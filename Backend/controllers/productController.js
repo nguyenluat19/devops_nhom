@@ -87,11 +87,41 @@ const deleteProduct = async (req, res) => {
     }
 }
 
+//Tìm kiếm sản phẩm 
+const searchProduct = async (req, res) => {
+    try {
+        const { keyword } = req.params
+        const result = await Product.find({
+            $or: [
+                {
+                    name: { $regex: keyword, $options: "i" }
+                },
+                {
+                    description: { $regex: keyword, $options: "i" },
+                }
+            ]
+        }).select("-photo")
+        // if (!result) {
+        //     res.status(404).send({
+        //         message: 'Không tìm thấy sản phẩm'
+        //     })
+        // }
+
+        res.status(200).json(result)
+    } catch (error) {
+        console.log(error)
+        res.status(400).send({
+            success: false,
+            message: 'Lỗi không tìm thấy sản phẩm'
+        })
+    }
+}
 
 module.exports = {
     createProduct,
     getAllProducts,
     getProductById,
     updateAllProduct,
-    deleteProduct
+    deleteProduct,
+    searchProduct
 }
