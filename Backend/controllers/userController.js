@@ -4,7 +4,7 @@ const JWT = require("jsonwebtoken")
 
 const registerController = async (req, res) => {
     try {
-        const { name, email, password, phone, address, answer } = req.body;
+        const { name, email, password, phone, address, gender } = req.body;
         if (!name) {
             return res.send({ error: 'Hãy nhập tên' })
         };
@@ -20,8 +20,8 @@ const registerController = async (req, res) => {
         if (!address) {
             return res.send({ message: 'Hãy nhập địa chỉ' })
         }
-        if (!answer) {
-            return res.send({ message: 'Hãy nhập answer' })
+        if (!gender) {
+            return res.send({ message: 'Hãy nhập gender' })
         }
 
         //Kiểm tra  tk tồn tại hay chưa
@@ -41,7 +41,7 @@ const registerController = async (req, res) => {
             password: hash,
             phone,
             address,
-            answer
+            gender
         }).save();
 
         res.status(201).send({
@@ -112,4 +112,65 @@ const loginController = async (req, res) => {
     }
 }
 
-module.exports = { registerController, loginController }
+/*********************Hiển thị tất cả người dùng********************* */
+const getAllUsers = async (req, res) => {
+    try {
+        const getUser = await userModel.find();
+        if (!getUser || getUser.length === 0) {
+            res.status(404).json({
+                message: 'Không tìm thấy người dùng'
+            })
+        }
+        res.status(200).json(getUser)
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            message: 'Lỗi không lấy được tất cả user',
+            error: error.message
+        })
+    }
+}
+
+//****************************Xoa nguoi dung******************************** */
+const getUserById = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const userExist = await userModel.findById(id);
+        if (!userExist) {
+            return res.status(404).json({
+                message: 'khong tim thay id ngui dung de xoa'
+            })
+        }
+        res.status(200).json(userExist)
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            message: 'Lỗi khi lấy người dùng theo id',
+            error: error.message
+        })
+    }
+}
+
+
+const deleteUser = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const xoaUser = await userModel.findByIdAndDelete(id);
+        if (!xoaUser) {
+            return res.status(404).json({
+                message: 'Nguoi dungf ko ton tai'
+            })
+        }
+        res.status(200).json({
+            message: 'Xoas người dùng thành công'
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            message: 'Lỗi khi Xoa người dùng ',
+            error: error.message
+        })
+    }
+}
+
+module.exports = { registerController, loginController, getAllUsers, getUserById, deleteUser }
