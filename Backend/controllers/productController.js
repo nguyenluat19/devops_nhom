@@ -10,6 +10,7 @@ const createProduct = async (req, res) => {
             product: savedProduct
         })
     } catch (error) {
+        console.error('Error creating product:', error);
         res.status(400).json({
             message: 'Lỗi khi tạo sản phẩm mới',
             error: error.message,
@@ -117,11 +118,29 @@ const searchProduct = async (req, res) => {
     }
 }
 
+
+const demSoLuongSP = async (req, res) => {
+    try {
+        const productCount = await Product.countDocuments();
+
+        res.status(200).send({
+            products: productCount,
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(400).send({
+            success: false,
+            message: 'Lỗi không thể đếm số lượng sản phẩm'
+        })
+    }
+}
+
 module.exports = {
     createProduct,
     getAllProducts,
     getProductById,
     updateAllProduct,
     deleteProduct,
-    searchProduct
+    searchProduct,
+    demSoLuongSP
 }

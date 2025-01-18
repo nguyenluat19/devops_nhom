@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Table, Breadcrumb, Image } from 'antd';
 import axios from 'axios';
+import { FiEdit3 } from "react-icons/fi";
+// import Link from 'antd/es/typography/Link';
+import { Link } from 'react-router-dom';
+
 
 const XemSanPham = () => {
     const [products, setProducts] = useState([]);
@@ -75,7 +79,25 @@ const XemSanPham = () => {
             dataIndex: 'rating',
             key: 'rating',
             render: (rating) => `${rating} sao`
+        },
+        {
+            title: 'Ảnh chi tiết',
+            dataIndex: 'detailImage',
+            key: 'detailImage',
+            render: (image) => (
+                <Image src={image} alt="Product Detail" style={{ width: 50, height: 50, objectFit: 'cover' }} />
+            ),
+        },
+        {
+            title: 'Hành động',
+            render: (_, record) => (
+                <Link className='btn btn-warning ' to={`/chinhsua/${record._id}`}>
+                    <FiEdit3 />
+                </Link>
+            )
         }
+
+
     ];
 
     return (

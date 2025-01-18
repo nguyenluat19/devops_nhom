@@ -4,6 +4,7 @@ import './styleUser.css'
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+
 const XemThongTin = () => {
     const [users, setUsers] = useState([])
 

@@ -4,6 +4,7 @@ import './styleUser.css'
 import { useEffect, useState } from "react"
 import { FaThList } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import toast from "react-hot-toast";
 
 
 const XoaND = () => {
@@ -22,7 +23,19 @@ const XoaND = () => {
         getAllProducts();
     })
 
-    // const deleteUser = async
+
+
+    const deleteUser = async (id) => {
+        try {
+            const response = await axios.delete(`http://localhost:3000/api/v2/delete/users/${id}`);
+            console.log('Xóa người dùng thành công', response.data);
+            setUsers(users.filter(user => user._id != id))
+            toast.success('Xóa người dùng thành công')
+        } catch (error) {
+            console.log('Xóa người dùng thấtj bại', error);
+            toast.error('Xóa ngươif dùng thất bại');
+        }
+    }
     return (
         <div>
             <div>
@@ -77,7 +90,9 @@ const XoaND = () => {
                                         <td>{user.address}</td>
                                         <td>
                                             <div className="buttonXoaND">
-                                                <RiDeleteBin6Line style={{ fontSize: '18px', textAlign: 'center', color: '#FF0000' }} />
+                                                <RiDeleteBin6Line style={{ fontSize: '18px', textAlign: 'center', color: '#FF0000' }}
+                                                    onClick={() => deleteUser(user._id)}
+                                                />
                                                 {/* <p>Xóa</p> */}
                                             </div>
                                         </td>

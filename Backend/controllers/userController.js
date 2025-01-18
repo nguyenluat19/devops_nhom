@@ -173,4 +173,21 @@ const deleteUser = async (req, res) => {
     }
 }
 
-module.exports = { registerController, loginController, getAllUsers, getUserById, deleteUser }
+// getall số lượng users
+const demSoLuongUsers = async (req, res) => {
+    try {
+        const usersCount = await userModel.countDocuments();
+
+        res.status(200).send({
+            users: usersCount,
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(400).send({
+            success: false,
+            message: 'Lỗi không thể đếm số lượng users'
+        })
+    }
+}
+
+module.exports = { registerController, loginController, getAllUsers, getUserById, deleteUser, demSoLuongUsers }

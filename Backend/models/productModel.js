@@ -3,29 +3,29 @@ const mongoose = require('mongoose')
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
-        requires: true,
+        required: true,
     },
     image: {
         type: String,
-        requires: true,
+        required: true,
     },
     description: {
         type: String,
-        requires: true,
+        required: true,
     },
     price: {
         type: Number,
-        requires: true,
+        required: true,
         min: 0,
     },
     priceGoc: {
         type: Number,
-        requires: true,
+        required: true,
         min: 0,
     },
     quantity: {
         type: Number,
-        requires: true,
+        required: true,
     },
     discount: {
         type: Number,
@@ -39,15 +39,8 @@ const productSchema = new mongoose.Schema({
         min: 0,
         max: 5
     },
-    detailImages: {
-        type: [String],
-        validate: {
-            validator: function (v) {
-                return v.length === 3;
-            },
-            message: "Phải có chính xác 3 ảnh chi tiết!"
-        },
-        required: true
+    detailImage: {
+        type: String,
     }
 
 }, { timestamps: true });

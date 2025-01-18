@@ -21,6 +21,7 @@ function App() {
             <Route index element={<BangDieuKhien />} />
             <Route path="xemsanPham" element={<XemSanPham />} />
             <Route path="taomoi" element={<TaoMoiSP />} />
+            <Route path="chinhsua/:id" element={<ChinhSuaSP />} />
             <Route path="chinhsua" element={<ChinhSuaSP />} />
             <Route path="xoasanpham" element={<XoaSP />} />
             <Route path="xemthongtin" element={<XemThongTin />} />
