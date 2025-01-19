@@ -2,8 +2,11 @@ import { Breadcrumb } from "antd"
 import axios from "axios";
 import { useEffect, useState } from "react"
 import './styleUser.css'
-import { RiLuggageCartLine } from "react-icons/ri";
-import { FaUsers } from "react-icons/fa";
+import { MdOutlineShoppingCartCheckout } from "react-icons/md";
+import { PiUsersFourLight } from "react-icons/pi";
+import { Link } from "react-router-dom"
+import { GrLinkNext } from "react-icons/gr";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 
 const BangDieuKhien = () => {
     const [soLuongProducts, setSoLuongProducts] = useState({ products: 0 });
@@ -36,6 +39,11 @@ const BangDieuKhien = () => {
         getSoLuongUsers();
     }, [])
 
+    const data = [
+        { name: 'Sản phẩm A', uv: 6000 },
+        { name: 'Sản phẩm B', uv: 4398 },
+        { name: 'Sản phẩm C', uv: 9800 },
+    ];
     return (
         <div>
             <div>
@@ -54,41 +62,65 @@ const BangDieuKhien = () => {
                     }}
                 />
             </div>
-            <div>
-                <div className="tableTongSoLuong">
-                    <div className="inTableTongSoLuong">
-                        <div>
-                            <h2 className="text-center">Tổng số lượng</h2>
-                            <hr />
+            <div className="containerDashboard">
+                {/* <h2 className="text-center">Tổng chi tiết</h2> */}
+                <div className="flexChiTiet">
+                    <div className="chiTietLeft">
+                        <div className="leftIcon">
+                            <MdOutlineShoppingCartCheckout />
                         </div>
-                        <div className="wrapperCardIn">
-                            <div className="leftCardOne">
-                                <div className="iconCardOne">
-                                    <RiLuggageCartLine />
-                                </div>
-                                <div className="textCardOne">
-                                    <p className="categoryCardOne">Số lượng: {soLuongProducts.products}</p>
-                                </div>
-                            </div>
+                        <div className="textLeft">
+                            <h4>Tổng sản phẩm: ({soLuongProducts.products})</h4>
+                            <Link to='/xemsanPham' style={{ textDecoration: 'none' }}>Xem chi tiết  <GrLinkNext /></Link>
+                        </div>
 
+                    </div>
+                    <div className="chiTietRight">
 
-                            <div className="rightCardTwo">
-                                <div className="iconCardTwo">
-                                    <FaUsers />
-                                </div>
-                                <div className="textCardTwo">
-                                    <p className="categoryCardTwo"> Số lượng: {soLuongUsers.users}</p>
-                                </div>
-                            </div>
+                        <div className="rightIcon">
+                            <PiUsersFourLight />
+                        </div>
+                        <div className="textRight text-center">
+                            <h4>Tổng người dùng: ({soLuongUsers.users})</h4>
+                            <Link to='/xemthongtin' style={{ textDecoration: 'none' }}>Xem chi tiết <GrLinkNext /></Link>
+
                         </div>
                     </div>
-
-                    {/* <p>Total Products: {soLuongProducts.products}</p>
-                    <p>Total Users: {soLuongUsers.users}</p> */}
                 </div>
+
+
+                <div className="flexDuoi mt-5">
+                    <div className="flexLeft">
+                        <BarChart width={500} height={350} data={data}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            {/* <Legend /> */}
+                            <Bar dataKey="uv" fill="#8884d8" />
+                        </BarChart>
+                    </div>
+                    <div className="flexRight">
+                        <div style={{ width: "100%", height: "350px", border: "1px solid #ddd" }}>
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.643765917889!2d108.1856982!3d16.0646945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219005b1da607%3A0x9092a3e383656014!2s18%20Ph%E1%BA%A1m%20Nh%E1%BB%AF%20T%C4%83ng%2C%20H%C3%B2a%20Kh%C3%AA%2C%20Thanh%20Kh%C3%AA%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng%20550000%2C%20Vi%E1%BB%87t%20Nam!5e0!3m2!1sen!2s!4v1699266097438!5m2!1sen!2s"
+                                width="100%"
+                                height="100%"
+                                style={{ border: "0" }}
+                                allowFullScreen=""
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                            ></iframe>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     )
 }
 
 export default BangDieuKhien
+
+{/* <p>Total Products: {soLuongProducts.products}</p>
+                    <p>Total Users: {soLuongUsers.users}</p> */}

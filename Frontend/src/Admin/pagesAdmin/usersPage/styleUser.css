@@ -26,56 +26,75 @@
     /* text-align: center; */
     margin-left: 20px;
 }
-.tableTongSoLuong{
+
+.containerDashboard{
     width: 100%;
-    height: auto;
-    border: 1px solid rgb(214, 214, 214);
+    text-align: center;
+    flex-wrap: wrap;
 }
-.inTableTongSoLuong{
-    margin: 10px;
-    border: 1px solid  rgb(214, 214, 214);
-}
-.wrapperCardIn{
+.flexChiTiet{
     display: flex;
+    flex-wrap: wrap;
+    /* text-align: center; */
     width: 100%;
-    justify-content: space-between;
-    padding: 8px;
+    justify-content: center;
+    gap: 15px;
 }
-.leftCardOne{
+.chiTietLeft{
+    flex-wrap: wrap;
     display: flex;
-    width: 48%;
-    height: 100%;
-    background-color: rgb(234, 234, 234);
+    width: 40%;
+    background-color: rgb(245, 245, 245);
 }
-.iconCardOne{
-    font-size: 50px;
-    /* align-items: center; */
-    width: 20%;
+.chiTietRight{
+    flex-wrap: wrap;
+    display: flex;
+    width: 40%;
+    background-color: rgb(245, 245, 245);
+}
+.leftIcon{
+    text-align: center;
+    align-items: center;
+    font-size: 65px;
+    width: 25%;
     background-color: green;
     color: white;
 }
-.textCardOne{
-    width: 80%;
+.textLeft{
+width: 75%;
+margin-top: 20px;
+align-items: center;
 }
-.rightCardTwo{
+.rightIcon{
+    text-align: center;
+    align-items: center;
+    font-size: 65px;
+    width: 130px;
+    height: 110px;
+    width: 25%;
+    background-color: rgb(158, 158, 1);
+    color: white;
+}
+.textRight{
+    margin-top: 20px;
+    width: 75%;
+align-items: center;    
+}
+
+.flexDuoi{
     display: flex;
-    width: 48%;
-    height: 100%;
-    background-color: rgb(228, 228, 228);
+    flex-wrap: wrap;
+    /* text-align: center; */
+    width: 100%;
+    justify-content: center;
+    gap: 15px;
 }
-.categoryCardOne{
-    height: 100%;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    /* align-items: center; */
-    margin-top: 20px;
+.flexLeft{
+    width: 40%;
+    border: 1px solid rgb(224, 224, 224);
+    /* background-color: antiquewhite; */
 }
-.categoryCardTwo{
-    height: 100%;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    /* align-items: center; */
-    margin-top: 20px;
+.flexRight{
+    width: 40%;
+    border: 1px solid rgb(224, 224, 224);
 }
