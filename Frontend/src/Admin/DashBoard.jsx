@@ -28,7 +28,9 @@ const DashBoard = () => {
         <Layout>
             <Sider trigger={null} collapsible collapsed={collapsed}>
                 <div className="demo-logo-vertical">
-                    <div className="in-logo">QUẢN LÝ BÁN HÀNG</div>
+                    <div className="in-logo">
+                        <Link to='/' style={{ textDecoration: 'none', color: 'white' }}>QUẢN LÝ BÁN HÀNG</Link>
+                    </div>
                     <hr />
                 </div>
 

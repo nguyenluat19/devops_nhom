@@ -36,6 +36,7 @@
 .in-logo{
     height: 70px;
   padding-top: 22px;
+  cursor: pointer;
 }
 .Link{
     text-decoration: none;
