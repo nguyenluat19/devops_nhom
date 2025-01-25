@@ -11,9 +11,15 @@ import {
     DeleteOutlined,
     FileSearchOutlined,
 } from '@ant-design/icons';
-import { Avatar, Button, Col, Layout, Menu, Row, theme } from 'antd';
+import { MdOutlineDeliveryDining } from "react-icons/md";
+import { Avatar, Button, Col, Dropdown, Layout, Menu, Row, theme } from 'antd';
 import './DashBoard.css';
 import { Link, Outlet } from 'react-router-dom';
+import { MdOutlineArrowDropDown } from "react-icons/md";
+import { MdShoppingCartCheckout } from "react-icons/md";
+import { MdOutlineSettings } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -23,6 +29,18 @@ const DashBoard = () => {
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
+
+
+    const dropdownMenu = (
+        <Menu>
+            <Menu.Item key="1">
+                <Link to="/profile" style={{ textDecoration: 'none' }}><CgProfile style={{ fontSize: '16px', marginTop: '-3px' }} /> Profile  </Link>
+            </Menu.Item>
+            <Menu.Item key="2">
+                <Link to="/logout" style={{ textDecoration: 'none' }}><MdLogout /> Logout </Link>
+            </Menu.Item>
+        </Menu>
+    );
 
     return (
         <Layout>
@@ -68,8 +86,19 @@ const DashBoard = () => {
                     </SubMenu>
 
                     {/* Mục khác */}
-                    <Menu.Item key="4" icon={<DashboardOutlined />}>
-                        Thống kê
+
+                    <Menu.Item key="5" icon={<MdShoppingCartCheckout style={{ fontSize: '17px' }} />}>
+                        <Link to="/qldonhang" style={{ textDecoration: 'none' }}>QL đơn hàng</Link>
+
+                    </Menu.Item>
+
+                    <Menu.Item key="4" icon={<MdOutlineDeliveryDining style={{ fontSize: '17px' }} />}>
+                        <Link to="/qlgiaohang" style={{ textDecoration: 'none' }}>QL giao hàng</Link>
+
+                    </Menu.Item>
+                    <Menu.Item key="6" icon={<MdOutlineSettings style={{ fontSize: '17px' }} />}>
+                        <Link to="/setting" style={{ textDecoration: 'none' }}>Cài đặt chung</Link>
+
                     </Menu.Item>
                 </Menu>
             </Sider>
@@ -94,10 +123,12 @@ const DashBoard = () => {
                             />
                         </Col>
                         <Col md={3}>
-                            <div>
-                                <Avatar size="default" icon={<TeamOutlined />} />
-                                Tran Viet Chinh
-                            </div>
+                            <Dropdown overlay={dropdownMenu} placement="bottomRight" arrow>
+                                <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                                    <Avatar size="default" icon={<TeamOutlined />} />
+                                    <span style={{ marginLeft: 8 }}>Tran Viet Chinh<MdOutlineArrowDropDown style={{ fontSize: '25px' }} /> </span>
+                                </div>
+                            </Dropdown>
                         </Col>
                     </Row>
                 </Header>

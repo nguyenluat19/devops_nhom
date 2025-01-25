@@ -7,7 +7,7 @@ const createProduct = async (req, res) => {
         const savedProduct = await newProduct.save();
         res.status(200).json({
             message: 'Tạo sản phẩm mới thành công',
-            product: savedProduct
+            savedProduct
         })
     } catch (error) {
         console.error('Error creating product:', error);

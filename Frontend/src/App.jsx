@@ -8,6 +8,8 @@ import XemThongTin from "./Admin/pagesAdmin/usersPage/XemThongTin";
 import XoaND from "./Admin/pagesAdmin/usersPage/XoaND";
 import XemSanPham from "./Admin/pagesAdmin/ProductPage/XemSanPham";
 import BangDieuKhien from "./Admin/pagesAdmin/usersPage/BangDieuKhien";
+import Profile from "./Admin/pagesAdmin/profile/Profile";
+import NotFoundPage from "./Admin/NotFoundPage";
 
 
 function App() {
@@ -26,7 +28,8 @@ function App() {
             <Route path="xoasanpham" element={<XoaSP />} />
             <Route path="xemthongtin" element={<XemThongTin />} />
             <Route path="xoanguoidung" element={<XoaND />} />
-
+            <Route path="/profile" element={<Profile />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
       </Router>

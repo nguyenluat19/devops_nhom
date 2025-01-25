@@ -50,7 +50,7 @@ const ChinhSuaSP = () => {
                 const response = await axios.get(`http://localhost:3000/api/v1//products/${id}`)
                 setFormProducts(response.data)
             } catch (error) {
-                toast.error('Lỗi không thể update sản phẩm')
+                toast.error('Bạn phải chọn sản phẩm để update ')
                 console.log('Lỗi không thể update sản phẩm', error);
 
             }
@@ -91,7 +91,7 @@ const ChinhSuaSP = () => {
             toast.success('Update sản phẩm thành công');
             navigate('/xemsanPham')
         } catch (error) {
-            toast.error('Lỗi không thể update sản phẩm');
+            // toast.error('Lỗi không thể update sản phẩm');
             console.log("Lỗi không thể update sản phẩm", error);
 
         }
@@ -369,7 +369,7 @@ const ChinhSuaSP = () => {
                     <div className="form-group mt-3 p-2" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <div style={{ flex: 1, marginRight: '10px' }}>
                             <label htmlFor="mainImage" style={{ fontWeight: "bold", display: "block", marginBottom: "10px", fontSize: "15px" }}>
-                                Upload sản phẩm
+                                Upload sản phẩm (1)
                             </label>
                             <input
                                 type="file"

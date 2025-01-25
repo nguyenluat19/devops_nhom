@@ -328,7 +328,7 @@ const TaoMoiSP = () => {
                     <div className="form-group mt-3 p-2" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <div style={{ flex: 1, marginRight: '10px' }}>
                             <label htmlFor="mainImage" style={{ fontWeight: "bold", display: "block", marginBottom: "10px", fontSize: "15px" }}>
-                                Upload sản phẩm
+                                Upload sản phẩm (1)
                             </label>
                             <input
                                 type="file"
