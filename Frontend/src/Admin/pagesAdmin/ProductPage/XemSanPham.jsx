@@ -4,10 +4,12 @@ import axios from 'axios';
 import { FiEdit3 } from "react-icons/fi";
 // import Link from 'antd/es/typography/Link';
 import { Link } from 'react-router-dom';
+// import Loading from '../Loading';
 
 
 const XemSanPham = () => {
     const [products, setProducts] = useState([]);
+    // const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const getAllProducts = async () => {
@@ -15,6 +17,7 @@ const XemSanPham = () => {
                 const response = await axios.get('http://localhost:3000/api/v1/products');
 
                 setProducts(response.data)
+                // setLoading(false);
             } catch (error) {
                 console.log('Lỗi trong khi getAllProduct', error);
 
@@ -22,6 +25,10 @@ const XemSanPham = () => {
         };
         getAllProducts();
     }, [])
+
+    // if (loading) {
+    //     return <Loading />
+    // }
 
     const columns = [
         {
