@@ -89,7 +89,7 @@ const ChinhSuaSP = () => {
                 detailImage: "",
             });
             toast.success('Update sản phẩm thành công');
-            navigate('/xemsanPham')
+            navigate('/dashboard/xemsanPham')
         } catch (error) {
             // toast.error('Lỗi không thể update sản phẩm');
             console.log("Lỗi không thể update sản phẩm", error);

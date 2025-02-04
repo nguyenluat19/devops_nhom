@@ -71,7 +71,7 @@ const BangDieuKhien = () => {
                         </div>
                         <div className="textLeft">
                             <h4>Tổng sản phẩm: ({soLuongProducts.products})</h4>
-                            <Link to='/xemsanPham' style={{ textDecoration: 'none' }}>Xem chi tiết  <GrLinkNext /></Link>
+                            <Link to='/dashboard/xemsanPham' style={{ textDecoration: 'none' }}>Xem chi tiết  <GrLinkNext /></Link>
                         </div>
 
                     </div>
@@ -82,7 +82,7 @@ const BangDieuKhien = () => {
                         </div>
                         <div className="textRight text-center">
                             <h4>Tổng người dùng: ({soLuongUsers.users})</h4>
-                            <Link to='/xemthongtin' style={{ textDecoration: 'none' }}>Xem chi tiết <GrLinkNext /></Link>
+                            <Link to='/dashboard/xemthongtin' style={{ textDecoration: 'none' }}>Xem chi tiết <GrLinkNext /></Link>
 
                         </div>
                     </div>

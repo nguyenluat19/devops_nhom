@@ -34,7 +34,7 @@ const DashBoard = () => {
     const dropdownMenu = (
         <Menu>
             <Menu.Item key="1">
-                <Link to="/profile" style={{ textDecoration: 'none' }}><CgProfile style={{ fontSize: '16px', marginTop: '-3px' }} /> Profile  </Link>
+                <Link to="/dashboard/profile" style={{ textDecoration: 'none' }}><CgProfile style={{ fontSize: '16px', marginTop: '-3px' }} /> Profile  </Link>
             </Menu.Item>
             <Menu.Item key="2">
                 <Link to="/logout" style={{ textDecoration: 'none' }}><MdLogout /> Logout </Link>
@@ -47,7 +47,7 @@ const DashBoard = () => {
             <Sider trigger={null} collapsible collapsed={collapsed}>
                 <div className="demo-logo-vertical">
                     <div className="in-logo">
-                        <Link to='/' style={{ textDecoration: 'none', color: 'white' }}>QUẢN LÝ BÁN HÀNG</Link>
+                        <Link to='/dashboard' style={{ textDecoration: 'none', color: 'white' }}>QUẢN LÝ BÁN HÀNG</Link>
                     </div>
                     <hr />
                 </div>
@@ -55,49 +55,49 @@ const DashBoard = () => {
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                     {/* Bảng điều khiển */}
                     <Menu.Item key="1" icon={<DashboardOutlined />}>
-                        <Link to="/" style={{ textDecoration: 'none' }}>Bảng điều khiển</Link>
+                        <Link to="/dashboard" style={{ textDecoration: 'none' }}>Bảng điều khiển</Link>
                     </Menu.Item>
 
                     {/* Mục sản phẩm */}
                     <SubMenu key="2" icon={<AppstoreOutlined />} title="Mục sản phẩm">
                         <Menu.Item key="2-1" icon={<EyeOutlined />}>
-                            <Link to="/xemsanPham" style={{ textDecoration: 'none' }}>Xem sản phẩm</Link>
+                            <Link to="/dashboard/xemsanPham" style={{ textDecoration: 'none' }}>Xem sản phẩm</Link>
                         </Menu.Item>
                         <Menu.Item key="2-2" icon={<PlusOutlined />}>
-                            <Link to="/taomoi" style={{ textDecoration: 'none' }}>Tạo mới</Link>
+                            <Link to="/dashboard/taomoi" style={{ textDecoration: 'none' }}>Tạo mới</Link>
                         </Menu.Item>
                         <Menu.Item key="2-3" icon={<EditOutlined />}>
-                            <Link to="/chinhsua" style={{ textDecoration: 'none' }}>Chỉnh sửa</Link>
+                            <Link to="/dashboard/chinhsua" style={{ textDecoration: 'none' }}>Chỉnh sửa</Link>
                         </Menu.Item>
                         <Menu.Item key="2-4" icon={<DeleteOutlined />}>
-                            <Link to="xoasanpham" style={{ textDecoration: 'none' }}>Xóa</Link>
+                            <Link to="/dashboard/xoasanpham" style={{ textDecoration: 'none' }}>Xóa</Link>
                         </Menu.Item>
                     </SubMenu>
 
                     {/* Quản lý người dùng */}
                     <SubMenu key="3" icon={<TeamOutlined />} title="QL người dùng">
                         <Menu.Item key="3-1" icon={<FileSearchOutlined />}>
-                            <Link to="/xemthongtin" style={{ textDecoration: 'none' }}>Xem thông tin</Link>
+                            <Link to="/dashboard/xemthongtin" style={{ textDecoration: 'none' }}>Xem thông tin</Link>
                         </Menu.Item>
 
                         <Menu.Item key="3-4" icon={<DeleteOutlined />}>
-                            <Link to="xoanguoidung" style={{ textDecoration: 'none' }}>Xóa người dùng</Link>
+                            <Link to="/dashboard/xoanguoidung" style={{ textDecoration: 'none' }}>Xóa người dùng</Link>
                         </Menu.Item>
                     </SubMenu>
 
                     {/* Mục khác */}
 
                     <Menu.Item key="5" icon={<MdShoppingCartCheckout style={{ fontSize: '17px' }} />}>
-                        <Link to="/qldonhang" style={{ textDecoration: 'none' }}>QL đơn hàng</Link>
+                        <Link to="/dashboard/qldonhang" style={{ textDecoration: 'none' }}>QL đơn hàng</Link>
 
                     </Menu.Item>
 
                     <Menu.Item key="4" icon={<MdOutlineDeliveryDining style={{ fontSize: '17px' }} />}>
-                        <Link to="/qlgiaohang" style={{ textDecoration: 'none' }}>QL giao hàng</Link>
+                        <Link to="/dashboard/qlgiaohang" style={{ textDecoration: 'none' }}>QL giao hàng</Link>
 
                     </Menu.Item>
                     <Menu.Item key="6" icon={<MdOutlineSettings style={{ fontSize: '17px' }} />}>
-                        <Link to="/setting" style={{ textDecoration: 'none' }}>Cài đặt chung</Link>
+                        <Link to="/dashboard/setting" style={{ textDecoration: 'none' }}>Cài đặt chung</Link>
 
                     </Menu.Item>
                 </Menu>

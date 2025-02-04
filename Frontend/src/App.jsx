@@ -19,7 +19,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<DashBoard />}>
+          <Route path="/dashboard" element={<DashBoard />}>
             <Route index element={<BangDieuKhien />} />
             <Route path="xemsanPham" element={<XemSanPham />} />
             <Route path="taomoi" element={<TaoMoiSP />} />
@@ -28,9 +28,10 @@ function App() {
             <Route path="xoasanpham" element={<XoaSP />} />
             <Route path="xemthongtin" element={<XemThongTin />} />
             <Route path="xoanguoidung" element={<XoaND />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
+
         </Routes>
       </Router>
     </>

@@ -6,11 +6,9 @@ import { FiEdit3 } from "react-icons/fi";
 import { Link } from 'react-router-dom';
 // import Loading from '../Loading';
 
-
 const XemSanPham = () => {
     const [products, setProducts] = useState([]);
     // const [loading, setLoading] = useState(true);
-
     useEffect(() => {
         const getAllProducts = async () => {
             try {
@@ -98,7 +96,7 @@ const XemSanPham = () => {
         {
             title: 'Hành động',
             render: (_, record) => (
-                <Link className='btn btn-warning ' to={`/chinhsua/${record._id}`}>
+                <Link className='btn btn-warning ' to={`/dashboard/chinhsua/${record._id}`}>
                     <FiEdit3 />
                 </Link>
             )
