@@ -47,7 +47,7 @@ const ChinhSuaSP = () => {
     useEffect(() => {
         const updateProduct = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/v1//products/${id}`)
+                const response = await axios.get(`http://localhost:3000/api/v1/products/${id}`)
                 setFormProducts(response.data)
             } catch (error) {
                 toast.error('Bạn phải chọn sản phẩm để update ')

@@ -27,24 +27,25 @@ const registerController = async (req, res) => {
         //Kiểm tra  tk tồn tại hay chưa
         const userExists = await userModel.findOne({ email })
         if (userExists) {
-            res.status(200).send({
+            return res.status(200).send({
                 success: false,
                 message: 'Đã đăng kí, vui lòng đăng nhập'
             })
         }
 
         //mã hóa bcrypt
-        const hash = await hashPassword(password)
+        const hashedPassword = await hashPassword(password);
         const user = await new userModel({
             name,
             email,
-            password: hash,
             phone,
             address,
+            password: hashedPassword,
             gender
         }).save();
 
         res.status(201).send({
+            success: true,
             message: 'Đăng kí thành công',
             user
         })
@@ -52,10 +53,14 @@ const registerController = async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            message: 'Looi khi đăng kí'
+            success: false,
+            message: 'Looi khi đăng kí',
+            error
         })
     }
 }
+
+
 
 //***********************login********************************* */
 
@@ -63,7 +68,8 @@ const loginController = async (req, res) => {
     try {
         const { email, password } = req.body;
         if (!email || !password) {
-            res.status(404).send({
+            return res.status(404).send({
+                success: false,
                 message: 'tài khoản hoặc mật khẩu không hợp lệ',
                 error,
             })
@@ -74,13 +80,12 @@ const loginController = async (req, res) => {
             return res.status(404).send({
                 success: false,
                 message: 'Email chưa được đăng ký',
-                error: error.message
             });
         }
 
         const soSanh = await comparePassword(password, user.password);
         if (!soSanh) {
-            res.status(404).send({
+            return res.status(200).send({
                 success: false,
                 message: 'Sai mật khẩu',
             })
@@ -96,7 +101,6 @@ const loginController = async (req, res) => {
                 id: user.id,
                 name: user.name,
                 email: user.email,
-                password: user.password,
                 phone: user.phone,
                 address: user.address,
                 role: user.role
@@ -112,12 +116,25 @@ const loginController = async (req, res) => {
     }
 }
 
+
+const testController = (req, res) => {
+    try {
+        res.send('testController')
+    } catch (error) {
+        console.log(error);
+        res.send({ error });
+    }
+
+}
+
+
+
 /*********************Hiển thị tất cả người dùng********************* */
 const getAllUsers = async (req, res) => {
     try {
         const getUser = await userModel.find();
         if (!getUser || getUser.length === 0) {
-            res.status(404).json({
+            return res.status(404).json({
                 message: 'Không tìm thấy người dùng'
             })
         }
@@ -190,4 +207,43 @@ const demSoLuongUsers = async (req, res) => {
     }
 }
 
-module.exports = { registerController, loginController, getAllUsers, getUserById, deleteUser, demSoLuongUsers }
+
+
+const updateProfileController = async (req, res) => {
+    try {
+        const { name, email, password, address, phone, gender } = req.body;
+        const user = await userModel.findById(req.user._id);
+        console.log(user);
+        //password
+        if (password && password.length < 6) {
+            return res.json({ error: "Mật khẩu phải đủ 6 ký tự" });
+        }
+        const hashedPassword = password ? await hashPassword(password) : undefined;
+        const updatedUser = await userModel.findByIdAndUpdate(
+            req.user._id,
+            {
+                name: name || user.name,
+                password: hashedPassword || user.password,
+                phone: phone || user.phone,
+                address: address || user.address,
+                gender: gender || user.gender,
+            },
+            { new: true }
+        );
+        res.status(200).send({
+            success: true,
+            message: "Cập nhật thông tin thành công",
+            updatedUser,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(400).send({
+            success: false,
+            message: "Lỗi khi cập nhật thông tin",
+            error,
+        });
+    }
+}
+
+
+module.exports = { registerController, loginController, getAllUsers, getUserById, deleteUser, demSoLuongUsers, updateProfileController, testController }

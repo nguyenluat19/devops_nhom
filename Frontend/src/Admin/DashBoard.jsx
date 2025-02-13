@@ -37,7 +37,7 @@ const DashBoard = () => {
                 <Link to="/dashboard/profile" style={{ textDecoration: 'none' }}><CgProfile style={{ fontSize: '16px', marginTop: '-3px' }} /> Profile  </Link>
             </Menu.Item>
             <Menu.Item key="2">
-                <Link to="/logout" style={{ textDecoration: 'none' }}><MdLogout /> Logout </Link>
+                <Link to="/" style={{ textDecoration: 'none' }}><MdLogout /> Back home </Link>
             </Menu.Item>
         </Menu>
     );
@@ -47,7 +47,9 @@ const DashBoard = () => {
             <Sider trigger={null} collapsible collapsed={collapsed}>
                 <div className="demo-logo-vertical">
                     <div className="in-logo">
-                        <Link to='/dashboard' style={{ textDecoration: 'none', color: 'white' }}>QUẢN LÝ BÁN HÀNG</Link>
+                        <Link to='/dashboard' style={{ textDecoration: 'none', color: 'white' }}>
+                            {collapsed ? 'QLBH' : 'QUẢN LÝ BÁN HÀNG '}
+                        </Link>
                     </div>
                     <hr />
                 </div>

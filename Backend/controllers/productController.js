@@ -1,3 +1,4 @@
+const productModel = require('../models/productModel');
 const Product = require('../models/productModel')
 
 //Tạo mới sản phẩm
@@ -29,6 +30,30 @@ const getAllProducts = async (req, res) => {
     } catch (error) {
         res.status(400).json({
             message: 'Lỗi khi get all products',
+            error: error.message
+        })
+    }
+}
+
+//Lấy 1 danh sách sản phẩm (ví dụ chỉ lấy 5 hoặc 10 sản phẩm để hiển thị lên trang web);
+const getListProducts = async (req, res) => {
+    try {
+        const perPage = 4;
+        const page = req.params.page ? req.params.page : 1;
+        const products = await Product
+            .find({})
+            .select("-photo")
+            .skip((page - 1) * perPage)
+            .limit(perPage)
+            .sort({ createdAt: -1 });
+
+        res.status(200).send({
+            success: true,
+            products
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: 'Loi khi get list products',
             error: error.message
         })
     }
@@ -138,6 +163,7 @@ const demSoLuongSP = async (req, res) => {
 module.exports = {
     createProduct,
     getAllProducts,
+    getListProducts,
     getProductById,
     updateAllProduct,
     deleteProduct,
