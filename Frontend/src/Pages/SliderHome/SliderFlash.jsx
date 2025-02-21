@@ -6,10 +6,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import styles from './SliderFlash.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const SliderFlash = () => {
     const [products, setProducts] = useState([]);
     const [countdown, setCountdown] = useState(4500);
+    const navigate = useNavigate()
 
     // Fetch danh sách sản phẩm
     useEffect(() => {
@@ -32,6 +34,15 @@ const SliderFlash = () => {
 
         return () => clearInterval(timer);
     }, []);
+
+    const handleBuyNow = (id) => {
+        if (!id) {
+            console.error("Lỗi: ID sản phẩm không hợp lệ!");
+            return;
+        }
+        navigate(`/detail/${id}`); // Chỉ truyền id, không phải object
+    };
+
 
     // Chuyển đổi giây thành HH:MM:SS
     const formatTime = (seconds) => {
@@ -57,7 +68,7 @@ const SliderFlash = () => {
             >
                 {products.map((product, index) => (
                     <SwiperSlide key={index}>
-                        <div className={styles.productCard}>
+                        <div className={styles.productCard} onClick={() => handleBuyNow(product._id)}>
                             <img src={product.image} alt={product.name} className={styles.productImage} />
                             {/* <p className={styles.productName}>
                                 {product.name}</p> */}

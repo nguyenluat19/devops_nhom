@@ -14,6 +14,9 @@ import ScrollToTop from "./SliderHome/ScrollTop";
 import { MdOutlineFilterAlt } from "react-icons/md";
 import SliderFlash from "./SliderHome/SliderFlash";
 import SliderBottom from "./SliderHome/SliderBottom";
+import { useNavigate } from "react-router-dom";
+import { IoChevronDownSharp } from "react-icons/io5";
+// import { color } from "framer-motion";
 // import { useCart } from "../context/cart";
 // import toast from "react-hot-toast";
 // import { FaPlus } from "react-icons/fa6";
@@ -21,6 +24,7 @@ import SliderBottom from "./SliderHome/SliderBottom";
 
 
 const HomePage = () => {
+    const navigate = useNavigate()
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [radio, setRadio] = useState([]);
@@ -53,6 +57,15 @@ const HomePage = () => {
         }
     }, [radio, products]);
 
+
+    const handleBuyNow = (id) => {
+        if (!id) {
+            console.error("Lỗi: ID sản phẩm không hợp lệ!");
+            return;
+        }
+        navigate(`/detail/${id}`);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
 
 
 
@@ -95,13 +108,15 @@ const HomePage = () => {
                                 <video className={styles.videoQC} muted="muted" autoPlay="autoPlay" loop="loop" src="https://cdn.hoanghamobile.com/FetchVideo?src=/Uploads/2025/02/10/spart-go-1-w-1_638748033500238042.mp4" />
                             </div>
                             <p style={{ color: '#4B4B4B', marginTop: '20px', fontWeight: 'bold' }}>Dành cho bạn</p>
-                            <div className={styles.productList}>
+                            <div className={styles.productList} >
                                 {filteredProducts.length > 0 ? (
                                     filteredProducts.map((product) => (
-                                        <div key={product._id} className={styles.productCart}>
+                                        <div key={product._id} className={styles.productCart} >
                                             <p className={styles.discountHomeProduct}>Giảm {product.discount}%</p>
-                                            <img src={product.image} alt={product.name} className={styles.productImageHome} />
-                                            <h6 style={{ fontWeight: '600', fontSize: '13px', color: '#4b4b4b' }}>{product.name}</h6>
+                                            <div onClick={() => handleBuyNow(product._id)}>
+                                                <img src={product.image} alt={product.name} className={styles.productImageHome} />
+                                            </div>
+                                            <h6 onClick={() => handleBuyNow(product._id)} style={{ fontWeight: '600', fontSize: '13px', color: '#4b4b4b', cursor: 'pointer' }}>{product.name}</h6>
                                             {/* <p>{product.description}</p> */}
                                             <div className={styles.flexGiaHome}>
                                                 <p className={styles.giaHomeFlex}>{product.price.toLocaleString()}đ</p>
@@ -109,6 +124,9 @@ const HomePage = () => {
                                             </div>
                                             {/* <p>{product.description.subString(0, 22)}...</p> */}
                                             <p style={{ fontSize: '13px', color: '#4b4b4b' }}>{product.description.substring(0, 27)}...</p>
+                                            {/* <div>
+                                            <span>TranChinh member giảm lên tới 20%</span>
+                                            </div> */}
                                             <div className={styles.flexKhuyenMai}>
                                                 <p className={styles.inKM}>KM</p>
                                                 <p>Nhiều gói ưu đãi </p>
@@ -116,6 +134,9 @@ const HomePage = () => {
                                             <div className={styles.flexKhuyenMai}>
                                                 <p className={styles.inKM}>KM</p>
                                                 <p>Trả góp 0% - 0 phí - 0 trả</p>
+                                            </div>
+                                            <div onClick={() => handleBuyNow(product._id)}>
+                                                <p style={{ fontSize: '13px', color: '#FC521D', cursor: 'pointer', fontWeight: 'bold' }}><IoChevronDownSharp /> Các ưu đãi khác</p>
                                             </div>
 
                                             {/* <div style={{ display: 'flex', justifyContent: 'space-between' }}>

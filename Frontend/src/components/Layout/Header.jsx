@@ -11,8 +11,11 @@ import { motion } from "framer-motion";
 import { FaSignOutAlt } from "react-icons/fa";
 import { AiTwotoneDashboard } from "react-icons/ai";
 import { FaRegUser } from "react-icons/fa";
+import { useCart } from "../../context/cart";
+// import Search from "../Form/SearchInput";
 
 const Header = () => {
+    const [cart] = useCart()
     const [auth, setAuth] = useAuth();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [sliderTop, setSliderTop] = useState(0);
@@ -38,6 +41,8 @@ const Header = () => {
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
+    // Tính tổng số lượng sản phẩm trong giỏ hàng
+    const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
     return (
         <>
@@ -58,14 +63,18 @@ const Header = () => {
                     <div className="search-bar-website">
                         <input type="text" placeholder="Tìm kiếm sản phẩm..." />
                         <button type="submit"><GrSearch /></button>
+                        {/* <Search /> */}
                     </div>
 
                     <div className={`actions-website ${isMenuOpen ? "open" : ""}`}>
-                        <Badge count={0} showZero className="badge-adjust" overflowCount={99}>
+
+
+                        <Badge count={totalQuantity} showZero className="badge-adjust" overflowCount={99}>
                             <NavLink to="/cart">
                                 <SlHandbag className="icon-website" />
                             </NavLink>
                         </Badge>
+
 
                         {!auth.user ? (
                             <>

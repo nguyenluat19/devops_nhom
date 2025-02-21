@@ -20,7 +20,7 @@ const XemThongTin = () => {
             }
         };
         getAllUser();
-    })
+    }, [])
 
     return (
         <div>

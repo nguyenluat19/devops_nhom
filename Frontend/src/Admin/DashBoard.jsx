@@ -20,11 +20,15 @@ import { MdShoppingCartCheckout } from "react-icons/md";
 import { MdOutlineSettings } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
+import { useAuth } from '../context/auth';
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
+// eslint-disable-next-line react-hooks/rules-of-hooks
+
 
 const DashBoard = () => {
+    const [auth] = useAuth();
     const [collapsed, setCollapsed] = useState(false);
     const {
         token: { colorBgContainer, borderRadiusLG },
@@ -112,7 +116,7 @@ const DashBoard = () => {
                     }}
                 >
                     <Row>
-                        <Col md={21}>
+                        <Col md={20}>
                             <Button
                                 type="text"
                                 icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -124,11 +128,11 @@ const DashBoard = () => {
                                 }}
                             />
                         </Col>
-                        <Col md={3}>
+                        <Col md={4}>
                             <Dropdown overlay={dropdownMenu} placement="bottomRight" arrow>
                                 <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
                                     <Avatar size="default" icon={<TeamOutlined />} />
-                                    <span style={{ marginLeft: 8 }}>Tran Viet Chinh<MdOutlineArrowDropDown style={{ fontSize: '25px' }} /> </span>
+                                    <span style={{ marginLeft: 8 }}>{auth.user ? `${auth.user.name}` : "Tài khoản"}<MdOutlineArrowDropDown style={{ fontSize: '25px' }} /> </span>
                                 </div>
                             </Dropdown>
                         </Col>

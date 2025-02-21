@@ -92,6 +92,9 @@ import AboutPage from "./Pages/AboutPage";
 import PageNotFound from "./Pages/PageNotFoud/PageNotFound"
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
+import DetailPage from "./Pages/DetailPage";
+import CartPage from "./Pages/CartPage";
+// import SearchHome from "./Pages/SearchHome";
 
 
 
@@ -102,9 +105,11 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutPage />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path='/cart' element={<CartPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-
+        {/* <Route path='/search' element={<SearchHome />} /> */}
         <Route path="/dashboard" element={<DashBoard />}>
           <Route index element={<BangDieuKhien />} />
           <Route path="xemsanPham" element={<XemSanPham />} />

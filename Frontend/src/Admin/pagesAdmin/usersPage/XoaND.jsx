@@ -21,7 +21,7 @@ const XoaND = () => {
             }
         };
         getAllProducts();
-    })
+    }, [])
 
 
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import styles from "./styleAuth.module.css";
 import axios from 'axios'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
 import Layout from "../components/Layout/Layout";
 
@@ -127,7 +127,7 @@ const Register = () => {
                     </button>
                     <div className="form-footer">
                         <p>
-                            Already have an account? <a href="#">Login here</a>
+                            Already have an account? <Link to="/login">Login here</Link>
                         </p>
                     </div>
                 </form>

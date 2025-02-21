@@ -159,6 +159,39 @@ const demSoLuongSP = async (req, res) => {
         })
     }
 }
+const getSingleProductController = async (req, res) => {
+    try {
+        const product = await Product.findOne({ slug: req.params.slug }).select("-photo").populate("category");
+        res.status(200).send({
+            success: true,
+            message: "Single Product Fetched",
+            product,
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Error while getting single product",
+            error: error.message
+        })
+    }
+}
+const getLatestProducts = async (req, res) => {
+    try {
+        const latestProducts = await Product.find().sort({ createdAt: -1 }).limit(5);
+        res.status(200).json({
+            success: true,
+            latestProducts
+        });
+    } catch (error) {
+        res.status(400).json({
+            message: 'Lỗi khi lấy sản phẩm mới nhất',
+            error: error.message
+        });
+    }
+};
+
 
 module.exports = {
     createProduct,
@@ -168,5 +201,7 @@ module.exports = {
     updateAllProduct,
     deleteProduct,
     searchProduct,
-    demSoLuongSP
+    demSoLuongSP,
+    getSingleProductController,
+    getLatestProducts
 }
