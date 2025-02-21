@@ -80,6 +80,9 @@ const DetailPage = () => {
     const handleSubmit = () => {
         toast.error('Chức năng đang được phát triển!');
     }
+    const handleExplore = () => {
+        toast.error('Hệ thống đang nâng cấp!');
+    }
 
     const addToCart = () => {
         let updatedCart = [...cart];
@@ -98,6 +101,8 @@ const DetailPage = () => {
         localStorage.setItem("cart", JSON.stringify(updatedCart));
         toast.success('Thêm sản phẩm thành công!');
     };
+
+
 
     return (
         <Layout title={'chi tiet'}>
@@ -263,19 +268,19 @@ const DetailPage = () => {
                                 </div>
                                 <div className={styles.wrapInUuDaiTranChinh}>
                                     <div >
-                                        <TbCircleNumber1Filled className={styles.iconUuDaiTranChinha} /> Tích thêm 8,000 cho các hạng thành viên <strong>(Khám phá ngay)</strong>
+                                        <TbCircleNumber1Filled className={styles.iconUuDaiTranChinha} /> Tích thêm 8,000 cho các hạng thành viên <strong style={{ cursor: 'pointer' }} onClick={() => handleExplore()}>(Khám phá ngay)</strong>
                                     </div>
                                     <div>
-                                        <TbCircleNumber2Filled className={styles.iconUuDaiTranChinha} /> Giảm thêm tới 25,000 cho Hoàng Hà Members <strong>(Khám phá ngay)</strong>
+                                        <TbCircleNumber2Filled className={styles.iconUuDaiTranChinha} /> Giảm thêm tới 25,000 cho Hoàng Hà Members <strong style={{ cursor: 'pointer' }} onClick={() => handleExplore()}>(Khám phá ngay)</strong>
                                     </div>
                                     <div>
-                                        <TbCircleNumber3Filled className={styles.iconUuDaiTranChinha} /> Ưu đãi trả góp 0% qua Shinhan Finance <strong>(Xem chi tiết)</strong>
+                                        <TbCircleNumber3Filled className={styles.iconUuDaiTranChinha} /> Ưu đãi trả góp 0% qua Shinhan Finance <strong style={{ cursor: 'pointer' }} onClick={() => handleExplore()}>(Xem chi tiết)</strong>
                                     </div>
                                     <div>
-                                        <TbCircleNumber4Filled className={styles.iconUuDaiTranChinha} /> Mở thẻ HSBC - Hoàn tiền tới 2 triệu đồng <strong>(Xem chi tiết)</strong>
+                                        <TbCircleNumber4Filled className={styles.iconUuDaiTranChinha} /> Mở thẻ HSBC - Hoàn tiền tới 2 triệu đồng <strong style={{ cursor: 'pointer' }} onClick={() => handleExplore()}>(Xem chi tiết)</strong>
                                     </div>
                                     <div>
-                                        <TbCircleNumber5Filled className={styles.iconUuDaiTranChinha} /> Giảm đến 150.000đ khi thanh toán qua Muadee <strong>(Xem chi tiết)</strong>
+                                        <TbCircleNumber5Filled className={styles.iconUuDaiTranChinha} /> Giảm đến 150.000đ khi thanh toán qua Muadee <strong style={{ cursor: 'pointer' }} onClick={() => handleExplore()}>(Xem chi tiết)</strong>
                                     </div>
                                 </div>
                             </div>
@@ -285,7 +290,7 @@ const DetailPage = () => {
                 <div>
                     <div className={styles.sanPhamMoi}>
                         <div style={{ color: 'black', marginTop: '5px', fontWeight: 'bold', fontSize: '20px' }}>SẢN PHẨM MỚI</div>
-                        <div className={styles.wrapProductCartSpMoi}>
+                        <div data-aos="zoom-out" className={styles.wrapProductCartSpMoi}>
                             {Array.isArray(newProducts) && newProducts.map((product, index) => (
                                 <div key={index} className={styles.productCartSpMoi} >
                                     <div onClick={() => handleDetail(product._id)}>

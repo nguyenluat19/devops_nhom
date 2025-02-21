@@ -128,19 +128,12 @@ const CartPage = () => {
                             </div>
 
                             {/* Address & Checkout */}
-                            {auth?.user?.address ? (
-                                <button
-                                    className="btn btn-secondary"
-                                    onClick={() => navigate("/dashboard/user/profile")}
-                                >
-                                    Cập nhật thông tin
-                                </button>
-                            ) : auth?.token ? (
+                            {auth?.token ? (
                                 <button
                                     className="btn btn-outline-warning"
-                                    onClick={() => navigate("/cart")}
+                                // onClick={() => navigate("/cart")}
                                 >
-                                    Cập nhật địa chỉ
+                                    Thanh toán ngay
                                 </button>
                             ) : (
                                 <button

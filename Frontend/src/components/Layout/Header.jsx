@@ -112,7 +112,7 @@ const Header = () => {
                                             {auth.user ? `👤 ${auth.user.name}` : "Tài khoản"}
                                         </li>
                                         <li>
-                                            <NavLink className="dropdown-item d-flex align-items-center" to="/profile">
+                                            <NavLink className="dropdown-item d-flex align-items-center" to="/profile-user">
                                                 <FaRegUser className="me-2" /> Profile
                                             </NavLink>
                                         </li>

@@ -11,7 +11,7 @@ routerUser.get('/users', getAllUsers)
 routerUser.get('/users/:id', getUserById)
 routerUser.delete('/delete/users/:id', deleteUser);
 routerUser.get('/demSoLuonguser', demSoLuongUsers)
-
+routerUser.put('/update/:id', updateProfileController)
 
 routerUser.get('/user-auth', requireSignIn, (req, res) => {
     res.status(200).send({

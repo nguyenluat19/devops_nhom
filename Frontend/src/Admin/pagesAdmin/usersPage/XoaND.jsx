@@ -23,8 +23,6 @@ const XoaND = () => {
         getAllProducts();
     }, [])
 
-
-
     const deleteUser = async (id) => {
         try {
             const response = await axios.delete(`http://localhost:3000/api/v2/delete/users/${id}`);

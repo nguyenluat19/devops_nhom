@@ -56,46 +56,6 @@ const TaoMoiSP = () => {
         }
     }
 
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-
-    //     const formData = new FormData();
-    //     formData.append('name', formProducts.name);
-    //     formData.append('image', formProducts.image);
-    //     formData.append('detailImages', formProducts.detailImages); // add more as needed
-    //     formData.append('description', formProducts.description);
-    //     formData.append('price', formProducts.price);
-    //     formData.append('priceGoc', formProducts.priceGoc);
-    //     formData.append('quantity', formProducts.quantity);
-    //     formData.append('discount', formProducts.discount);
-    //     formData.append('rating', formProducts.rating);
-
-    //     try {
-    //         const response = await axios.post('http://localhost:3000/api/v1/product', formProducts, {
-    //             headers: {
-    //                 'Content-Type': 'multipart/form-data', // ensure the right content type
-    //             },
-    //         });
-    //         console.log('Thêm sản phẩm mới thành công', response.data);
-    //         setFormProducts({
-    //             name: "",
-    //             image: "",
-    //             description: "",
-    //             price: "",
-    //             priceGoc: "",
-    //             quantity: "",
-    //             discount: "",
-    //             rating: "",
-    //             detailImages: "",
-    //         });
-    //         toast.success('Thêm sản phẩm mới thành công');
-    //     } catch (error) {
-    //         console.log("Lỗi không thể tạo sản phẩm mới", error);
-    //         toast.error('Lỗi không thể tạo sản phẩm mới');
-    //     }
-    // }
-
     return (
         <div>
             <div>
@@ -215,33 +175,6 @@ const TaoMoiSP = () => {
                                 required
                             />
                         </div>
-
-                        {/* <div style={{ marginBottom: "16px", marginTop: "10px" }}>
-                            <label htmlFor="parentCategory" style={{ fontWeight: "bold", display: "block", marginBottom: "8px" }}>
-                                Đánh giá
-                            </label>
-                            <select
-                                id="parentCategory"
-                                value={formProducts.rating}
-                                onChange={handleChange}
-                                name="rating"
-                                style={{
-                                    width: "100%",
-                                    padding: "8px",
-                                    borderRadius: "4px",
-                                    border: "1px solid #ccc",
-
-                                }}
-                            >
-                                <option value="">Đánh giá (...sao)</option>
-                                <option value="category1">1 sao</option>
-                                <option value="category2">2 sao</option>
-                                <option value="category3">3 sao</option>
-                                <option value="category4">4 sao</option>
-                                <option value="category5">5 sao</option>
-
-                            </select>
-                        </div> */}
                         <div style={{ marginTop: "10px" }}>
                             <label htmlFor="categoryName" style={{ fontWeight: "bold", display: "block", marginBottom: "8px" }}>
                                 Đánh giá
@@ -287,44 +220,6 @@ const TaoMoiSP = () => {
                 <div className="tableCreateRight">
                     <h5 className="text-center mt-2">Phần ảnh sản phẩm</h5>
                     <hr />
-                    {/* <div style={{ marginTop: "10px" }}>
-                        <label htmlFor="mainImage" style={{ fontWeight: "bold", display: "block", marginBottom: "8px" }}>
-                            Ảnh chính
-                        </label>
-                        <input
-                            type="text"
-                            id="mainImage"
-                            placeholder="URL ảnh chính"
-                            style={{
-                                width: "100%",
-                                padding: "5px",
-                                borderRadius: "4px",
-                                border: "1px solid #ccc",
-                            }}
-                            required
-                        />
-                    </div> */}
-                    {/* <div className="form-group mt-3 p-2">
-                        <label htmlFor="mainImage" style={{ fontWeight: "bold", display: "block", marginBottom: "10px" }}>Upload sản phẩm</label>
-                        <input type="file" name="image" onChange={handleChange} value={formProducts.image} />
-                    </div>
-                    <div className="form-group  p-2">
-                        <label htmlFor="mainImage" style={{ fontWeight: "bold", display: "block", marginBottom: "10px" }}>Upload chi tiết (1)</label>
-                        <input type="file" name="detailImage" onChange={handleChange} value={formProducts.detailImage} />
-                    </div> */}
-
-
-                    {/* <div className="form-group mt-3 p-2">
-                        <label htmlFor="mainImage" style={{ fontWeight: "bold", display: "block", marginBottom: "10px" }}>Upload sản phẩm</label>
-                        <input type="file" name="image" onChange={handleChange} />
-                        {formProducts.image && <Image src={formProducts.image} alt="Hình ảnh sản phẩm" style={{ width: '84px', height: '84px', objectFit: 'cover' }} />}
-                    </div>
-                    <div className="form-group mt-3 p-2">
-                        <label htmlFor="mainImage" style={{ fontWeight: "bold", display: "block", marginBottom: "10px" }}>Upload chi tiết (1)</label>
-                        <input type="file" name="detailImage" onChange={handleChange} />
-                        {formProducts.detailImage && <img src={formProducts.detailImage} alt="Hình ảnh sản phẩm" style={{ width: '84px', height: '84px', objectFit: 'cover' }} />}
-                    </div> */}
-
                     <div className="form-group mt-3 p-2" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <div style={{ flex: 1, marginRight: '10px' }}>
                             <label htmlFor="mainImage" style={{ fontWeight: "bold", display: "block", marginBottom: "10px", fontSize: "15px" }}>
@@ -390,16 +285,6 @@ const TaoMoiSP = () => {
                             </div>
                         )}
                     </div>
-
-
-                    {/* <div className="form-group  p-2">
-                        <label htmlFor="mainImage" style={{ fontWeight: "bold", display: "block", marginBottom: "10px" }}>Upload chi tiết (2)</label>
-                        <input type="file" name="detailImages" onChange={handleChange} value={formProducts.detailImages} />
-                    </div>
-                    <div className="form-group  p-2">
-                        <label htmlFor="mainImage" style={{ fontWeight: "bold", display: "block", marginBottom: "10px" }}>Upload chi tiết (3)</label>
-                        <input type="file" name="detailImages" onChange={handleChange} value={formProducts.detailImages} />
-                    </div> */}
 
                     <div style={{ marginTop: "40px", textAlign: "center" }}>
                         <button
