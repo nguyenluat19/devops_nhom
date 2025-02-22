@@ -87,7 +87,6 @@ const Header = () => {
                                     className="btn btn-light rounded-circle p-2 d-flex align-items-center"
                                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                                     data-bs-toggle="dropdown"
-                                // style={{ border: "none", boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)" }}
                                 >
                                     <FaCircleUser style={{ fontSize: '30px', color: '#333' }} />
                                 </button>

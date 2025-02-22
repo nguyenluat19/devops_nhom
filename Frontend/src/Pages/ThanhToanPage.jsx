@@ -1,18 +1,14 @@
-import Layout from "../components/Layout/Layout"
-import styles from './styles/CartPage.module.css'
+import { useLocation } from "react-router-dom";
+import Layout from "../components/Layout/Layout";
+import styles from "./styles/ThanhToanPage.module.css";
 import { MdNavigateNext } from "react-icons/md";
 import { GoHome } from "react-icons/go";
-import { useCart } from "../context/cart";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/auth";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import { Image } from "antd";
 import toast from "react-hot-toast";
 
-const CartPage = () => {
-    const [auth] = useAuth();
-    const [cart, setCart] = useCart();
-    const navigate = useNavigate();
+const ThanhToanPage = () => {
+    const location = useLocation();
+    const cart = location.state?.cart || [];
 
     const totalPrice = () => {
         if (!cart || cart.length === 0) return "0 VND";
@@ -27,63 +23,36 @@ const CartPage = () => {
             return "0 VND";
         }
     };
-
-
-    // Remove item from cart
-    const removeCartItem = (pid) => {
-        try {
-            let myCart = [...cart];
-            let index = myCart.findIndex(item => item._id === pid);
-            if (index !== -1) {
-                myCart.splice(index, 1);
-                setCart(myCart);
-                localStorage.setItem('cart', JSON.stringify(myCart));
-            }
-        } catch (error) {
-            console.error("Error removing item from cart:", error);
-        }
-    };
-
     const handleVoucher = () => {
         toast.error("Chức năng đang được phát triển 🚀");
     }
 
-
-    const handleCheckout = () => {
-        if (auth?.token) {
-            navigate("/thanh-toan", { state: { cart } });
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        } else {
-            navigate("/login", { state: "/cart" });
-        }
-    };
-
-
-    const handleLogin = () => {
-        navigate("/login", { state: "/cart" });
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }
     return (
-        <Layout title={'Giỏ hàng'}>
+        <Layout title="Thanh Toán">
+            {/* <h2>Trang Thanh Toán</h2>
+            {cart.length > 0 ? (
+                <ul>
+                    {cart.map((item) => (
+                        <li key={item._id}>
+                            <div>
+                                {item.name}
+                            </div>
+                            <div>
+                                {item.price} VND
+                            </div>
+                            <div>
+                                <img src={item.image} />
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p>Không có sản phẩm trong giỏ hàng.</p>
+            )} */}
             <div className={styles.wrapGioHang}>
                 <div className={styles.wrapInGioHang}>
-                    <p style={{ fontSize: '15px' }}> <GoHome />Trang chủ <MdNavigateNext /> Giỏ hàng</p>
-                    {cart.length === 0 ? (
-                        <div className={styles.emptyCart}>
-                            <h2>Giỏ hàng trống</h2>
-                            <img
-                                src="https://cdn.tgdd.vn/mwgcart/v2/vue-pro/img/empty-cart.9cc0f897feb1585aec6c0902e.png"
-                                alt="Giỏ hàng trống"
-
-                            />
-                            <div style={{ marginBottom: '50px', marginTop: '20px' }}>
-                                <Link to="/" className={styles.btnQuayVeTrangChu}>
-                                    Quay về trang chủ
-                                </Link>
-                            </div>
-
-                        </div>
-                    ) : (
+                    <p style={{ fontSize: '15px' }}> <GoHome />Trang chủ <MdNavigateNext /> Đặt hàng</p>
+                    {cart.length > 0 ? (
                         <div className={styles.InINWrapGioHang}>
                             <div className={styles.leftInINWrapGioHang}>
                                 {cart.map((item) => (
@@ -97,21 +66,16 @@ const CartPage = () => {
                                         </div>
                                         <div className={styles.productInfoLeft}>
                                             <div>
-                                                <h4>{item.name.substring(0, 15)}</h4>
+                                                <h4>Sản phẩm: {item.name}</h4>
                                                 <div>Màu: undefiled</div>
                                             </div>
-                                            <div>{item.description.substring(0, 25)}...</div>
-                                            <div    >Số lượng: {item.quantity}</div>
+                                            {/* <div>{item.description.substring(0, 25)}...</div> */}
+                                            <div className={styles.removeBtn}>Số lượng: {item.quantity}</div>
                                             <div>
                                                 <div style={{ color: '#FD475A', fontWeight: 'bold', fontSize: '14px' }}>{(item.price * item.quantity).toLocaleString()}đ</div>
                                                 <div className={styles.forcusLineThrough}>{(item.priceGoc).toLocaleString()}đ</div>
                                             </div>
-                                            <button
-                                                className={styles.removeBtn}
-                                                onClick={() => removeCartItem(item._id)}
-                                            >
-                                                <RiDeleteBin6Line /> Xóa
-                                            </button>
+
                                         </div>
                                     </div>
                                 ))}
@@ -156,26 +120,22 @@ const CartPage = () => {
                                         ).toLocaleString("vi-VN")}đ</div>
                                     </div>
                                 </div>
-                                {auth?.token ? (
-                                    <button className={styles.btnXacNhanDon} onClick={handleCheckout}>
-                                        Xác nhận đơn
-                                    </button>
-                                ) : (
-                                    <button className={styles.btnVuiLongDangNhap}
-                                        onClick={() => handleLogin()}
-                                    >
-                                        Vui lòng đăng nhập
-                                    </button>
-                                )}
+
+                                <button className={styles.btnXacNhanDon} >
+                                    Đặt hàng
+                                </button>
+
 
                             </div>
                         </div>
+                    ) : (
+                        <p>Không có sản phẩm trong giỏ hàng.</p>
                     )}
 
                 </div>
             </div>
         </Layout>
-    )
-}
+    );
+};
 
-export default CartPage
+export default ThanhToanPage;

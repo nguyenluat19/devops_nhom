@@ -89,10 +89,9 @@ const DetailPage = () => {
         const existingProductIndex = updatedCart.findIndex(item => item.id === product.id);
 
         if (existingProductIndex >= 0) {
-            // Nếu sản phẩm đã có trong giỏ, tăng số lượng
+
             updatedCart[existingProductIndex].quantity += 1;
         } else {
-            // Nếu sản phẩm chưa có trong giỏ, thêm mới
             const newProduct = { ...product, id: product.id || new Date().getTime(), quantity: 1 };
             updatedCart.push(newProduct);
         }
@@ -102,6 +101,27 @@ const DetailPage = () => {
         toast.success('Thêm sản phẩm thành công!');
     };
 
+    const gioHang = () => {
+        let updatedCart = [...cart];
+        const existingProductIndex = updatedCart.findIndex(item => item.id === product.id);
+
+        if (existingProductIndex >= 0) {
+
+            updatedCart[existingProductIndex].quantity += 1;
+        } else {
+            const newProduct = { ...product, id: product.id || new Date().getTime(), quantity: 1 };
+            updatedCart.push(newProduct);
+        }
+
+        setCart(updatedCart);
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        navigate('/cart')
+    }
+
+    const hanldeMuaNgay = () => {
+        gioHang(product._id);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
 
 
     return (
@@ -242,7 +262,7 @@ const DetailPage = () => {
                             </div>
                             <div className={styles.allButtonAdd}>
                                 <div className={styles.twoButtonFist}>
-                                    <button className={styles.twoButtonFistA}>
+                                    <button className={styles.twoButtonFistA} onClick={() => hanldeMuaNgay()}>
                                         <strong>MUA NGAY</strong>
                                         <div>(Giao tận nhà hoặc nhận tại cửa hàng)</div>
                                     </button>

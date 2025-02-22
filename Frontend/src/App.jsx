@@ -96,6 +96,7 @@ import DetailPage from "./Pages/DetailPage";
 import CartPage from "./Pages/CartPage";
 import ProfileUser from "./Pages/Profile";
 import UpdateProfile from "./Pages/updateProfile";
+import ThanhToanPage from "./Pages/ThanhToanPage";
 
 // import SearchHome from "./Pages/SearchHome";
 
@@ -115,6 +116,9 @@ function App() {
         {/* <Route path='/search' element={<SearchHome />} /> */}
         <Route path='/profile-user' element={<ProfileUser />} />
         <Route path="/update-profile" element={<UpdateProfile />} />
+        <Route path="/thanh-toan" element={<ThanhToanPage />} />
+
+
         <Route path="/dashboard" element={<DashBoard />}>
           <Route index element={<BangDieuKhien />} />
           <Route path="xemsanPham" element={<XemSanPham />} />
