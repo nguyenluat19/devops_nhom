@@ -175,12 +175,10 @@ body {
 
 
 .rightInINWrapGioHang {
-    /* width: 100%;     */
-    /* width: 30%; */
     width:300px;
     background: #fff;
     border-radius: 10px;
-    height: 53.5vh; 
+    height: 59vh; 
     padding: 15px;
     display: flex;
     flex-direction: column;

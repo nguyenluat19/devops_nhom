@@ -63,6 +63,9 @@ const CartPage = () => {
         navigate("/login", { state: "/cart" });
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
+
+
+    const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
     return (
         <Layout title={'Giỏ hàng'}>
             <div className={styles.wrapGioHang}>
@@ -128,6 +131,12 @@ const CartPage = () => {
                                 </div>
                                 <div>
                                     <div className={styles.WrapTongTien}>
+                                        <div className={styles.totalA}>Tổng sản phẩm : </div>
+                                        <div >
+                                            {totalQuantity} SP
+                                        </div>
+                                    </div>
+                                    <div className={styles.WrapTongTien}>
                                         <div className={styles.totalA}>Tổng tiền: </div>
                                         <div >
                                             {totalPrice()}
@@ -141,7 +150,7 @@ const CartPage = () => {
                                     </div>
                                     <div className={styles.WrapTongTien}>
                                         <div className={styles.totalA}>
-                                            Voucher:
+                                            Áp dụng Voucher:
                                         </div>
                                         <div>
                                             0đ

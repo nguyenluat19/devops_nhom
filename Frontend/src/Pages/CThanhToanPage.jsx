@@ -6,7 +6,7 @@ import { GoHome } from "react-icons/go";
 import { Image } from "antd";
 import toast from "react-hot-toast";
 
-const ThanhToanPage = () => {
+const CThanhToanPage = () => {
     const location = useLocation();
     const cart = location.state?.cart || [];
 
@@ -26,6 +26,8 @@ const ThanhToanPage = () => {
     const handleVoucher = () => {
         toast.error("Chức năng đang được phát triển 🚀");
     }
+
+    const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
     return (
         <Layout title="Thanh Toán">
@@ -61,7 +63,7 @@ const ThanhToanPage = () => {
                                             <Image
                                                 src={item.image}
                                                 alt={item.name}
-                                                className={styles.productImageInLeft}
+                                                cl assName={styles.productImageInLeft}
                                             />
                                         </div>
                                         <div className={styles.productInfoLeft}>
@@ -92,6 +94,12 @@ const ThanhToanPage = () => {
                                 </div>
                                 <div>
                                     <div className={styles.WrapTongTien}>
+                                        <div className={styles.totalA}>Tổng sản phẩm : </div>
+                                        <div >
+                                            {totalQuantity} SP
+                                        </div>
+                                    </div>
+                                    <div className={styles.WrapTongTien}>
                                         <div className={styles.totalA}>Tổng tiền: </div>
                                         <div >
                                             {totalPrice()}
@@ -120,12 +128,9 @@ const ThanhToanPage = () => {
                                         ).toLocaleString("vi-VN")}đ</div>
                                     </div>
                                 </div>
-
-                                <button className={styles.btnXacNhanDon} >
+                                <button className={styles.btnXacNhanDon}>
                                     Đặt hàng
                                 </button>
-
-
                             </div>
                         </div>
                     ) : (
@@ -138,4 +143,4 @@ const ThanhToanPage = () => {
     );
 };
 
-export default ThanhToanPage;
+export default CThanhToanPage;

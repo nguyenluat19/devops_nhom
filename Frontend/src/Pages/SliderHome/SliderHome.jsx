@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-
+import toast from "react-hot-toast";
 
 const SliderHome = () => {
     const categories = [
@@ -40,6 +40,10 @@ const SliderHome = () => {
         { image: 'https://cdn.hoanghamobile.com/i/home/Uploads/2025/01/11/honor200.png' },
         { image: 'https://cdn.hoanghamobile.com/i/home/Uploads/2025/02/08/mac-4.png' }
     ]
+
+    const handleClick = () => {
+        toast.error('Danh mục đang được phát triển 🚀')
+    }
     return (
         <div className={styles.sliderHome}>
             <div className={styles.DanhMucLeft}>
@@ -47,7 +51,7 @@ const SliderHome = () => {
                     <strong>Danh mục</strong>
                     <ul style={{ listStyle: 'none', margin: '0' }}>
                         {categories.map((category, index) => (
-                            <li key={index} style={{ textDecoration: 'none' }}>
+                            <li key={index} style={{ textDecoration: 'none' }} onClick={() => handleClick()}>
                                 <span className="icon">{category.icon}</span>
                                 {category.name}
                             </li>

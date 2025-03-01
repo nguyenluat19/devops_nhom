@@ -159,6 +159,7 @@ const HomePage = () => {
                 </div>
 
             </div>
+
             <SliderBottom />
             <ScrollToTop /> {/* Nút Scroll lên đầu */}
         </Layout>
