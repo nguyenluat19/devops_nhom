@@ -19,7 +19,7 @@ router.get('/products/:id', getProductById)
 router.get('/get-product/:slug', getSingleProductController)
 router.put('/update/products/:id', updateAllProduct)
 router.delete('/delete/products/:id', deleteProduct)
-router.get('/search/:keyword', searchProduct)
+router.get('/search/', searchProduct)
 router.get('/demSoLuongSP', demSoLuongSP)
 router.get('/products/:page', getListProducts)
 

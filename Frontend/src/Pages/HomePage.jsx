@@ -138,16 +138,6 @@ const HomePage = () => {
                                             <div onClick={() => handleBuyNow(product._id)}>
                                                 <p style={{ fontSize: '13px', color: '#FC521D', cursor: 'pointer', fontWeight: 'bold' }}><IoChevronDownSharp /> Các ưu đãi khác</p>
                                             </div>
-
-                                            {/* <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                <div><FiEye /></div>
-                                                <div><FaPlus /></div>
-                                            </div> */}
-                                            {/* <button onClick={() => {
-                                                setCart([...cart, product]);
-                                                localStorage.setItem('cart', JSON.stringify([...cart, product]))
-                                                toast.success('Đã thêm sản phẩm vào giỏ hàng');
-                                            }}>Add cart</button> */}
                                         </div>
                                     ))
                                 ) : (

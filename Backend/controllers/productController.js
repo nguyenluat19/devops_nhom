@@ -116,32 +116,21 @@ const deleteProduct = async (req, res) => {
 //Tìm kiếm sản phẩm 
 const searchProduct = async (req, res) => {
     try {
-        const { keyword } = req.params
-        const result = await Product.find({
+        const { keyword } = req.query;
+        const products = await Product.find({
             $or: [
-                {
-                    name: { $regex: keyword, $options: "i" }
-                },
-                {
-                    description: { $regex: keyword, $options: "i" },
-                }
+                { name: { $regex: keyword, $options: "i" } },
+                { description: { $regex: keyword, $options: "i" } }
             ]
-        }).select("-photo")
-        // if (!result) {
-        //     res.status(404).send({
-        //         message: 'Không tìm thấy sản phẩm'
-        //     })
-        // }
-
-        res.status(200).json(result)
+        }).select("-photo");
+        res.status(200).json(products);
     } catch (error) {
-        console.log(error)
-        res.status(400).send({
-            success: false,
-            message: 'Lỗi không tìm thấy sản phẩm'
-        })
+        res.status(400).json({
+            message: 'Lỗi khi tìm kiếm sản phẩm',
+            error: error.message
+        });
     }
-}
+};
 
 
 const demSoLuongSP = async (req, res) => {

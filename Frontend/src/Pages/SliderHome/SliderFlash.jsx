@@ -41,6 +41,7 @@ const SliderFlash = () => {
             return;
         }
         navigate(`/detail/${id}`); // Chỉ truyền id, không phải object
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
 

@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import './Header.css';
 import { GrSearch } from "react-icons/gr";
 import { Badge } from 'antd';
@@ -12,7 +12,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { AiTwotoneDashboard } from "react-icons/ai";
 import { FaRegUser } from "react-icons/fa";
 import { useCart } from "../../context/cart";
-// import Search from "../Form/SearchInput";
+
 
 const Header = () => {
     const [cart] = useCart()
@@ -20,11 +20,14 @@ const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [sliderTop, setSliderTop] = useState(0);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         setAuth({ user: null, token: "" });
         localStorage.removeItem("auth");
         toast.success("Đăng xuất thành công");
+
     };
 
     const toggleMenu = () => {
@@ -44,14 +47,30 @@ const Header = () => {
     // Tính tổng số lượng sản phẩm trong giỏ hàng
     const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
+
+    const handleSearch = () => {
+        if (searchTerm.trim() !== "") {
+            navigate(`/search?keyword=${searchTerm}`);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    };
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            handleSearch();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    };
+    const handleClick = () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
     return (
         <>
             <div className="slider-top" style={{ top: `${sliderTop}px` }}>
                 <div className="slider-top-in">
-                    <img className="anh-headerTop-a" src="https://cdn2.cellphones.com.vn/x/https://dashboard.cellphones.com.vn/storage/Top%20banner_Giao%20hang.svg" />
-                    <img className="anh-headerTop-a" src="https://cdn2.cellphones.com.vn/x/https://dashboard.cellphones.com.vn/storage/Top%20banner_Thu%20cu.svg" />
-                    <img className="anh-headerTop-a" src="https://cdn2.cellphones.com.vn/x/https://dashboard.cellphones.com.vn/storage/Top%20banner_Chinh%20hang.svg" />
-                    <img className="anh-headerTop-a" src="https://cdn2.cellphones.com.vn/x/https://dashboard.cellphones.com.vn/storage/Top%20banner_Smember.svg" />
+                    <img className="anh-headerTop-a" src="https://cdn2.cellphones.com.vn/x/https://dashboard.cellphones.com.vn/storage/Top%20banner_Giao%20hang.svg" alt="" />
+                    <img className="anh-headerTop-a" src="https://cdn2.cellphones.com.vn/x/https://dashboard.cellphones.com.vn/storage/Top%20banner_Thu%20cu.svg" alt="" />
+                    <img className="anh-headerTop-a" src="https://cdn2.cellphones.com.vn/x/https://dashboard.cellphones.com.vn/storage/Top%20banner_Chinh%20hang.svg" alt="" />
+                    <img className="anh-headerTop-a" src="https://cdn2.cellphones.com.vn/x/https://dashboard.cellphones.com.vn/storage/Top%20banner_Smember.svg" alt="" />
                 </div>
             </div>
             <header className={`header-website ${sliderTop === 0 ? '' : 'header-fixed'}`}>
@@ -61,8 +80,12 @@ const Header = () => {
                     </div>
 
                     <div className="search-bar-website">
-                        <input type="text" placeholder="Tìm kiếm sản phẩm..." />
-                        <button type="submit"><GrSearch /></button>
+                        <input type="text" placeholder="Tìm kiếm sản phẩm..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onKeyDown={handleKeyDown}
+                        />
+                        <button type="submit" onClick={handleSearch}><GrSearch /></button>
                         {/* <Search /> */}
                     </div>
 
@@ -78,8 +101,8 @@ const Header = () => {
 
                         {!auth.user ? (
                             <>
-                                <Link to="/login" className="buttonHeader login-btn">Đăng nhập</Link>
-                                <Link to="/register" className="buttonHeader register-btn">Đăng ký</Link>
+                                <Link onClick={handleClick} to="/login" className="buttonHeader login-btn">Đăng nhập</Link>
+                                <Link onClick={handleClick} to="/register" className="buttonHeader register-btn">Đăng ký</Link>
                             </>
                         ) : (
                             <div className="nav-item dropdown position-relative">

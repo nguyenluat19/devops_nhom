@@ -23,7 +23,7 @@ body {
   width: 230px; /* Độ rộng của sidebar */
   position: sticky;
   margin-top: 10px;
-  top: 83px; /* Giữ cố định khi cuộn */
+  top: 85px; /* Giữ cố định khi cuộn */
   height: fit-content;
   background: #fff;
   padding: 15px;

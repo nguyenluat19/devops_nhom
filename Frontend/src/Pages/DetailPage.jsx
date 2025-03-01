@@ -78,7 +78,7 @@ const DetailPage = () => {
     ];
 
     const handleSubmit = () => {
-        toast.error('Chức năng đang được phát triển!');
+        toast.error('Chức năng đang được phát triển 🚀');
     }
     const handleExplore = () => {
         toast.error('Hệ thống đang nâng cấp!');
