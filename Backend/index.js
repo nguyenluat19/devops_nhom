@@ -5,6 +5,7 @@ const morgan = require('morgan')
 const connectDB = require('./config/db');
 const productRouter = require('./routes/productRoute')
 const usersRouter = require('./routes/userRoute')
+const orderRouter = require('./routes/orderRoute')
 require('dotenv').config();
 
 
@@ -19,7 +20,8 @@ connectDB();
 app.use('/api/v1/', productRouter)
 //API của thằng user(login, resgister)
 app.use('/api/v2/', usersRouter)
-
+//API cuar thành order
+app.use('/api/v3/', orderRouter);
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

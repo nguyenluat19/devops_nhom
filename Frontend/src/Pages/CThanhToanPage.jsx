@@ -31,8 +31,15 @@ const CThanhToanPage = () => {
     const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
     const handleDatHang = () => {
-        navigate("/cbDatHang", { state: { cart } });
-    }
+        const ifHave = window.confirm(`Bạn có chắc chắn muốn đặt ${totalQuantity} sản phẩm này không?`);
+        if (ifHave) {
+            navigate("/cbDatHang", { state: { cart } });
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    };
+
+
+
 
     return (
         <Layout title="Thanh Toán">

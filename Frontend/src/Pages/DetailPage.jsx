@@ -24,6 +24,7 @@ import Spinner from "../components/Spinner";
 import { IoChevronDownSharp } from "react-icons/io5";
 import toast from "react-hot-toast";
 import { useCart } from "../context/cart";
+import ScrollToTop from "./SliderHome/ScrollTop";
 
 const DetailPage = () => {
     const { id } = useParams();
@@ -330,7 +331,9 @@ const DetailPage = () => {
                         </div>
                     </div>
                 </div>
+                <ScrollToTop />
             </div>
+
         </Layout>
     );
 };

@@ -16,11 +16,7 @@ import SliderFlash from "./SliderHome/SliderFlash";
 import SliderBottom from "./SliderHome/SliderBottom";
 import { useNavigate } from "react-router-dom";
 import { IoChevronDownSharp } from "react-icons/io5";
-// import { color } from "framer-motion";
-// import { useCart } from "../context/cart";
-// import toast from "react-hot-toast";
-// import { FaPlus } from "react-icons/fa6";
-// import { FiEye } from "react-icons/fi";
+
 
 
 const HomePage = () => {
@@ -151,7 +147,7 @@ const HomePage = () => {
             </div>
 
             <SliderBottom />
-            <ScrollToTop /> {/* Nút Scroll lên đầu */}
+            <ScrollToTop />
         </Layout>
     );
 };
