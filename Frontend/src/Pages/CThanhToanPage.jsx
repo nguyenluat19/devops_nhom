@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
 import styles from "./styles/ThanhToanPage.module.css";
 import { MdNavigateNext } from "react-icons/md";
@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 const CThanhToanPage = () => {
     const location = useLocation();
     const cart = location.state?.cart || [];
+    const navigate = useNavigate()
 
     const totalPrice = () => {
         if (!cart || cart.length === 0) return "0 VND";
@@ -29,28 +30,12 @@ const CThanhToanPage = () => {
 
     const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
+    const handleDatHang = () => {
+        navigate("/cbDatHang", { state: { cart } });
+    }
+
     return (
         <Layout title="Thanh Toán">
-            {/* <h2>Trang Thanh Toán</h2>
-            {cart.length > 0 ? (
-                <ul>
-                    {cart.map((item) => (
-                        <li key={item._id}>
-                            <div>
-                                {item.name}
-                            </div>
-                            <div>
-                                {item.price} VND
-                            </div>
-                            <div>
-                                <img src={item.image} />
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p>Không có sản phẩm trong giỏ hàng.</p>
-            )} */}
             <div className={styles.wrapGioHang}>
                 <div className={styles.wrapInGioHang}>
                     <p style={{ fontSize: '15px' }}> <GoHome />Trang chủ <MdNavigateNext /> Đặt hàng</p>
@@ -128,7 +113,7 @@ const CThanhToanPage = () => {
                                         ).toLocaleString("vi-VN")}đ</div>
                                     </div>
                                 </div>
-                                <button className={styles.btnXacNhanDon}>
+                                <button className={styles.btnXacNhanDon} onClick={() => handleDatHang()}>
                                     Đặt hàng
                                 </button>
                             </div>

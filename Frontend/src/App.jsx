@@ -98,6 +98,7 @@ import ProfileUser from "./Pages/Profile";
 import UpdateProfile from "./Pages/updateProfile";
 import CThanhToanPage from "./Pages/CThanhToanPage";
 import SearchResults from "./Pages/SearchHome";
+import CBDatHang from "./Pages/CBDatHang";
 
 // import SearchHome from "./Pages/SearchHome";
 
@@ -119,7 +120,7 @@ function App() {
         <Route path="/update-profile" element={<UpdateProfile />} />
         <Route path="/thanh-toan" element={<CThanhToanPage />} />
         <Route path="/search" element={<SearchResults />} />
-
+        <Route path="/cbDatHang" element={<CBDatHang />} />
 
         <Route path="/dashboard" element={<DashBoard />}>
           <Route index element={<BangDieuKhien />} />

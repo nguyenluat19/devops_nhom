@@ -1,5 +1,5 @@
 //Suử dụng thư viên bcrypt để băm(hash) mật khâur để so sánh giúp kiểm tra có khớp mk đã lưu không
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 const hashPassword = async (password) => {
     try {
