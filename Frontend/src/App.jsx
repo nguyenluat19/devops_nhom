@@ -1,77 +1,4 @@
 
-// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// import DashBoard from "./Admin/DashBoard";
-// import TaoMoiSP from "./Admin/pagesAdmin/ProductPage/TaoMoiSP";
-// import ChinhSuaSP from "./Admin/pagesAdmin/ProductPage/ChinhSuaSP";
-// import XoaSP from "./Admin/pagesAdmin/ProductPage/XoaSP";
-// import XemThongTin from "./Admin/pagesAdmin/usersPage/XemThongTin";
-// import XoaND from "./Admin/pagesAdmin/usersPage/XoaND";
-// import XemSanPham from "./Admin/pagesAdmin/ProductPage/XemSanPham";
-// import BangDieuKhien from "./Admin/pagesAdmin/usersPage/BangDieuKhien";
-// import Profile from "./Admin/pagesAdmin/profile/Profile";
-// import NotFoundPage from "./Admin/NotFoundPage";
-// import HomePage from "./Pages/HomePage";
-// import AboutPage from "./Pages/AboutPage";
-// import PageNotFound from "./Pages/PageNotFoud/PageNotFound";
-// import Login from "./Auth/Login";
-// import Register from "./Auth/Register";
-// import PrivateRoute from "./routes/UserRouter/UserRouter";
-// import UserDashBoard from "./User/UserDashBoard";
-// import ProfileUser from "./User/ProfileUser";
-// import AdminRoute from "./routes/AdminRouter/AdminRouter";
-
-
-// function App() {
-
-
-//   return (
-//     <>
-//       <Router>
-//         <Routes>
-//           <Route path='/' element={<HomePage />} />
-//           <Route path='/about' element={<AboutPage />} />
-
-//           {/* <Route path="/dashboard" element={<DashBoard />}>
-//             <Route index element={<BangDieuKhien />} />
-//             <Route path="xemsanPham" element={<XemSanPham />} />
-//             <Route path="taomoi" element={<TaoMoiSP />} />
-//             <Route path="chinhsua/:id" element={<ChinhSuaSP />} />
-//             <Route path="chinhsua" element={<ChinhSuaSP />} />
-//             <Route path="xoasanpham" element={<XoaSP />} />
-//             <Route path="xemthongtin" element={<XemThongTin />} />
-//             <Route path="xoanguoidung" element={<XoaND />} />
-//             <Route path="profile" element={<Profile />} />
-//             <Route path="*" element={<NotFoundPage />} />
-//           </Route> */}
-//           <Route path="/dashboard" element={<AdminRoute />} >
-//             <Route path="admin" element={<DashBoard />} />
-//             <Route index element={<BangDieuKhien />} />
-//             <Route path="xemsanPham" element={<XemSanPham />} />
-//             <Route path="taomoi" element={<TaoMoiSP />} />
-//             <Route path="chinhsua/:id" element={<ChinhSuaSP />} />
-//             <Route path="chinhsua" element={<ChinhSuaSP />} />
-//             <Route path="xoasanpham" element={<XoaSP />} />
-//             <Route path="xemthongtin" element={<XemThongTin />} />
-//             <Route path="xoanguoidung" element={<XoaND />} />
-//             <Route path="profile" element={<Profile />} />
-//             <Route path="*" element={<NotFoundPage />} />
-
-//           </Route>
-//           <Route path="/dashboard" element={<PrivateRoute />}>
-//             <Route path="user" element={<UserDashBoard />} />
-//             <Route path="user/profile" element={<ProfileUser />} />
-//           </Route>
-//           <Route path="*" element={<PageNotFound />} />
-//           <Route path="/login" element={<Login />} />
-//           <Route path="/register" element={<Register />} />
-//         </Routes>
-//       </Router>
-//     </>
-//   )
-// }
-
-// export default App
-
 
 
 
@@ -99,6 +26,11 @@ import UpdateProfile from "./Pages/updateProfile";
 import CThanhToanPage from "./Pages/CThanhToanPage";
 import SearchResults from "./Pages/SearchHome";
 import CBDatHang from "./Pages/CBDatHang";
+import DonHang from "./Pages/DonHang";
+import XemComment from "./Admin/pagesAdmin/reviews/xemComment";
+import XoaComment from "./Admin/pagesAdmin/reviews/XoaComment";
+// import AllComment from "./Pages/AllComment";
+
 
 // import SearchHome from "./Pages/SearchHome";
 
@@ -121,6 +53,9 @@ function App() {
         <Route path="/thanh-toan" element={<CThanhToanPage />} />
         <Route path="/search" element={<SearchResults />} />
         <Route path="/cbDatHang" element={<CBDatHang />} />
+        <Route path="/donhang" element={<DonHang />} />
+        {/* <Route path="/comment" element={<AllComment />} /> */}
+
 
         <Route path="/dashboard" element={<DashBoard />}>
           <Route index element={<BangDieuKhien />} />
@@ -131,6 +66,8 @@ function App() {
           <Route path="xoasanpham" element={<XoaSP />} />
           <Route path="xemthongtin" element={<XemThongTin />} />
           <Route path="xoanguoidung" element={<XoaND />} />
+          <Route path="xemComment" element={<XemComment />} />
+          <Route path="xoaComment" element={<XoaComment />} />
           <Route path="profile" element={<Profile />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>

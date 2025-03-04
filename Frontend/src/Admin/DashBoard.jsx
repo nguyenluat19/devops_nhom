@@ -21,6 +21,8 @@ import { MdOutlineSettings } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { useAuth } from '../context/auth';
+import { RiNotification3Line } from "react-icons/ri";
+import { MdOutlineComment } from "react-icons/md";
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -86,15 +88,24 @@ const DashBoard = () => {
                             <Link to="/dashboard/xemthongtin" style={{ textDecoration: 'none' }}>Xem thông tin</Link>
                         </Menu.Item>
 
-                        <Menu.Item key="3-4" icon={<DeleteOutlined />}>
+                        <Menu.Item key="3-2" icon={<DeleteOutlined />}>
                             <Link to="/dashboard/xoanguoidung" style={{ textDecoration: 'none' }}>Xóa người dùng</Link>
                         </Menu.Item>
                     </SubMenu>
 
                     {/* Mục khác */}
+                    <SubMenu key="4" icon={<RiNotification3Line />} title="QL đánh giá">
+                        <Menu.Item key="4-1" icon={<FileSearchOutlined />}>
+                            <Link to="/dashboard/xemComment" style={{ textDecoration: 'none' }}>Xem comment</Link>
+                        </Menu.Item>
+
+                        <Menu.Item key="4-2" icon={<MdOutlineComment />}>
+                            <Link to="/dashboard/xoaComment" style={{ textDecoration: 'none' }}>Xóa comment</Link>
+                        </Menu.Item>
+                    </SubMenu>
 
                     <Menu.Item key="5" icon={<MdShoppingCartCheckout style={{ fontSize: '17px' }} />}>
-                        <Link to="/dashboard/qldonhang" style={{ textDecoration: 'none' }}>QL đơn hàng</Link>
+                        <Link to="/dashboard/qldonhang" style={{ textDecoration: 'none' }}>QL thông báo</Link>
 
                     </Menu.Item>
 

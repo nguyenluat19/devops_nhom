@@ -129,3 +129,18 @@
 .storePickup input, .homeDelivery input {
     /* padding: 10px; */
 }
+.inChossePayment button{
+    width: 100%;
+    padding: 5px 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    /* background: #ddd; */
+    cursor: pointer;
+    transition: 0.3s;
+    /* outline: #474747; */
+    /* border: 1px solid #2e5986; */
+    color: white;
+    background-color: #2e5986;
+}

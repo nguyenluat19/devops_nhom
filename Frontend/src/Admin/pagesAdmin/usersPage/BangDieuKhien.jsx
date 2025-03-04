@@ -10,7 +10,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 
 const BangDieuKhien = () => {
     const [soLuongProducts, setSoLuongProducts] = useState({ products: 0 });
-    const [soLuongUsers, setSoLuongUsers] = useState({ users: 0 });
+    const [soLuongUsers, setSoLuongUsers] = useState({ User: 0 });
 
     //get all soó lượng sản phẩm
     useEffect(() => {
@@ -81,7 +81,7 @@ const BangDieuKhien = () => {
                             <PiUsersFourLight />
                         </div>
                         <div className="textRight text-center">
-                            <h4>Tổng người dùng: ({soLuongUsers.users})</h4>
+                            <h4>Tổng người dùng: ({soLuongUsers.User})</h4>
                             <Link to='/dashboard/xemthongtin' style={{ textDecoration: 'none' }}>Xem chi tiết <GrLinkNext /></Link>
 
                         </div>

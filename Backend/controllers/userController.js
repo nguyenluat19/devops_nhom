@@ -139,6 +139,7 @@ const getAllUsers = async (req, res) => {
                 message: 'Không tìm thấy người dùng'
             })
         }
+
         res.status(200).json(getUser)
     } catch (error) {
         console.log(error);
@@ -197,7 +198,7 @@ const demSoLuongUsers = async (req, res) => {
         const usersCount = await userModel.countDocuments();
 
         res.status(200).send({
-            users: usersCount,
+            User: usersCount,
         })
     } catch (error) {
         console.log(error)

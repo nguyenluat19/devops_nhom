@@ -6,6 +6,8 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../context/auth";
 import { Radio } from "antd";
+import { BsCash } from "react-icons/bs";
+import toast from "react-hot-toast";
 
 const CBDatHang = () => {
     const location = useLocation();
@@ -13,7 +15,9 @@ const CBDatHang = () => {
     const [auth] = useAuth();
     const [valueName, setValueName] = useState(auth.user.name);
     const [valueAddress, setValueAddress] = useState(auth.user.address)
-    const [valuePhone, setValuePhone] = useState(auth.user.phone)
+    // const [valuePhone, setValuePhone] = useState(auth.user.phone)
+    const [valuePhone, setValuePhone] = useState(auth.user.phone);
+
 
 
     const [shippingMethod, setShippingMethod] = useState("store");
@@ -30,6 +34,10 @@ const CBDatHang = () => {
 
     const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
+
+    const handleClick = () => {
+        toast.error('Chức năng đang được phát triển 🚀')
+    }
     return (
         <Layout>
             <div className={styles.containerCBDatHang}>
@@ -153,15 +161,17 @@ const CBDatHang = () => {
                                     // onChange={(e) => setRadio(e.target.value)}
                                     >
 
-                                        <span><Radio > <img width={20} src="https://homepage.momocdn.net/fileuploads/svg/momo-file-240411162904.svg" /> Thanh toán bằng tiền mặt</Radio></span>
-                                        <Radio >Thanh toán bằng VNPay</Radio>
+                                        <span><Radio > <BsCash style={{ fontSize: '23px', color: '#2e5986' }} /> Thanh toán bằng tiền mặt</Radio></span>
+                                        <Radio ><img width={50} src="https://stcd02206177151.cloud.edgevnpay.vn/assets/images/logo-icon/logo-primary.svg" />Thanh toán bằng VNPay</Radio>
 
-                                        <Radio >Thanh toán bằng momo</Radio>
+                                        <Radio > <img width={20} src="https://homepage.momocdn.net/fileuploads/svg/momo-file-240411162904.svg" /> Thanh toán bằng momo</Radio>
 
                                         <Radio >Thanh toán bằng online</Radio>
 
 
                                     </Radio.Group>
+
+                                    <button onClick={() => handleClick()}>Tiếp tục</button>
                                 </div>
                             </div>
                         </div>

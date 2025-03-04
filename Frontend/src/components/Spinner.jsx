@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import Layout from "./Layout/Layout";
 // eslint-disable-next-line react/prop-types
-const Spinner = ({ path = "login" }) => {
-    const [count, setCount] = useState(4);
+const Spinner = ({ path = "" }) => {
+    const [count, setCount] = useState(10);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -26,7 +26,7 @@ const Spinner = ({ path = "login" }) => {
 
                 <div>
                     <p>The page is loading, please wait {count} second</p>
-                    <ScaleLoader color="#212529" height={40} width={5} radius={2} margin={2} />
+                    <ScaleLoader color="#2e5986" height={40} width={5} radius={2} margin={2} />
                 </div>
             </div>
         </Layout>

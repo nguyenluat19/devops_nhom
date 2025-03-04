@@ -9,6 +9,8 @@ import { Radio } from 'antd';
 import { Prices } from '../components/Prices';
 import { IoArrowBackOutline } from "react-icons/io5";
 import { GrLinkNext } from "react-icons/gr";
+// import Loading from '../Admin/pagesAdmin/Loading'
+import Spinner from '../components/Spinner';
 
 const SearchResults = () => {
     const [products, setProducts] = useState([]);
@@ -18,12 +20,14 @@ const SearchResults = () => {
     const [radio, setRadio] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const navigate = useNavigate()
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
                 const response = await axios.get(`http://localhost:3000/api/v1/search?keyword=${keyword}`);
                 setProducts(response.data);
+                setLoading(false)
             } catch (error) {
                 console.error('Lỗi khi tìm kiếm sản phẩm:', error);
                 setProducts([]); // Đảm bảo state được cập nhật khi có lỗi
@@ -57,6 +61,9 @@ const SearchResults = () => {
         navigate('/')
     }
 
+    if (loading) {
+        return <Spinner />
+    }
     return (
         <Layout title="Tìm kiếm">
             <div className={styles.searchContainer}>

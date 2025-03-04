@@ -25,6 +25,7 @@ import { IoChevronDownSharp } from "react-icons/io5";
 import toast from "react-hot-toast";
 import { useCart } from "../context/cart";
 import ScrollToTop from "./SliderHome/ScrollTop";
+import CommentSection from "./AllComment";
 
 const DetailPage = () => {
     const { id } = useParams();
@@ -32,6 +33,7 @@ const DetailPage = () => {
     const [product, setProduct] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
     const [newProducts, setNewProducts] = useState([]);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -331,6 +333,11 @@ const DetailPage = () => {
                         </div>
                     </div>
                 </div>
+
+                <>
+                    <CommentSection />
+                </>
+
                 <ScrollToTop />
             </div>
 
