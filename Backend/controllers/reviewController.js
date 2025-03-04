@@ -4,36 +4,46 @@ const User = require('../models/userModel')
 
 const createReview = async (req, res) => {
     try {
-        const { rating, comment } = req.body;
-        const { productId } = req.params;
+        const { userId, productId, rating, comment } = req.body;
 
-        if (!req.user) {
-            return res.status(401).json({ success: false, message: 'Bạn cần đăng nhập để bình luận' });
+        //kiểm tra sp có tồn taioj hay không
+        const product = await Product.findById(productId)
+        if (!product) {
+            return res.status(404).json({
+                success: false,
+                message: 'San pham không tồn tại'
+            })
         }
-
+        //kiểm tra người dùng có tồn taioj hay không
+        const user = await User.findById(userId)
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'Người dùng không tồn tạik'
+            })
+        }
+        //taoj ddansh gia moiw
         const review = new reviewModel({
-            user: req.user.id, // Lấy từ token
+            user: userId,
             product: productId,
             rating,
             comment
-        });
-
+        })
         await review.save();
-
-        res.status(201).json({
+        res.status(200).json({
             success: true,
-            message: 'Đánh giá thành công',
+            message: 'Tao comment thanh cong',
             review
-        });
+        })
     } catch (error) {
-        res.status(500).json({
+        console.log(error);
+        res.status(500).send({
             success: false,
-            message: 'Không thể tạo đánh giá',
+            message: 'Không thể tạo comment',
             error: error.message
-        });
+        })
     }
-};
-
+}
 
 const replyComment = async (req, res) => {
     try {

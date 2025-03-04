@@ -319,13 +319,13 @@ const DetailPage = () => {
                                     <div onClick={() => handleDetail(product._id)}>
                                         <img src={product.image} alt={product.name} className={styles.imageProductCartSpMoi} />
                                     </div>
-                                    <h6 style={{ fontWeight: '600', fontSize: '13px', color: '#4b4b4b', cursor: 'pointer' }}>{product.name}</h6>
+                                    <h6 onClick={() => handleDetail(product._id)} style={{ fontWeight: '600', fontSize: '13px', color: '#4b4b4b', cursor: 'pointer' }}>{product.name}</h6>
                                     <div className={styles.flexGiaHome}>
                                         <div className={styles.giaHomeFlex}>{product.price.toLocaleString()}đ</div>
                                         <div className={styles.giaGocHomeFlex}>{product.priceGoc.toLocaleString()}đ</div>
                                     </div>
                                     <p style={{ fontSize: '13px', color: '#4b4b4b' }}>{product.description.substring(0, 27)}...</p>
-                                    <div >
+                                    <div onClick={() => handleDetail(product._id)}>
                                         <p style={{ fontSize: '13px', color: '#FC521D', cursor: 'pointer', fontWeight: 'bold' }}><IoChevronDownSharp /> Các ưu đãi khác</p>
                                     </div>
                                 </div>

@@ -29,6 +29,7 @@ import CBDatHang from "./Pages/CBDatHang";
 import DonHang from "./Pages/DonHang";
 import XemComment from "./Admin/pagesAdmin/reviews/xemComment";
 import XoaComment from "./Admin/pagesAdmin/reviews/XoaComment";
+import ReplyComment from "./Pages/replyComment";
 // import AllComment from "./Pages/AllComment";
 
 
@@ -54,7 +55,7 @@ function App() {
         <Route path="/search" element={<SearchResults />} />
         <Route path="/cbDatHang" element={<CBDatHang />} />
         <Route path="/donhang" element={<DonHang />} />
-        {/* <Route path="/comment" element={<AllComment />} /> */}
+        <Route path="/rep-comment" element={<ReplyComment />} />
 
 
         <Route path="/dashboard" element={<DashBoard />}>
