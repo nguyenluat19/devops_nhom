@@ -13,4 +13,8 @@ router.get('/reviews/total', getAllTotalReviews);
 router.get('/reviews/total/:productId', getTotalReviewsByProduct);
 
 router.get('/reviews/:productId', getProductReviews);
+
+
+router.get('/all-reviews', getAllReviews);
+
 module.exports = router

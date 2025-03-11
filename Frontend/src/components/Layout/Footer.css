@@ -1,0 +1,7 @@
+footer {
+    margin: 0; /* Loại bỏ margin */
+    padding: 0; /* Loại bỏ padding */
+    position: relative; /* Đảm bảo footer không bị ảnh hưởng bởi các phần tử khác */
+    bottom: 0; /* Đặt footer ở dưới cùng */
+    width: 100%; /* Đảm bảo footer chiếm toàn bộ chiều rộng */
+}

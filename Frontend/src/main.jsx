@@ -17,7 +17,7 @@ createRoot(document.getElementById('root')).render(
         <StrictMode>
           <App />
           <Toaster />
-        </StrictMode>,
+        </StrictMode>
       </CartProvider>
     </SearchProvider>
   </AuthProvider>

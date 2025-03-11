@@ -111,7 +111,7 @@ const getProductReviews = async (req, res) => {
 };
 
 
-//lấy đánh giá của tất cả sản phẩm 
+//lấy  số lượng đánh giá của tất cả sản phẩm 
 const getAllTotalReviews = async (req, res) => {
     try {
         const totalReviews = await reviewModel.countDocuments();
@@ -148,6 +148,19 @@ const getTotalReviewsByProduct = async (req, res) => {
     }
 };
 
+//Lấy tất cả comment 
+const getAllReviews = async (req, res) => {
+    try {
+        const reviews = await reviewModel.find()
+            .populate('user', 'name email')
+            .populate('product', 'name')
+            .sort({ createdAt: -1 });
+
+        res.status(200).json(reviews);
+    } catch (error) {
+        res.status(500).json({ message: 'Lỗi khi lấy danh sách bình luận', error: error.message });
+    }
+};
 
 
 module.exports = {
@@ -156,5 +169,6 @@ module.exports = {
     deleteReview,
     getProductReviews,
     getAllTotalReviews,
-    getTotalReviewsByProduct
+    getTotalReviewsByProduct,
+    getAllReviews
 }

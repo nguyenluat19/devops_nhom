@@ -7,6 +7,6 @@ router.post('/orders', createOrder);
 router.get('/orders/:id', getOrderById);
 // router.get('/user/:userId/orders', getOrdersByUser);
 router.get('/getAllOrder', getAllOrders)
-router.delete('/delete/order:id', deleteOrder)
+router.delete('/delete/order/:id', deleteOrder)
 
 module.exports = router;

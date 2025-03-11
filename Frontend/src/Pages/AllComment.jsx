@@ -16,6 +16,7 @@ const CommentSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
+  const [totalCmt, setTotalCmt] = useState([])
 
   const navigate = useNavigate();
 
@@ -55,7 +56,6 @@ const CommentSection = () => {
     e.preventDefault();
 
     if (!newComment.trim() || rating === 0) {
-      // alert("Vui lòng nhập nội dung bình luận vaf chọn đánh giá sao.");
       toast.error("Vui lòng nhập nội dung bình luận và chọn đánh giá sao.")
       return;
     }
@@ -91,10 +91,32 @@ const CommentSection = () => {
     }
   };
 
+
+  useEffect(() => {
+    const getTotalOneProduct = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/v4/reviews/total/${id}`);
+        console.log("Tổng số bình luận:", response.data);
+        setTotalCmt(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getTotalOneProduct();
+  }, [id]);
+
   return (
     <div className={styles.commentSection}>
-      <h4>Bình luận về sản phẩm</h4>
 
+      <div className={styles.blSP}>
+        <h4> Bình luận về sản phẩm</h4>
+        <div>
+          <div style={{ fontSize: '14px', color: '#4b4b4b' }}>Tổng số bình luận:
+            <strong >({totalCmt.totalReviews})</strong>
+          </div>
+        </div>
+
+      </div>
       <div className={styles.formComment}>
         <form className={styles.commentForm} onSubmit={handleSubmit}>
           {/* danh gia sao */}

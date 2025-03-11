@@ -1,33 +1,120 @@
-import { Breadcrumb } from "antd"
-
+import { Breadcrumb } from "antd";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import styles from "./xemComment.module.css";
+import { CiPaperplane } from "react-icons/ci";
 
 const XemComment = () => {
+    const [reviews, setReviews] = useState([]);
+    const [replyComment, setReplyComment] = useState({});
+
+    // Hàm lấy tất cả bình luận (bao gồm cả phản hồi)
+    const fetchReviews = async () => {
+        try {
+            const response = await axios.get("http://localhost:3000/api/v4/all-reviews");
+            setReviews(response.data);
+        } catch (error) {
+            console.error("Lỗi khi lấy bình luận:", error);
+        }
+    };
+
+    // Hàm gửi phản hồi bình luận
+    const replyToReview = async (reviewId) => {
+        if (!replyComment[reviewId] || replyComment[reviewId].trim() === "") {
+            toast.error("Vui lòng nhập nội dung phản hồi!");
+            return;
+        }
+
+        try {
+            console.log("Gửi bình luận:", replyComment[reviewId]);
+
+            const response = await axios.post(
+                `http://localhost:3000/api/v4/reviews/${reviewId}/reply`,
+                { reply: replyComment[reviewId] },
+                { headers: { "Content-Type": "application/json" } }
+            );
+
+            console.log("Phản hồi từ server:", response.data);
+            toast.success("Reply message thành công");
+
+            // Cập nhật bình luận trong state để hiển thị ngay
+            setReviews((prevReviews) =>
+                prevReviews.map((review) =>
+                    review._id === reviewId
+                        ? { ...review, replies: [...(review.replies || []), response.data] }
+                        : review
+                )
+            );
+
+            setReplyComment({ ...replyComment, [reviewId]: "" }); // Xóa nội dung input sau khi gửi
+        } catch (error) {
+            console.error("Lỗi khi trả lời bình luận:", error.response ? error.response.data : error);
+            toast.error("Lỗi khi gửi phản hồi!");
+        }
+    };
+
+    useEffect(() => {
+        fetchReviews();
+    }, []);
+
     return (
-        <div>
-            <div>
-                <Breadcrumb
-                    items={[
-                        {
-                            title: 'Trang chủ',
-                        },
-                        {
-                            title: 'QL người dùng',
-                        },
-                        {
-                            title: 'Xem comment'
-                        }
+        <>
+            <Breadcrumb
+                items={[
+                    { title: "Trang chủ" },
+                    { title: "QL người dùng" },
+                    { title: "Xem comment" },
+                ]}
+                style={{ margin: "16px 0" }}
+            />
 
-                    ]}
-                    style={{
-                        margin: '16px 0',
-                    }}
-                />
-            </div>
-            <div>
-                <h1>helloo</h1>
-            </div>
-        </div>
-    )
-}
+            <div id="reviews" className={styles.wrapAllComment}>
+                <h3 className="text-center">Quản lý bình luận</h3>
+                <div id="review-list" className={styles.allComment}>
+                    {reviews.map((review) => (
+                        <div key={review._id} className={styles.review}>
+                            <p>
+                                <strong>{review.user.name}</strong> (Email: {review.user.email}): {review.comment}
+                            </p>
+                            <p>Đánh giá: {review.rating} sao</p>
 
-export default XemComment
+                            {/* Hiển thị danh sách phản hồi */}
+                            {review.replies && review.replies.length > 0 && (
+                                <div className={styles.replies}>
+                                    <strong>Phản hồi:</strong>
+                                    {review.replies.map((reply, index) => (
+                                        <p key={index} className={styles.replyItem}>➥ {reply}</p>
+                                    ))}
+                                </div>
+                            )}
+
+                            {/* Form trả lời bình luận */}
+                            <form
+                                onSubmit={(e) => {
+                                    e.preventDefault();
+                                    replyToReview(review._id);
+                                }}
+                                className={styles.formReplyBl}
+                            >
+                                <textarea
+                                    value={replyComment[review._id] || ""}
+                                    onChange={(e) => setReplyComment({ ...replyComment, [review._id]: e.target.value })}
+                                    placeholder="Trả lời bình luận..."
+                                />
+                                <div className={styles.wrapButtonGuiBl}>
+                                    <button className={styles.buttonGuiBl} type="submit">
+                                        Gửi bình luận
+                                        <CiPaperplane style={{ fontSize: "20px", marginLeft: "5px" }} />
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </>
+    );
+};
+
+export default XemComment;

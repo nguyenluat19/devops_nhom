@@ -30,7 +30,7 @@ app.use('/api/v3/', orderRouter);
 app.use('/api/v4/', reviewRouter)
 
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

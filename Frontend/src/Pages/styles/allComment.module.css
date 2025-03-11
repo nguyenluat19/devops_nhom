@@ -136,3 +136,8 @@
     color: gold;
     cursor: pointer;
   }
+
+  .blSP{
+    display: flex;
+    justify-content: space-between;
+  }
