@@ -5,7 +5,7 @@ const User = require('../models/userModel');
 // Tạo đơn hàng mới
 exports.createOrder = async (req, res) => {
     try {
-        const { userId, products, address, phone } = req.body; // Lấy userId từ req.body
+        const { userId, products, address, phone } = req.body;
 
         // Kiểm tra user có tồn tại không
         const user = await User.findById(userId);
@@ -47,7 +47,7 @@ exports.createOrder = async (req, res) => {
             address,
             phone,
             status: 'Pending'
-        });
+        });s
 
         await newOrder.save();
         res.status(201).json({ message: 'Đơn hàng đã được tạo', order: newOrder });
@@ -56,7 +56,6 @@ exports.createOrder = async (req, res) => {
         res.status(500).json({ message: 'Lỗi khi tạo đơn hàng', error: error.message });
     }
 };
-
 
 // Lấy danh sách tất cả đơn hàng
 exports.getAllOrders = async (req, res) => {
