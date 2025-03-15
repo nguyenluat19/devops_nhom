@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import styles from "./xemComment.module.css";
 import { CiPaperplane } from "react-icons/ci";
+import { MdDeleteOutline } from "react-icons/md";
 
 const XemComment = () => {
     const [reviews, setReviews] = useState([]);
@@ -22,7 +23,7 @@ const XemComment = () => {
     // Hàm gửi phản hồi bình luận
     const replyToReview = async (reviewId) => {
         if (!replyComment[reviewId] || replyComment[reviewId].trim() === "") {
-            toast.error("Vui lòng nhập nội dung phản hồi!");
+
             return;
         }
 
@@ -57,6 +58,18 @@ const XemComment = () => {
     useEffect(() => {
         fetchReviews();
     }, []);
+
+    const hanldXoaBl = async (reviewId) => {
+        try {
+            await axios.delete(`http://localhost:3000/api/v4/reviews/delete/${reviewId}`);
+            setReviews((prevReviews) => prevReviews.filter((comment) => comment._id !== reviewId));
+            toast.success('Xóa bình luận thành công')
+        } catch (error) {
+            console.error("Lỗi khi xóa bình luận:", error);
+            alert("Không thể xóa bình luận. Vui lòng thử lại.");
+        }
+    };
+
 
     return (
         <>
@@ -103,6 +116,10 @@ const XemComment = () => {
                                     placeholder="Trả lời bình luận..."
                                 />
                                 <div className={styles.wrapButtonGuiBl}>
+                                    <button className={styles.buttonXoaBl} onClick={() => hanldXoaBl(review._id)}>
+                                        Xóa
+                                        <MdDeleteOutline style={{ fontSize: "20px", marginLeft: "5px" }} />
+                                    </button>
                                     <button className={styles.buttonGuiBl} type="submit">
                                         Gửi bình luận
                                         <CiPaperplane style={{ fontSize: "20px", marginLeft: "5px" }} />

@@ -58,7 +58,7 @@ const Register = () => {
                             name="name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            placeholder="Enter your name"
+                            placeholder="Nhập tên của banj"
                             required
                         />
                     </div>
@@ -70,7 +70,7 @@ const Register = () => {
                             name="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter your email"
+                            placeholder="Nhập email của bạn"
                             required
                         />
                     </div>
@@ -82,7 +82,7 @@ const Register = () => {
                             name="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Enter your password"
+                            placeholder="Nhập password của bạn"
                             required=""
                         />
                     </div>
@@ -94,7 +94,7 @@ const Register = () => {
                             name="phone"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
-                            placeholder="Enter your phone number"
+                            placeholder="Nhập sdt của bạn"
                             required
                         />
                     </div>
@@ -106,7 +106,7 @@ const Register = () => {
                             name="address"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
-                            placeholder="Enter your address"
+                            placeholder="Nhập địa chỉ của bạn"
                             required
                         />
                     </div>
@@ -118,7 +118,7 @@ const Register = () => {
                             name="gender"
                             value={gender}
                             onChange={(e) => setGender(e.target.value)}
-                            placeholder="What is your gender?"
+                            placeholder="Nhập giới tính (nam/nữ)"
                             required
                         />
                     </div>
@@ -127,7 +127,7 @@ const Register = () => {
                     </button>
                     <div className="form-footer">
                         <p>
-                            Already have an account? <Link to="/login">Login here</Link>
+                            Nếu bạn đã có tài khoản? <Link to="/login">Đăng nhập</Link>
                         </p>
                     </div>
                 </form>

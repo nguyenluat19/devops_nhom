@@ -87,7 +87,7 @@ const loginController = async (req, res) => {
         if (!soSanh) {
             return res.status(200).send({
                 success: false,
-                message: 'Sai mật khẩu',
+                message: 'Mật khẩu không đúng',
             })
         }
 

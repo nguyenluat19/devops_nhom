@@ -25,6 +25,14 @@ body {
     margin: 0 auto;
     max-width: 1200px;
 }
+/* Tablet */
+
+/* Mobile */
+@media (max-width: 767px) {
+    .slider-top-in {
+        display: none;
+    }
+}
 
 .anh-headerTop-a {
     width: 300px;

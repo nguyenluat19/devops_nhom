@@ -30,7 +30,6 @@ const Login = () => {
             }
         } catch (error) {
             console.log(error);
-            // alert('Đăng nhập thất bại');
             toast.error('Đăng nhập thất bại')
         }
     };

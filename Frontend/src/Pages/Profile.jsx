@@ -16,6 +16,7 @@ const ProfileUser = () => {
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" />
                         <h4>{auth.user.name}</h4>
                         <div>{auth.user.address}</div>
+
                     </div>
                     <div className={styles.rightProfileUser}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>

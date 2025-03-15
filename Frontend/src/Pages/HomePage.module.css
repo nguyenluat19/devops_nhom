@@ -264,10 +264,19 @@ text-align: center;
   font-size: 12px;
   position: absolute;
   padding: 2px 8px;
+
+  border-radius: 5px;
+}
+.redBorder {
+  color: red;
+  background-color: rgb(240, 222, 222);
+  border: 1px solid red;
+}
+
+.greenBorder {
   color: #2e5986;
   background-color: white;
   border: 1px solid #2e5986;
-  border-radius: 5px;
 }
 .flexKhuyenMai{
   display: flex;

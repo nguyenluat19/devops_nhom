@@ -108,21 +108,24 @@ const HomePage = () => {
                                 {filteredProducts.length > 0 ? (
                                     filteredProducts.map((product) => (
                                         <div key={product._id} className={styles.productCart} >
-                                            <p className={styles.discountHomeProduct}>Giảm {product.discount}%</p>
+                                            <p
+                                                className={`${styles.discountHomeProduct} ${product.discount > 10 ? styles.redBorder : styles.greenBorder
+                                                    }`}
+                                            >
+                                                Giảm {product.discount}%
+                                            </p>
+
                                             <div onClick={() => handleBuyNow(product._id)}>
                                                 <img src={product.image} alt={product.name} className={styles.productImageHome} />
                                             </div>
                                             <h6 onClick={() => handleBuyNow(product._id)} style={{ fontWeight: '600', fontSize: '13px', color: '#4b4b4b', cursor: 'pointer' }}>{product.name}</h6>
-                                            {/* <p>{product.description}</p> */}
                                             <div className={styles.flexGiaHome}>
                                                 <p className={styles.giaHomeFlex}>{product.price.toLocaleString()}đ</p>
                                                 <p className={styles.giaGocHomeFlex}>{product.priceGoc.toLocaleString()}đ</p>
                                             </div>
                                             {/* <p>{product.description.subString(0, 22)}...</p> */}
                                             <p style={{ fontSize: '13px', color: '#4b4b4b' }}>{product.description.substring(0, 27)}...</p>
-                                            {/* <div>
-                                            <span>TranChinh member giảm lên tới 20%</span>
-                                            </div> */}
+
                                             <div className={styles.flexKhuyenMai}>
                                                 <p className={styles.inKM}>KM</p>
                                                 <p>Nhiều gói ưu đãi </p>
