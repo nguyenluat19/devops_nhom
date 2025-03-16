@@ -27,7 +27,7 @@ import CThanhToanPage from "./Pages/CThanhToanPage";
 import SearchResults from "./Pages/SearchHome";
 import CBDatHang from "./Pages/CBDatHang";
 import DonHang from "./Pages/DonHang";
-import XemComment from "./Admin/pagesAdmin/reviews/xemComment";
+import XemComment from './Admin/pagesAdmin/reviews/XemComment'
 import XoaComment from "./Admin/pagesAdmin/reviews/XoaComment";
 import ReplyComment from "./Pages/replyComment";
 import Reviews from "./Pages/ThanhToan";
