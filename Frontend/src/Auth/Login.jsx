@@ -5,6 +5,8 @@ import { useAuth } from '../context/auth';
 import Layout from '../components/Layout/Layout';
 import styles from './styleAuth.module.css';
 import toast from 'react-hot-toast';
+const API_URL = import.meta.env.VITE_API;
+
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -15,7 +17,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:3000/api/v2/login', { email, password });
+            const res = await axios.post(`${API_URL}/api/v2/login`, { email, password });
             if (res.data.token) {
                 setAuth({
                     ...auth,

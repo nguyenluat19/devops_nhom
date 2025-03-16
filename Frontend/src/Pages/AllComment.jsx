@@ -18,12 +18,14 @@ const CommentSection = () => {
   const [hoverRating, setHoverRating] = useState(0);
   const [totalCmt, setTotalCmt] = useState([])
 
+  const API_URL = import.meta.env.VITE_API;
+
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!id) return;
     setLoading(true);
-    axios.get(`http://localhost:3000/api/v4/reviews/${id}`)
+    axios.get(`${API_URL}/api/v4/reviews/${id}`)
       .then(response => {
         setComments(response.data);
       })
@@ -39,7 +41,7 @@ const CommentSection = () => {
     if (!window.confirm("Bạn có chắc muốn xóa bình luận này không?")) return;
 
     try {
-      await axios.delete(`http://localhost:3000/api/v4/reviews/delete/${commentId}`);
+      await axios.delete(`${API_URL}/api/v4/reviews/delete/${commentId}`);
       setComments(comments.filter(comment => comment._id !== commentId));
     } catch (error) {
       console.error("Lỗi khi xóa bình luận:", error);
@@ -63,7 +65,7 @@ const CommentSection = () => {
     setIsSubmitting(true);
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/v4/reviews`,
+        `${API_URL}/api/v4/reviews`,
         {
           userId: auth?.user?.id,
           productId: id,
@@ -95,7 +97,7 @@ const CommentSection = () => {
   useEffect(() => {
     const getTotalOneProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/v4/reviews/total/${id}`);
+        const response = await axios.get(`${API_URL}/api/v4/reviews/total/${id}`);
         console.log("Tổng số bình luận:", response.data);
         setTotalCmt(response.data);
       } catch (error) {

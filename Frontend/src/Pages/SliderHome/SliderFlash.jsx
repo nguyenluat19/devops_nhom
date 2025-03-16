@@ -7,6 +7,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import styles from './SliderFlash.module.css';
 import { useNavigate } from 'react-router-dom';
+const API_URL = import.meta.env.VITE_API;
 
 const SliderFlash = () => {
     const [products, setProducts] = useState([]);
@@ -17,7 +18,7 @@ const SliderFlash = () => {
     useEffect(() => {
         const getAllProducts = async () => {
             try {
-                const res = await axios.get('http://localhost:3000/api/v1/products');
+                const res = await axios.get(`${API_URL}/api/v1/products`);
                 setProducts(res.data);
             } catch (error) {
                 console.log("Lỗi khi lấy danh sách sản phẩm flash:", error);
@@ -40,7 +41,7 @@ const SliderFlash = () => {
             console.error("Lỗi: ID sản phẩm không hợp lệ!");
             return;
         }
-        navigate(`/detail/${id}`); // Chỉ truyền id, không phải object
+        navigate(`/detail/${id}`);
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 

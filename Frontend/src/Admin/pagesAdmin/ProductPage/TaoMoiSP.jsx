@@ -3,6 +3,7 @@ import './style.css'
 import { useState } from "react"
 import toast from "react-hot-toast";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API;
 
 const TaoMoiSP = () => {
 
@@ -34,7 +35,7 @@ const TaoMoiSP = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/api/v1/product', formProducts)
+            const response = await axios.post(`${API_URL}/api/v1/product`, formProducts)
             console.log('Thêm mới sản phẩm thành công', response.data);
             setFormProducts({
                 name: "",

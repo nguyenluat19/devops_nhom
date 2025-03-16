@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
-
+const API_URL = import.meta.env.VITE_API;
 
 const DonHang = () => {
     const [order, setOrder] = useState([])
     useEffect(() => {
         const getAllOrder = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/v3/getAllOrder");
+                const response = await axios.get(`${API_URL}/api/v3/getAllOrder`);
                 setOrder(response.data);
                 // setFilteredProducts(response.data);
             } catch (error) {

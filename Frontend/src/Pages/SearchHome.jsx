@@ -11,6 +11,8 @@ import { IoArrowBackOutline } from "react-icons/io5";
 import { GrLinkNext } from "react-icons/gr";
 // import Loading from '../Admin/pagesAdmin/Loading'
 import Spinner from '../components/Spinner';
+const API_URL = import.meta.env.VITE_API;
+
 
 const SearchResults = () => {
     const [products, setProducts] = useState([]);
@@ -25,7 +27,7 @@ const SearchResults = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/v1/search?keyword=${keyword}`);
+                const response = await axios.get(`${API_URL}/api/v1/search?keyword=${keyword}`);
                 setProducts(response.data);
                 setLoading(false)
             } catch (error) {

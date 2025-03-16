@@ -3,6 +3,7 @@ import { FaThList } from "react-icons/fa";
 import './styleUser.css'
 import { useEffect, useState } from "react";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API;
 
 
 const XemThongTin = () => {
@@ -11,7 +12,7 @@ const XemThongTin = () => {
     useEffect(() => {
         const getAllUser = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/v2/users')
+                const response = await axios.get(`${API_URL}/api/v2/users`)
 
                 setUsers(response.data)
             } catch (error) {

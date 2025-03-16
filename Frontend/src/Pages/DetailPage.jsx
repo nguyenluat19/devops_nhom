@@ -27,6 +27,8 @@ import { useCart } from "../context/cart";
 import ScrollToTop from "./SliderHome/ScrollTop";
 import CommentSection from "./AllComment";
 
+const API_URL = import.meta.env.VITE_API;
+
 const DetailPage = () => {
     const { id } = useParams();
     const [cart, setCart] = useCart();
@@ -38,7 +40,7 @@ const DetailPage = () => {
 
     useEffect(() => {
         if (!id) return;
-        axios.get(`http://localhost:3000/api/v1/products/${id}`)
+        axios.get(`${API_URL}/api/v1/products/${id}`)
             .then(response => {
                 setProduct(response.data);
                 setSelectedImage(response.data.image);
@@ -51,7 +53,7 @@ const DetailPage = () => {
     useEffect(() => {
         const fetchNewProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/v1/products/SpMoi');
+                const response = await axios.get(`${API_URL}/api/v1/products/SpMoi`);
                 setNewProducts(response.data.latestProducts);
             } catch (error) {
                 console.error('Error fetching new products:', error);

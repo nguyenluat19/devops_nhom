@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { FaThList } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import toast from "react-hot-toast";
+const API_URL = import.meta.env.VITE_API;
 
 
 const XoaND = () => {
@@ -13,7 +14,7 @@ const XoaND = () => {
     useEffect(() => {
         const getAllProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/v2/users');
+                const response = await axios.get(`${API_URL}/api/v2/users`);
                 setUsers(response.data)
             } catch (error) {
                 console.log('Loi khong lay duoc tat ca user', error);
@@ -25,7 +26,7 @@ const XoaND = () => {
 
     const deleteUser = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:3000/api/v2/delete/users/${id}`);
+            const response = await axios.delete(`${API_URL}/api/v2/delete/users/${id}`);
             console.log('Xóa người dùng thành công', response.data);
             setUsers(users.filter(user => user._id != id))
             toast.success('Xóa người dùng thành công')

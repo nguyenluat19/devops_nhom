@@ -4,6 +4,7 @@ import { DeleteOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import toast from "react-hot-toast";
 import './style.css'
+const API_URL = import.meta.env.VITE_API;
 
 const XoaSP = () => {
     const [products, setProducts] = useState([]);
@@ -11,7 +12,7 @@ const XoaSP = () => {
     useEffect(() => {
         const getAllProduct = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/v1/products')
+                const response = await axios.get(`${API_URL}/api/v1/products`)
                 setProducts(response.data)
             } catch (error) {
                 console.log('Lỗi trong khi getAllProduct', error);
@@ -24,7 +25,7 @@ const XoaSP = () => {
 
     const deleteProduct = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:3000/api/v1/delete/products/${id}`);
+            const response = await axios.delete(`${API_URL}/api/v1/delete/products/${id}`);
             console.log('Xóa sản phẩm thành công', response.data);
             toast.success('Xóa sản phẩm thành công')
             setProducts(products.filter(products => products._id != id));

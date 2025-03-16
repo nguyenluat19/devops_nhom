@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+const API_URL = import.meta.env.VITE_API;
 
 const Reviews = () => {
     const [reviews, setReviews] = useState([]);
@@ -9,7 +10,7 @@ const Reviews = () => {
     // Hàm để lấy tất cả bình luận
     const fetchReviews = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/v4/all-reviews');
+            const response = await axios.get(`${API_URL}/api/v4/all-reviews`);
             setReviews(response.data);
         } catch (error) {
             console.error('Lỗi khi lấy bình luận:', error);
@@ -19,7 +20,7 @@ const Reviews = () => {
     // Hàm để gửi bình luận trả lời
     const replyToReview = async (reviewId) => {
         try {
-            await axios.post(`http://localhost:3000/api/v4/reviews/${reviewId}/reply`, {
+            await axios.post(`${API_URL}/api/v4/reviews/${reviewId}/reply`, {
                 reply: replyComment[reviewId],
 
             });

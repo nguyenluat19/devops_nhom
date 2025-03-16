@@ -7,6 +7,7 @@ import { PiUsersFourLight } from "react-icons/pi";
 import { Link } from "react-router-dom"
 import { GrLinkNext } from "react-icons/gr";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
+const API_URL = import.meta.env.VITE_API;
 
 const BangDieuKhien = () => {
     const [soLuongProducts, setSoLuongProducts] = useState({ products: 0 });
@@ -16,7 +17,7 @@ const BangDieuKhien = () => {
     useEffect(() => {
         const getSoLuongProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/v1/demSoLuongSP');
+                const response = await axios.get(`${API_URL}/api/v1/demSoLuongSP`);
                 console.log('Lấy số lượng sản phẩm thành côgn');
                 setSoLuongProducts(response.data)
             } catch (error) {
@@ -30,7 +31,7 @@ const BangDieuKhien = () => {
     useEffect(() => {
         const getSoLuongUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/v2/demSoLuonguser');
+                const response = await axios.get(`${API_URL}/api/v2/demSoLuonguser`);
                 setSoLuongUsers(response.data)
             } catch (error) {
                 console.log('LỖi không thể lấy số lượng users', error)

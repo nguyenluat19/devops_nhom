@@ -26,6 +26,7 @@ import { useEffect, useState } from "react"
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API;
 
 const ChinhSuaSP = () => {
     const { id } = useParams();
@@ -47,7 +48,7 @@ const ChinhSuaSP = () => {
     useEffect(() => {
         const updateProduct = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/v1/products/${id}`)
+                const response = await axios.get(`${API_URL}/api/v1/products/${id}`)
                 setFormProducts(response.data)
             } catch (error) {
                 toast.error('Bạn phải chọn sản phẩm để update ')
@@ -75,7 +76,7 @@ const ChinhSuaSP = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:3000/api/v1/update/products/${id}`, formProducts)
+            const response = await axios.put(`${API_URL}/api/v1/update/products/${id}`, formProducts)
             console.log('Update sản phẩm thành công', response.data);
             setFormProducts({
                 name: "",
@@ -96,46 +97,6 @@ const ChinhSuaSP = () => {
 
         }
     }
-
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-
-    //     const formData = new FormData();
-    //     formData.append('name', formProducts.name);
-    //     formData.append('image', formProducts.image);
-    //     formData.append('detailImages', formProducts.detailImages); // add more as needed
-    //     formData.append('description', formProducts.description);
-    //     formData.append('price', formProducts.price);
-    //     formData.append('priceGoc', formProducts.priceGoc);
-    //     formData.append('quantity', formProducts.quantity);
-    //     formData.append('discount', formProducts.discount);
-    //     formData.append('rating', formProducts.rating);
-
-    //     try {
-    //         const response = await axios.post('http://localhost:3000/api/v1/product', formProducts, {
-    //             headers: {
-    //                 'Content-Type': 'multipart/form-data', // ensure the right content type
-    //             },
-    //         });
-    //         console.log('Thêm sản phẩm mới thành công', response.data);
-    //         setFormProducts({
-    //             name: "",
-    //             image: "",
-    //             description: "",
-    //             price: "",
-    //             priceGoc: "",
-    //             quantity: "",
-    //             discount: "",
-    //             rating: "",
-    //             detailImages: "",
-    //         });
-    //         toast.success('Thêm sản phẩm mới thành công');
-    //     } catch (error) {
-    //         console.log("Lỗi không thể tạo sản phẩm mới", error);
-    //         toast.error('Lỗi không thể tạo sản phẩm mới');
-    //     }
-    // }
 
     return (
         <div>

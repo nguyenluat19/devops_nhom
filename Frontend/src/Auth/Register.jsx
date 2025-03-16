@@ -5,7 +5,7 @@ import axios from 'axios'
 import { Link, useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
 import Layout from "../components/Layout/Layout";
-
+const API_URL = import.meta.env.VITE_API;
 
 
 const Register = () => {
@@ -23,7 +23,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.post("http://localhost:3000/api/v2/register", {
+            const res = await axios.post(`${API_URL}/api/v2/register`, {
                 name,
                 email,
                 password,

@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import styles from "./xemComment.module.css";
 import { CiPaperplane } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
+const API_URL = import.meta.env.VITE_API;
 
 const XemComment = () => {
     const [reviews, setReviews] = useState([]);
@@ -13,7 +14,7 @@ const XemComment = () => {
     // Hàm lấy tất cả bình luận (bao gồm cả phản hồi)
     const fetchReviews = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/api/v4/all-reviews");
+            const response = await axios.get(`${API_URL}/api/v4/all-reviews`);
             setReviews(response.data);
         } catch (error) {
             console.error("Lỗi khi lấy bình luận:", error);
@@ -31,7 +32,7 @@ const XemComment = () => {
             console.log("Gửi bình luận:", replyComment[reviewId]);
 
             const response = await axios.post(
-                `http://localhost:3000/api/v4/reviews/${reviewId}/reply`,
+                `${API_URL}/api/v4/reviews/${reviewId}/reply`,
                 { reply: replyComment[reviewId] },
                 { headers: { "Content-Type": "application/json" } }
             );
@@ -61,7 +62,7 @@ const XemComment = () => {
 
     const hanldXoaBl = async (reviewId) => {
         try {
-            await axios.delete(`http://localhost:3000/api/v4/reviews/delete/${reviewId}`);
+            await axios.delete(`${API_URL}/api/v4/reviews/delete/${reviewId}`);
             setReviews((prevReviews) => prevReviews.filter((comment) => comment._id !== reviewId));
             toast.success('Xóa bình luận thành công')
         } catch (error) {

@@ -5,6 +5,7 @@ import { FiEdit3 } from "react-icons/fi";
 // import Link from 'antd/es/typography/Link';
 import { Link } from 'react-router-dom';
 // import Loading from '../Loading';
+const API_URL = import.meta.env.VITE_API;
 
 const XemSanPham = () => {
     const [products, setProducts] = useState([]);
@@ -12,7 +13,7 @@ const XemSanPham = () => {
     useEffect(() => {
         const getAllProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/v1/products');
+                const response = await axios.get(`${API_URL}/api/v1/products`);
 
                 setProducts(response.data)
                 // setLoading(false);

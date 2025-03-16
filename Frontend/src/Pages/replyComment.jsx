@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+const API_URL = import.meta.env.VITE_API;
 const ReplyComment = () => {
     const [reviews, setReviews] = useState([]);
     const [replies, setReplies] = useState({});
@@ -9,7 +9,7 @@ const ReplyComment = () => {
     useEffect(() => {
         const fetchReviews = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/v4/all-reviews");
+                const response = await axios.get(`${API_URL}/api/v4/all-reviews`);
                 setReviews(response.data.reviews);
             } catch (error) {
                 console.error("Lỗi khi lấy bình luận:", error);
@@ -34,7 +34,7 @@ const ReplyComment = () => {
         }
 
         try {
-            const response = await axios.post(`http://localhost:3000/api/v4/reply/${reviewId}`, {
+            const response = await axios.post(`${API_URL}/api/v4/reply/${reviewId}`, {
                 reply: replies[reviewId],
             });
 

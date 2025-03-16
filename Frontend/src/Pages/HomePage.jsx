@@ -17,7 +17,7 @@ import SliderBottom from "./SliderHome/SliderBottom";
 import { useNavigate } from "react-router-dom";
 import { IoChevronDownSharp } from "react-icons/io5";
 
-
+const API_URL = import.meta.env.VITE_API;
 
 const HomePage = () => {
     const navigate = useNavigate()
@@ -29,7 +29,7 @@ const HomePage = () => {
     useEffect(() => {
         const getAllProducts = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/v1/products");
+                const response = await axios.get(`${API_URL}/api/v1/products`);
                 setProducts(response.data);
                 setFilteredProducts(response.data);
             } catch (error) {
@@ -100,8 +100,14 @@ const HomePage = () => {
                         </div>
                         <div className={styles.wrapProductHome}>
                             <div className={styles.videoProductHome}>
-                                <video className={styles.videoQC} muted="muted" autoPlay="autoPlay" loop="loop" src="https://cdn.hoanghamobile.com/FetchVideo?src=/Uploads/2024/12/11/infinix-note-40-pro-w.mp4" />
-                                <video className={styles.videoQC} muted="muted" autoPlay="autoPlay" loop="loop" src="https://cdn.hoanghamobile.com/FetchVideo?src=/Uploads/2025/02/10/spart-go-1-w-1_638748033500238042.mp4" />
+                                <video className={styles.videoQC} controls muted autoPlay loop>
+                                    <source src="https://cdn.hoanghamobile.com/FetchVideo?src=/Uploads/2024/12/11/infinix-note-40-pro-w.mp4" type="video/mp4" />
+                                    Trình duyệt không hỗ trợ video.
+                                </video>
+                                <video className={styles.videoQC} controls muted autoPlay loop>
+                                    <source src="https://cdn.hoanghamobile.com/FetchVideo?src=/Uploads/2025/02/10/spart-go-1-w-1_638748033500238042.mp4" type="video/mp4" />
+                                    Trình duyệt không hỗ trợ video.
+                                </video>
                             </div>
                             <p style={{ color: '#4B4B4B', marginTop: '20px', fontWeight: 'bold' }}>Dành cho bạn</p>
                             <div className={styles.productList} >
