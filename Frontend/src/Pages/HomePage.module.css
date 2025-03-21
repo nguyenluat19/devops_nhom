@@ -292,3 +292,7 @@ text-align: center;
   font-weight: bold;
 color:#FC521D;
 }
+
+#button-body::before {
+ padding-top: 10px;
+}

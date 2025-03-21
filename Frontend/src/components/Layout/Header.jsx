@@ -23,11 +23,29 @@ const Header = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
 
+    //ban đầu chưa thêm Tidio chat
+    // const handleLogout = () => {
+    //     setAuth({ user: null, token: "" });
+    //     localStorage.removeItem("auth");
+    //     toast.success("Đăng xuất thành công");
+
+    // };
     const handleLogout = () => {
         setAuth({ user: null, token: "" });
         localStorage.removeItem("auth");
         toast.success("Đăng xuất thành công");
 
+        if (window.tidioChatApi) {
+            window.tidioChatApi.reset(); // Xóa dữ liệu chat
+            window.tidioChatApi.restart(); // Khởi tạo lại Tidio (xóa sạch session)
+            setTimeout(() => {
+                window.location.reload(); // Reload trang để làm mới dữ liệu hoàn toàn
+            }, 2000); // Chờ 2s để chắc chắn Tidio đã reset và restart
+        } else {
+            window.location.reload(); // Reload trang để làm mới dữ liệu hoàn toàn
+        }
+
+        navigate('/login');
     };
 
     const toggleMenu = () => {

@@ -16,6 +16,7 @@ import SliderFlash from "./SliderHome/SliderFlash";
 import SliderBottom from "./SliderHome/SliderBottom";
 import { useNavigate } from "react-router-dom";
 import { IoChevronDownSharp } from "react-icons/io5";
+import TidioChat from "../TidioChat";
 
 const API_URL = import.meta.env.VITE_API;
 
@@ -156,6 +157,8 @@ const HomePage = () => {
             </div>
 
             <SliderBottom />
+
+            <div style={{ marginTop: '20px ' }}> <TidioChat /></div>
             <ScrollToTop />
         </Layout>
     );

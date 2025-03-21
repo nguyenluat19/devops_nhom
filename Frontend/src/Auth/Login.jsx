@@ -14,6 +14,29 @@ const Login = () => {
     const [auth, setAuth] = useAuth();
     const navigate = useNavigate();
 
+    //Ban đầu khi chưa thêm tidio chat
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     try {
+    //         const res = await axios.post(`${API_URL}/api/v2/login`, { email, password });
+    //         if (res.data.token) {
+    //             setAuth({
+    //                 ...auth,
+    //                 user: res.data.user,
+    //                 token: res.data.token,
+    //             });
+    //             localStorage.setItem('auth', JSON.stringify(res.data));
+    //             navigate('/');
+    //         } else {
+    //             // alert(res.data.message);
+    //             toast.error(res.data.message)
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //         toast.error('Đăng nhập thất bại')
+    //     }
+    // };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -25,6 +48,17 @@ const Login = () => {
                     token: res.data.token,
                 });
                 localStorage.setItem('auth', JSON.stringify(res.data));
+                // Reset Tidio để khởi tạo phiên chat mới
+                if (window.tidioChatApi) {
+                    window.tidioChatApi.reset(); // Xóa toàn bộ dữ liệu chat trước đó
+                    setTimeout(() => {
+                        window.tidioChatApi.setVisitorData({
+                            email: res.data.user.email,
+                            name: res.data.user.name || "Người dùng",
+                        });
+                    }, 2000); // Chờ 2s để chắc chắn Tidio đã load lại
+                }
+
                 navigate('/');
             } else {
                 // alert(res.data.message);
@@ -35,6 +69,7 @@ const Login = () => {
             toast.error('Đăng nhập thất bại')
         }
     };
+
 
     return (
         <Layout title={'login'}>
