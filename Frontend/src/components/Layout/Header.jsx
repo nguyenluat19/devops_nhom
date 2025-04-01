@@ -36,13 +36,13 @@ const Header = () => {
         toast.success("Đăng xuất thành công");
 
         if (window.tidioChatApi) {
-            window.tidioChatApi.reset(); // Xóa dữ liệu chat
-            window.tidioChatApi.restart(); // Khởi tạo lại Tidio (xóa sạch session)
+            window.tidioChatApi.reset(); 
+            window.tidioChatApi.restart(); 
             setTimeout(() => {
-                window.location.reload(); // Reload trang để làm mới dữ liệu hoàn toàn
-            }, 2000); // Chờ 2s để chắc chắn Tidio đã reset và restart
+                window.location.reload(); 
+            }, 1000); 
         } else {
-            window.location.reload(); // Reload trang để làm mới dữ liệu hoàn toàn
+            window.location.reload();
         }
 
         navigate('/login');
