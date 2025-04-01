@@ -89,8 +89,10 @@ const XemComment = () => {
                     {reviews.map((review) => (
                         <div key={review._id} className={styles.review}>
                             <p>
-                                <strong>{review.user.name}</strong> (Email: {review.user.email}): {review.comment}
+                                <strong>{review.user?.name || "Unknown User"}</strong>
+                                (Email: {review.user?.email || "No Email"}): {review.comment}
                             </p>
+
                             <p>Đánh giá: {review.rating} sao</p>
 
                             {/* Hiển thị danh sách phản hồi */}

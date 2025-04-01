@@ -105,10 +105,13 @@ const CartPage = () => {
                                             </div>
                                             <div>{item.description.substring(0, 25)}...</div>
                                             <div    >Số lượng: {item.quantity}</div>
-                                            <div>
-                                                <div style={{ color: '#FD475A', fontWeight: 'bold', fontSize: '14px' }}>{(item.price * item.quantity).toLocaleString()}đ</div>
-                                                <div className={styles.forcusLineThrough}>{(item.priceGoc).toLocaleString()}đ</div>
+                                            <div style={{ color: '#FD475A', fontWeight: 'bold', fontSize: '14px' }}>
+                                                {item.price ? (item.price * item.quantity).toLocaleString() : "0"}đ
                                             </div>
+                                            <div className={styles.forcusLineThrough}>
+                                                {item.priceGoc ? item.priceGoc.toLocaleString() : "0"}đ
+                                            </div>
+
                                             <button
                                                 className={styles.removeBtn}
                                                 onClick={() => removeCartItem(item._id)}
