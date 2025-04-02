@@ -71,7 +71,6 @@ const loginController = async (req, res) => {
             return res.status(404).send({
                 success: false,
                 message: 'tài khoản hoặc mật khẩu không hợp lệ',
-                error,
             })
         }
 

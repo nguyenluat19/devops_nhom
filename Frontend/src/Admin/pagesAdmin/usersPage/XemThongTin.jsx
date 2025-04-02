@@ -1,8 +1,10 @@
-import { Breadcrumb } from "antd"
+import { Breadcrumb, Button } from "antd"
 import { FaThList } from "react-icons/fa";
 import './styleUser.css'
 import { useEffect, useState } from "react";
 import axios from "axios";
+import * as XLSX from 'xlsx';
+import { ExportOutlined } from '@ant-design/icons';
 const API_URL = import.meta.env.VITE_API;
 
 
@@ -23,9 +25,34 @@ const XemThongTin = () => {
         getAllUser();
     }, [])
 
+
+
+
+    const exportToExcel = () => {
+        // Format dữ liệu cho Excel
+        const excelData = users.map((item, index) => ({
+            'STT': index + 1,
+            'Họ và tên': item.name,
+            'Email': item.email,
+            'Giới tính': item.gender,
+            'Số điện thoại': item.phone,
+            'Địa chỉ': `${item.address}`,
+        }));
+
+
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.json_to_sheet(excelData);
+
+
+        XLSX.utils.book_append_sheet(wb, ws, "Danh sách người dùng");
+
+
+        XLSX.writeFile(wb, "danh-sach-nguoi-dung.xlsx");
+    };
+
     return (
         <div>
-            <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Breadcrumb
                     items={[
                         {
@@ -43,6 +70,21 @@ const XemThongTin = () => {
                         margin: '16px 0',
                     }}
                 />
+
+                <div style={{}}>
+                    <Button
+                        type="primary"
+                        icon={<ExportOutlined />}
+                        onClick={exportToExcel}
+                        style={{
+                            backgroundColor: ' #fafafa',
+                            borderColor: ' #d7d4d4',
+                            color: 'black'
+                        }}
+                    >
+                        Xuất Excel
+                    </Button>
+                </div>
             </div>
 
             <div className="danhSachQL">

@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Table, Breadcrumb, Image } from 'antd';
+import { Table, Breadcrumb, Image, Button } from 'antd';
 import axios from 'axios';
 import { FiEdit3 } from "react-icons/fi";
 // import Link from 'antd/es/typography/Link';
 import { Link } from 'react-router-dom';
+import * as XLSX from 'xlsx';
+import { ExportOutlined } from '@ant-design/icons';
 // import Loading from '../Loading';
 const API_URL = import.meta.env.VITE_API;
 
@@ -25,6 +27,31 @@ const XemSanPham = () => {
         getAllProducts();
     }, [])
 
+
+
+    const exportToExcel = () => {
+        // Format dữ liệu cho Excel
+        const excelData = products.map((item, index) => ({
+            'STT': index + 1,
+            'Tên sản phẩm': item.name,
+            'Giá': item.price,
+            'Giá gốc': item.priceGoc,
+            'Số lượng': item.quantity,
+            'Giảm giá': `${item.discount}%`,
+            'Đánh giá': `${item.rating} sao`,
+            'Mô tả': item.description
+        }));
+
+
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.json_to_sheet(excelData);
+
+
+        XLSX.utils.book_append_sheet(wb, ws, "Danh sách sản phẩm");
+
+
+        XLSX.writeFile(wb, "danh-sach-san-pham.xlsx");
+    };
     // if (loading) {
     //     return <Loading />
     // }
@@ -108,7 +135,7 @@ const XemSanPham = () => {
 
     return (
         <div>
-            <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
                 <Breadcrumb
                     items={[
                         { title: 'Trang chủ' },
@@ -117,6 +144,21 @@ const XemSanPham = () => {
                     ]}
                     style={{ margin: '16px 0' }}
                 />
+
+                <div style={{}}>
+                    <Button
+                        type="primary"
+                        icon={<ExportOutlined />}
+                        onClick={exportToExcel}
+                        style={{
+                            backgroundColor: ' #fafafa',
+                            borderColor: ' #d7d4d4',
+                            color: 'black'
+                        }}
+                    >
+                        Xuất Excel
+                    </Button>
+                </div>
             </div>
 
             <Table
@@ -125,7 +167,7 @@ const XemSanPham = () => {
                 rowKey="id" // id là khóa duy nhất cho mỗi hàng
                 pagination={{ pageSize: 5 }} // Cấu hình phân trang 
             />
-        </div>
+        </div >
     );
 };
 
