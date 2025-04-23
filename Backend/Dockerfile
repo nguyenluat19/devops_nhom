@@ -1,27 +1,27 @@
-# FROM node:23-alpine
+    # FROM node:23-alpine
 
-# WORKDIR /app
+    # WORKDIR /app
 
-# COPY package*.json ./
+    # COPY package*.json ./
 
-# RUN npm install
+    # RUN npm install
 
-# COPY . .
+    # COPY . .
 
-# EXPOSE 3000
+    # EXPOSE 3000
 
-# CMD ["npm", "start"]`
+    # CMD ["npm", "start"]`
 
-FROM node:18-alpine
+    FROM node:18-alpine
 
-WORKDIR /app
+    WORKDIR /app
 
-COPY package*.json ./
+    COPY package*.json ./
 
-RUN npm install
+    RUN npm install
 
-COPY . .
+    COPY . .
 
-EXPOSE 3000
+    EXPOSE 3000
 
-CMD ["npm", "start"]
+    CMD ["npm", "start"]

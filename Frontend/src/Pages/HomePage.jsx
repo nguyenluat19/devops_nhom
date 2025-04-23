@@ -16,7 +16,8 @@ import SliderFlash from "./SliderHome/SliderFlash";
 import SliderBottom from "./SliderHome/SliderBottom";
 import { useNavigate } from "react-router-dom";
 import { IoChevronDownSharp } from "react-icons/io5";
-import TidioChat from "../TidioChat";
+import Notification from "../Notification";
+// import TidioChat from "../TidioChat";
 
 const API_URL = import.meta.env.VITE_API;
 
@@ -69,6 +70,7 @@ const HomePage = () => {
     return (
         <Layout title={"Trang chủ"}>
             <SliderHome />
+            <Notification />
             <div className={styles.HomePage}>
 
                 <div className={styles.DanhMucLeft}>
@@ -158,7 +160,7 @@ const HomePage = () => {
 
             <SliderBottom />
 
-            <div style={{ marginTop: '20px ' }}> <TidioChat /></div>
+            {/* <div style={{ marginTop: '20px ' }}> <TidioChat /></div> */}
             <ScrollToTop />
         </Layout>
     );

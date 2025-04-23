@@ -35,15 +35,17 @@ const Header = () => {
         localStorage.removeItem("auth");
         toast.success("Đăng xuất thành công");
 
-        if (window.tidioChatApi) {
-            window.tidioChatApi.reset();
-            window.tidioChatApi.restart();
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
-        } else {
-            window.location.reload();
-        }
+        //Nếu xài tidio chat thì bỏ comment đoạn dưới
+
+        // if (window.tidioChatApi) {
+        //     window.tidioChatApi.reset();
+        //     window.tidioChatApi.restart();
+        //     setTimeout(() => {
+        //         window.location.reload();
+        //     }, 1000);
+        // } else {
+        //     window.location.reload();
+        // }
 
         navigate('/login');
     };

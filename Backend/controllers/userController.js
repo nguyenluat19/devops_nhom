@@ -84,7 +84,7 @@ const loginController = async (req, res) => {
 
         const soSanh = await comparePassword(password, user.password);
         if (!soSanh) {
-            return res.status(200).send({
+            return res.status(201).send({
                 success: false,
                 message: 'Mật khẩu không đúng',
             })
@@ -95,6 +95,7 @@ const loginController = async (req, res) => {
         );
 
         res.status(200).send({
+            success: true,
             message: 'Đăng nhập thành công',
             user: {
                 id: user.id,
@@ -197,6 +198,7 @@ const demSoLuongUsers = async (req, res) => {
         const usersCount = await userModel.countDocuments();
 
         res.status(200).send({
+            message: 'Đếm số lượng users thành công',
             User: usersCount,
         })
     } catch (error) {
