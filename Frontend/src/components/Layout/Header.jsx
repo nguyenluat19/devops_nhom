@@ -96,7 +96,7 @@ const Header = () => {
             <header className={`header-website ${sliderTop === 0 ? '' : 'header-fixed'}`}>
                 <div className="container-website">
                     <div className="logo-website">
-                        <Link to="/" className="logo-text">MyWebsite.com</Link>
+                        <Link to="/" className="logo-text">Mainshop.com</Link>
                     </div>
 
                     <div className="search-bar-website">
