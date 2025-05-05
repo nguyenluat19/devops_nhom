@@ -28,7 +28,7 @@ const getAllProducts = async (req, res) => {
         }
         res.status(200).json(products)
     } catch (error) {
-        res.status(400).json({
+        return res.status(400).json({
             message: 'Lỗi khi get all products',
             error: error.message
         })
@@ -52,7 +52,7 @@ const getListProducts = async (req, res) => {
             products
         })
     } catch (error) {
-        res.status(400).json({
+        return res.status(400).json({
             message: 'Loi khi get list products',
             error: error.message
         })
@@ -69,7 +69,7 @@ const getProductById = async (req, res) => {
         }
         res.status(200).json(productExist)
     } catch (error) {
-        res.status(400).json({
+       return res.status(400).json({
             message: 'Lỗi khi getProductById',
             error: error.message
         })
@@ -89,7 +89,7 @@ const updateAllProduct = async (req, res) => {
         })
         res.status(200).json({ updateProduct })
     } catch (error) {
-        res.status(400).json({
+       return res.status(400).json({
             message: 'Lỗi khi update Product',
             error: error.message
         })

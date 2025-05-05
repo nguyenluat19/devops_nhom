@@ -47,7 +47,7 @@ exports.createOrder = async (req, res) => {
             address,
             phone,
             status: 'Pending'
-        });s
+        }); s
 
         await newOrder.save();
         res.status(201).json({ message: 'Đơn hàng đã được tạo', order: newOrder });

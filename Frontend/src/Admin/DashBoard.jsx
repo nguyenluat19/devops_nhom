@@ -109,11 +109,11 @@ const DashBoard = () => {
 
                     </Menu.Item>
 
-                    <Menu.Item key="4" icon={<MdOutlineDeliveryDining style={{ fontSize: '17px' }} />}>
+                    <Menu.Item key="6" icon={<MdOutlineDeliveryDining style={{ fontSize: '17px' }} />}>
                         <Link to="/dashboard/qlgiaohang" style={{ textDecoration: 'none' }}>QL giao hàng</Link>
 
                     </Menu.Item>
-                    <Menu.Item key="6" icon={<MdOutlineSettings style={{ fontSize: '17px' }} />}>
+                    <Menu.Item key="7" icon={<MdOutlineSettings style={{ fontSize: '17px' }} />}>
                         <Link to="/dashboard/setting" style={{ textDecoration: 'none' }}>Cài đặt chung</Link>
 
                     </Menu.Item>
