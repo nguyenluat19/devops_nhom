@@ -7,7 +7,7 @@ const Footer = () => {
                 <div className="row">
                     {/* Cột 1: Logo & Giới thiệu */}
                     <div className="col-md-3">
-                        <h4 className="fw-bold">MyWebsite.com</h4>
+                        <h4 className="fw-bold">Mainshop.com</h4>
                         <p>Chuyên cung cấp sản phẩm công nghệ chính hãng với chất lượng đảm bảo.</p>
                     </div>
 

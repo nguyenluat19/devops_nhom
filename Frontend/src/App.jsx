@@ -31,6 +31,7 @@ import XemComment from './Admin/pagesAdmin/reviews/XemComment'
 import XoaComment from "./Admin/pagesAdmin/reviews/XoaComment";
 import ReplyComment from "./Pages/replyComment";
 import Reviews from "./Pages/ThanhToan";
+import Tragop0 from "./Pages/Tragop0";
 // import AllComment from "./Pages/AllComment";
 
 
@@ -56,6 +57,7 @@ function App() {
         <Route path="/search" element={<SearchResults />} />
         <Route path="/cbDatHang" element={<CBDatHang />} />
         <Route path="/donhang" element={<DonHang />} />
+        <Route path="/tragop/:id" element={<Tragop0 />} />
         <Route path="/rep-comment" element={<ReplyComment />} />
         <Route path="/getAll-comemnt" element={<Reviews />} />
 

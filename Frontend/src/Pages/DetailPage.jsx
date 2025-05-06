@@ -82,9 +82,20 @@ const DetailPage = () => {
         "https://cdn.hoanghamobile.com/i/preview-h-V2/Uploads/2024/06/25/oppo-reno12-f-5g-7.png"
     ];
 
+    // const handleSubmit = () => {
+    //     toast.error('Chức năng đang được phát triển 🚀');
+    // }
+
     const handleSubmit = () => {
-        toast.error('Chức năng đang được phát triển 🚀');
+        if (!product?._id) {
+            console.error("Lỗi: ID sản phẩm tra gop không hợp lệ!");
+            return;
+        }
+        navigate(`/tragop/${product._id}`);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        
     }
+
     const handleExplore = () => {
         toast.error('Hệ thống đang nâng cấp!');
     }

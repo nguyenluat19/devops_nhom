@@ -475,3 +475,76 @@ flex: 1;
     border-radius: 5px;
   }
  
+
+
+  .freeShip{
+    width: 100%;
+    /* background: #2e5986; */
+    background: linear-gradient(#ccdff4, #FFFFFF);
+    color: #2e5986;
+    border: 1px solid #2e5986;
+    text-align: center;
+    margin-top: 15px;
+    border-radius: 5px;
+    padding: 5px;
+  }
+  .wrapGuide{
+   padding: 5px 10px;
+   background-color: white;
+   border-radius: 5px;
+   border: 1px solid #ccc;
+  }
+  .wrapInfoUser{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    gap: 15px;
+  }
+  .wrapInfoUser input {
+    width: 100%;
+    padding: 5px 10px;
+    /* border-radius: 5px; */
+    border: 1px solid #ccc;
+    margin-top: 5px;
+  }
+  .textArea{
+    border: 1px solid #ccc;
+    margin-top: 15px;
+    color: #757575;
+    padding-left: 10px;
+  }
+  .inputAdress{
+    width: 100%;
+    padding: 5px 10px;
+    /* border-radius: 5px; */
+    border: 1px solid #ccc;
+    margin-top: 15px;
+  }
+  .wrapBtn{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 15px;
+  }
+  .btnQuayLai{
+    border-radius: 10px;
+    border: none;
+    width: 30%;
+    color: white;
+    background-color: #2e5986;
+    padding: 5px;
+  }
+  .btnDatHang{
+    border-radius: 10px;
+    border: none;
+    width: 30%;
+    color: white;
+    background-color: #FD475A;
+    padding: 5px;
+  }
+  .wrapNote{
+    text-align: center;
+  }
