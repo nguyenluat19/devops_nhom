@@ -11,8 +11,9 @@ const Chatbot = () => {
     const [loading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const chatContainerRef = useRef(null);
-    const API_URL = import.meta.env.VITE_API;
     const navigate = useNavigate();
+    const API_URL = import.meta.env.VITE_API;
+
 
     useEffect(() => {
         if (chatContainerRef.current) {
