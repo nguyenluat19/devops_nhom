@@ -32,6 +32,7 @@ import XoaComment from "./Admin/pagesAdmin/reviews/XoaComment";
 import ReplyComment from "./Pages/replyComment";
 import Reviews from "./Pages/ThanhToan";
 import Tragop0 from "./Pages/Tragop0";
+// import Chatbot from "./chatbot/Chatbot";
 // import AllComment from "./Pages/AllComment";
 
 
@@ -59,7 +60,8 @@ function App() {
         <Route path="/donhang" element={<DonHang />} />
         <Route path="/tragop/:id" element={<Tragop0 />} />
         <Route path="/rep-comment" element={<ReplyComment />} />
-        <Route path="/getAll-comemnt" element={<Reviews />} />
+        <Route path="/getAll-comment" element={<Reviews />} />
+        {/* <Route path="/chatbot" element={<Chatbot />} /> */}
 
 
         <Route path="/dashboard" element={<DashBoard />}>

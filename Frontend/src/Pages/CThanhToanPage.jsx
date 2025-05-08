@@ -5,6 +5,7 @@ import { MdNavigateNext } from "react-icons/md";
 import { GoHome } from "react-icons/go";
 import { Image } from "antd";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const CThanhToanPage = () => {
     const location = useLocation();
@@ -31,11 +32,31 @@ const CThanhToanPage = () => {
     const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
     const handleDatHang = () => {
-        const ifHave = window.confirm(`Bạn có chắc chắn muốn đặt ${totalQuantity} sản phẩm này không?`);
-        if (ifHave) {
-            navigate("/cbDatHang", { state: { cart } });
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }
+        Swal.fire({
+            title: "Xác nhận đặt hàng",
+            text: `Bạn có chắc chắn muốn đặt ${totalQuantity} sản phẩm này không?`,
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Có, đặt hàng!",
+            cancelButtonText: "Hủy bỏ"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                navigate("/cbDatHang", { state: { cart } });
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+
+                console.log("Người dùng đã hủy đặt hàng.");
+                Swal.fire({
+                    title: "Đã hủy",
+                    text: "Đơn hàng của bạn đã được hủy bỏ.",
+                    icon: "error",
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }
+        });
     };
 
 

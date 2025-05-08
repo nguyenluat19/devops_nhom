@@ -26,6 +26,7 @@ import toast from "react-hot-toast";
 import { useCart } from "../context/cart";
 import ScrollToTop from "./SliderHome/ScrollTop";
 import CommentSection from "./AllComment";
+import Chatbot from "../chatbot/Chatbot";
 
 const API_URL = import.meta.env.VITE_API;
 
@@ -93,7 +94,7 @@ const DetailPage = () => {
         }
         navigate(`/tragop/${product._id}`);
         window.scrollTo({ top: 0, behavior: "smooth" });
-        
+
     }
 
     const handleExplore = () => {
@@ -352,6 +353,7 @@ const DetailPage = () => {
                 </>
 
                 <ScrollToTop />
+                <Chatbot />
             </div>
 
         </Layout>
