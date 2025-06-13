@@ -37,7 +37,7 @@ const CThanhToanPage = () => {
             text: `Bạn có chắc chắn muốn đặt ${totalQuantity} sản phẩm này không?`,
             icon: "question",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#2e5986",
             cancelButtonColor: "#d33",
             confirmButtonText: "Có, đặt hàng!",
             cancelButtonText: "Hủy bỏ"
@@ -76,7 +76,7 @@ const CThanhToanPage = () => {
                                             <Image
                                                 src={item.image}
                                                 alt={item.name}
-                                                cl assName={styles.productImageInLeft}
+                                                className={styles.productImageInLeft}
                                             />
                                         </div>
                                         <div className={styles.productInfoLeft}>

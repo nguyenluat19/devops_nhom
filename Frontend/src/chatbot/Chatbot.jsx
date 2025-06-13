@@ -26,7 +26,7 @@ const Chatbot = () => {
             navigate(`/detail/${productId}`);
             setIsOpen(false);
         } else {
-            console.warn("Product ID is missing, cannot navigate.");
+            console.warn("product íd không tồn tại.");
         }
     };
 
@@ -35,15 +35,11 @@ const Chatbot = () => {
         const parts = [];
         let lastIndex = 0;
         const regex = /PRODUCT_ITEM_START([\s\S]*?)PRODUCT_ITEM_END/g;
-        let match;
-
+        let match;  
         while ((match = regex.exec(content)) !== null) {
-
             if (match.index > lastIndex) {
                 parts.push({ type: 'text', text: content.substring(lastIndex, match.index).trim() });
             }
-
-
             const itemContent = match[1].trim();
             const productDetails = {};
             itemContent.split('\n').forEach(line => {

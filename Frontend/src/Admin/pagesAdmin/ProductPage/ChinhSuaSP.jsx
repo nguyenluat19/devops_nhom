@@ -23,16 +23,14 @@ const ChinhSuaSP = () => {
 
     })
 
-
     useEffect(() => {
         const updateProduct = async () => {
             try {
                 const response = await axios.get(`${API_URL}/api/v1/products/${id}`)
                 setFormProducts(response.data)
             } catch (error) {
-                toast.error('Bạn phải chọn sản phẩm để update ')
+                toast.error('Bạn phải chọn sản phẩm để update.');
                 console.log('Lỗi không thể update sản phẩm', error);
-
             }
         };
         updateProduct();
@@ -268,43 +266,6 @@ const ChinhSuaSP = () => {
                 <div className="tableCreateRight">
                     <h5 className="text-center mt-2">Phần ảnh sản phẩm</h5>
                     <hr />
-                    {/* <div style={{ marginTop: "10px" }}>
-                        <label htmlFor="mainImage" style={{ fontWeight: "bold", display: "block", marginBottom: "8px" }}>
-                            Ảnh chính
-                        </label>
-                        <input
-                            type="text"
-                            id="mainImage"
-                            placeholder="URL ảnh chính"
-                            style={{
-                                width: "100%",
-                                padding: "5px",
-                                borderRadius: "4px",
-                                border: "1px solid #ccc",
-                            }}
-                            required
-                        />
-                    </div> */}
-                    {/* <div className="form-group mt-3 p-2">
-                        <label htmlFor="mainImage" style={{ fontWeight: "bold", display: "block", marginBottom: "10px" }}>Upload sản phẩm</label>
-                        <input type="file" name="image" onChange={handleChange} value={formProducts.image} />
-                    </div>
-                    <div className="form-group  p-2">
-                        <label htmlFor="mainImage" style={{ fontWeight: "bold", display: "block", marginBottom: "10px" }}>Upload chi tiết (1)</label>
-                        <input type="file" name="detailImage" onChange={handleChange} value={formProducts.detailImage} />
-                    </div> */}
-
-
-                    {/* <div className="form-group mt-3 p-2">
-                        <label htmlFor="mainImage" style={{ fontWeight: "bold", display: "block", marginBottom: "10px" }}>Upload sản phẩm</label>
-                        <input type="file" name="image" onChange={handleChange} />
-                        {formProducts.image && <Image src={formProducts.image} alt="Hình ảnh sản phẩm" style={{ width: '84px', height: '84px', objectFit: 'cover' }} />}
-                    </div>
-                    <div className="form-group mt-3 p-2">
-                        <label htmlFor="mainImage" style={{ fontWeight: "bold", display: "block", marginBottom: "10px" }}>Upload chi tiết (1)</label>
-                        <input type="file" name="detailImage" onChange={handleChange} />
-                        {formProducts.detailImage && <img src={formProducts.detailImage} alt="Hình ảnh sản phẩm" style={{ width: '84px', height: '84px', objectFit: 'cover' }} />}
-                    </div> */}
 
                     <div className="form-group mt-3 p-2" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <div style={{ flex: 1, marginRight: '10px' }}>

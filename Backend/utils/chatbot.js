@@ -46,8 +46,8 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 async function chatbot(question) {
     try {
-        // const products = await productModel.find({}).limit(10).lean(); //giới hạn 10 sản phẩm để tránh quá tải dữ liệu
-        const products = await productModel.find({}).lean(); //giới hạn 10 sản phẩm để tránh quá tải dữ liệu
+        // const products = await productModel.find({}).limit(10).lean(); 
+        const products = await productModel.find({}).lean();
 
         const productData = products.map(
             // (item) => `ID: ${item._id}, Tên sản phẩm: ${item.name}, Giá: ${item.price || 'Không rõ'}, Hình ảnh: ${item.image || 'Không rõ'}`

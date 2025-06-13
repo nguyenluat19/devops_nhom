@@ -22,13 +22,12 @@ const XoaSP = () => {
         getAllProduct();
     }, [])
 
-
     const deleteProduct = async (id) => {
         try {
             const response = await axios.delete(`${API_URL}/api/v1/delete/products/${id}`);
             console.log('Xóa sản phẩm thành công', response.data);
             toast.success('Xóa sản phẩm thành công')
-            setProducts(products.filter(products => products._id != id));
+            setProducts(products.filter(products => products._id != id)); 
         } catch (error) {
             console.log('Lỗi khi xóa sản phẩm', error);
             toast.error('Khoong thể xóa sản phẩm');
@@ -116,7 +115,7 @@ const XoaSP = () => {
             <Table
                 dataSource={products} // Cấp dưu liêuj cho bảngbảng
                 columns={columns} // cấu hình cột 
-                rowKey="id" // id là khóa duy nhất cho mỗi hàng
+                rowKey="id" 
                 pagination={{ pageSize: 5 }} // Cấu hình phân trang 
             />
         </div>

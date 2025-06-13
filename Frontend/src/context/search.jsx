@@ -9,7 +9,6 @@ const SearchProvider = ({ children }) => {
         results: [],
     });
 
-
     return (
         <SearchContext.Provider value={[auth, setAuth]}>
             {children}

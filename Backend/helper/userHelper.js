@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs')
 
 const hashPassword = async (password) => {
     try {
-        //số nguyên thể hiện độ phức tạp của thuật toán băm
         const saltRounds = 10
         const hashedPassword = await bcrypt.hash(password, saltRounds)
         return hashedPassword

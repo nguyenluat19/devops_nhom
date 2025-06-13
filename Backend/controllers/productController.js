@@ -19,7 +19,7 @@ const createProduct = async (req, res) => {
     }
 }
 
-//Lấy tất cả sản phẩm
+
 const getAllProducts = async (req, res) => {
     try {
         const products = await Product.find();
@@ -35,7 +35,7 @@ const getAllProducts = async (req, res) => {
     }
 }
 
-//Lấy 1 danh sách sản phẩm (ví dụ chỉ lấy 5 hoặc 10 sản phẩm để hiển thị lên trang web);
+//Cấu hình phân trang (ví dụ chỉ lấy 5 hoặc 10 sản phẩm để hiển thị lên trang web);
 const getListProducts = async (req, res) => {
     try {
         const perPage = 4;
@@ -59,7 +59,7 @@ const getListProducts = async (req, res) => {
     }
 }
 
-//lấy snar phẩm theo id
+
 const getProductById = async (req, res) => {
     try {
         const id = req.params.id;
@@ -69,14 +69,14 @@ const getProductById = async (req, res) => {
         }
         res.status(200).json(productExist)
     } catch (error) {
-       return res.status(400).json({
+        return res.status(400).json({
             message: 'Lỗi khi getProductById',
             error: error.message
         })
     }
 }
 
-//update sản phẩm 
+
 const updateAllProduct = async (req, res) => {
     try {
         const id = req.params.id;
@@ -89,7 +89,7 @@ const updateAllProduct = async (req, res) => {
         })
         res.status(200).json({ updateProduct })
     } catch (error) {
-       return res.status(400).json({
+        return res.status(400).json({
             message: 'Lỗi khi update Product',
             error: error.message
         })

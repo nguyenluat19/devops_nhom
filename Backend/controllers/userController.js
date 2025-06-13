@@ -117,7 +117,6 @@ const loginController = async (req, res) => {
     }
 }
 
-
 const testController = (req, res) => {
     try {
         res.send('testController')
@@ -128,9 +127,6 @@ const testController = (req, res) => {
 
 }
 
-
-
-/*********************Hiển thị tất cả người dùng********************* */
 const getAllUsers = async (req, res) => {
     try {
         const getUser = await userModel.find();
@@ -150,7 +146,6 @@ const getAllUsers = async (req, res) => {
     }
 }
 
-//****************************Xoa nguoi dung******************************** */
 const getUserById = async (req, res) => {
     try {
         const id = req.params.id;
@@ -192,11 +187,9 @@ const deleteUser = async (req, res) => {
     }
 }
 
-// getall số lượng users
 const demSoLuongUsers = async (req, res) => {
     try {
         const usersCount = await userModel.countDocuments();
-
         res.status(200).send({
             message: 'Đếm số lượng users thành công',
             User: usersCount,

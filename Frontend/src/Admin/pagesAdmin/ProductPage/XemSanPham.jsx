@@ -16,7 +16,6 @@ const XemSanPham = () => {
         const getAllProducts = async () => {
             try {
                 const response = await axios.get(`${API_URL}/api/v1/products`);
-
                 setProducts(response.data)
                 // setLoading(false);
             } catch (error) {
@@ -41,15 +40,9 @@ const XemSanPham = () => {
             'Đánh giá': `${item.rating} sao`,
             'Mô tả': item.description
         }));
-
-
         const wb = XLSX.utils.book_new();
         const ws = XLSX.utils.json_to_sheet(excelData);
-
-
         XLSX.utils.book_append_sheet(wb, ws, "Danh sách sản phẩm");
-
-
         XLSX.writeFile(wb, "danh-sach-san-pham.xlsx");
     };
     // if (loading) {
@@ -162,9 +155,9 @@ const XemSanPham = () => {
             </div>
 
             <Table
-                dataSource={products} // Cấp dưu liêuj cho bảngbảng
+                dataSource={products} // Cấp dưu liêuj cho bangr
                 columns={columns} // cấu hình cột 
-                rowKey="id" // id là khóa duy nhất cho mỗi hàng
+                rowKey="id"
                 pagination={{ pageSize: 5 }} // Cấu hình phân trang 
             />
         </div >

@@ -13,7 +13,6 @@ const BangDieuKhien = () => {
     const [soLuongProducts, setSoLuongProducts] = useState({ products: 0 });
     const [soLuongUsers, setSoLuongUsers] = useState({ User: 0 });
 
-    //get all soó lượng sản phẩm
     useEffect(() => {
         const getSoLuongProducts = async () => {
             try {
@@ -27,7 +26,6 @@ const BangDieuKhien = () => {
         getSoLuongProducts()
     }, [])
 
-    //get all số lượng người dùng 
     useEffect(() => {
         const getSoLuongUsers = async () => {
             try {

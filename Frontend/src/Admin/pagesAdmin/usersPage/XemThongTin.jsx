@@ -15,7 +15,6 @@ const XemThongTin = () => {
         const getAllUser = async () => {
             try {
                 const response = await axios.get(`${API_URL}/api/v2/users`)
-
                 setUsers(response.data)
             } catch (error) {
                 console.log('Lỗi không thể lấy dữ liệu', error);
@@ -24,9 +23,6 @@ const XemThongTin = () => {
         };
         getAllUser();
     }, [])
-
-
-
 
     const exportToExcel = () => {
         // Format dữ liệu cho Excel
@@ -116,11 +112,7 @@ const XemThongTin = () => {
                                         <td>{user.email}</td>
                                         <td>{user.gender}</td>
                                         <td>{user.phone}</td>
-                                        <td>{user.address}</td>
-                                        {/* <td>
-                   
-                </td> */}
-
+                                        <td>{user.address}</td>              
                                     </tr>
                                 )
                             })}

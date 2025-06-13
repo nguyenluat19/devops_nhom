@@ -6,6 +6,8 @@ import { LuPenLine } from "react-icons/lu";
 
 const ProfileUser = () => {
     const [auth] = useAuth();
+    console.log(auth);
+
     const navigate = useNavigate();
 
     return (

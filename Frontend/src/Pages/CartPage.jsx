@@ -10,7 +10,7 @@ import { Image } from "antd";
 import toast from "react-hot-toast";
 
 const CartPage = () => {
-    const [auth] = useAuth();
+    const [auth] = useAuth(); //tt user(dn/dk)
     const [cart, setCart] = useCart();
     const navigate = useNavigate();
 
@@ -28,8 +28,6 @@ const CartPage = () => {
         }
     };
 
-
-    // Remove item from cart
     const removeCartItem = (pid) => {
         try {
             let myCart = [...cart];
@@ -48,7 +46,6 @@ const CartPage = () => {
         toast.error("Chức năng đang được phát triển 🚀");
     }
 
-
     const handleCheckout = () => {
         if (auth?.token) {
             navigate("/thanh-toan", { state: { cart } });
@@ -58,14 +55,13 @@ const CartPage = () => {
         }
     };
 
-
     const handleLogin = () => {
         navigate("/login", { state: "/cart" });
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-
     const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
+
     return (
         <Layout title={'Giỏ hàng'}>
             <div className={styles.wrapGioHang}>
@@ -77,14 +73,12 @@ const CartPage = () => {
                             <img
                                 src="https://cdn.tgdd.vn/mwgcart/v2/vue-pro/img/empty-cart.9cc0f897feb1585aec6c0902e.png"
                                 alt="Giỏ hàng trống"
-
                             />
                             <div style={{ marginBottom: '50px', marginTop: '20px' }}>
                                 <Link to="/" className={styles.btnQuayVeTrangChu}>
                                     Quay về trang chủ
                                 </Link>
                             </div>
-
                         </div>
                     ) : (
                         <div className={styles.InINWrapGioHang}>
@@ -111,7 +105,6 @@ const CartPage = () => {
                                             <div className={styles.forcusLineThrough}>
                                                 {item.priceGoc ? item.priceGoc.toLocaleString() : "0"}đ
                                             </div>
-
                                             <button
                                                 className={styles.removeBtn}
                                                 onClick={() => removeCartItem(item._id)}
@@ -121,7 +114,6 @@ const CartPage = () => {
                                         </div>
                                     </div>
                                 ))}
-
                             </div>
                             <div className={styles.rightInINWrapGioHang}>
                                 <h4 className={styles.h4TongGioHang}>
@@ -183,7 +175,6 @@ const CartPage = () => {
                             </div>
                         </div>
                     )}
-
                 </div>
             </div>
         </Layout>
