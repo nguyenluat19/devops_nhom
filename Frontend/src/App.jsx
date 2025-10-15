@@ -1,7 +1,3 @@
-
-
-
-
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import DashBoard from "./Admin/DashBoard";
@@ -16,7 +12,7 @@ import Profile from "./Admin/pagesAdmin/profile/Profile";
 import NotFoundPage from "./Admin/NotFoundPage";
 import HomePage from "./Pages/HomePage";
 import AboutPage from "./Pages/AboutPage";
-import PageNotFound from "./Pages/PageNotFoud/PageNotFound"
+import PageNotFound from "./Pages/PageNotFoud/PageNotFound";
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
 import DetailPage from "./Pages/DetailPage";
@@ -27,43 +23,34 @@ import CThanhToanPage from "./Pages/CThanhToanPage";
 import SearchResults from "./Pages/SearchHome";
 import CBDatHang from "./Pages/CBDatHang";
 import DonHang from "./Pages/DonHang";
-import XemComment from './Admin/pagesAdmin/reviews/XemComment'
+import XemComment from "./Admin/pagesAdmin/reviews/XemComment";
 import XoaComment from "./Admin/pagesAdmin/reviews/XoaComment";
 import ReplyComment from "./Pages/replyComment";
 import Reviews from "./Pages/ThanhToan";
 import Tragop0 from "./Pages/Tragop0";
-// import Chatbot from "./chatbot/Chatbot";
-// import AllComment from "./Pages/AllComment";
-
-
-// import SearchHome from "./Pages/SearchHome";
-
-
+import QRPaymentPage from "./Pages/QRPaymentPage";
+import Morder from "./Admin/pagesAdmin/qldonhang/Morder";
 
 function App() {
   return (
-
     <Router>
       <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/about' element={<AboutPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
-        <Route path='/cart' element={<CartPage />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        {/* <Route path='/search' element={<SearchHome />} /> */}
-        <Route path='/profile-user' element={<ProfileUser />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile-user" element={<ProfileUser />} />
         <Route path="/update-profile" element={<UpdateProfile />} />
         <Route path="/thanh-toan" element={<CThanhToanPage />} />
         <Route path="/search" element={<SearchResults />} />
         <Route path="/cbDatHang" element={<CBDatHang />} />
-        <Route path="/donhang" element={<DonHang />} />
+        <Route path="/orders" element={<DonHang />} />
         <Route path="/tragop/:id" element={<Tragop0 />} />
         <Route path="/rep-comment" element={<ReplyComment />} />
         <Route path="/getAll-comment" element={<Reviews />} />
-        {/* <Route path="/chatbot" element={<Chatbot />} /> */}
-
-
+        <Route path="/qr-payment" element={<QRPaymentPage />} />
         <Route path="/dashboard" element={<DashBoard />}>
           <Route index element={<BangDieuKhien />} />
           <Route path="xemsanPham" element={<XemSanPham />} />
@@ -76,12 +63,12 @@ function App() {
           <Route path="xemComment" element={<XemComment />} />
           <Route path="xoaComment" element={<XoaComment />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="qlgiaohang" element={<Morder />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </Router>
-
   );
 }
 

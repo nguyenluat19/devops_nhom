@@ -1,4 +1,3 @@
-
 import { MdOutlineLocalShipping } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -8,214 +7,231 @@ import { GoHome } from "react-icons/go";
 import axios from "axios";
 import Spinner from "../components/Spinner";
 import { FaCheck } from "react-icons/fa6";
-import styles from './styles/DetailPage.module.css';
 import { useAuth } from "../context/auth";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { useCart } from "../context/cart";
 
-
 const API_URL = import.meta.env.VITE_API;
 
 const Tragop0 = () => {
-    const { id } = useParams();
-    const [auth] = useAuth();
-    const [cart, setCart] = useCart();
-    const navigate = useNavigate()
-    const [product, setProduct] = useState(null);
-    const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+  const [auth] = useAuth();
+  const [cart, setCart] = useCart();
+  const navigate = useNavigate();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const getProduct = async () => {
-            try {
-                const { data } = await axios.get(`${API_URL}/api/v1/products/${id}`);
-                setProduct(data);
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching product:", error);
-                setLoading(false);
-            }
-        };
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const { data } = await axios.get(`${API_URL}/api/v1/products/${id}`);
+        setProduct(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+        setLoading(false);
+      }
+    };
 
-        if (id) {
-            getProduct();
-        }
-    }, [id]);
+    if (id) {
+      getProduct();
+    }
+  }, [id]);
 
-    if (loading) return <Spinner />;
+  if (loading) return <Spinner />;
 
-    const handleBack = () => {
+  const handleBack = () => {
+    navigate("/");
+  };
 
-        // window.location.href = "/";
-        navigate("/")
+  const gioHang = () => {
+    let updatedCart = [...cart];
+    const existingProductIndex = updatedCart.findIndex((item) => item.id === product.id);
 
+    if (existingProductIndex >= 0) {
+      updatedCart[existingProductIndex].quantity += 1;
+    } else {
+      const newProduct = { ...product, id: product.id || new Date().getTime(), quantity: 1 };
+      updatedCart.push(newProduct);
     }
 
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    navigate("/cart");
+  };
 
-    const gioHang = () => {
-        let updatedCart = [...cart];
-        const existingProductIndex = updatedCart.findIndex(item => item.id === product.id);
+  const hanldeMuaNgay = () => {
+    gioHang(product._id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
-        if (existingProductIndex >= 0) {
+  return (
+    <Layout title="Trả góp 0% lãi suất">
+      <div className="w-full max-w-6xl mt-[110px] mx-auto px-4 sm:px-6 lg:px-8 bg-gray-100 font-inter">
+        <div >
+          <div className="mb-4">
+            <p className="flex items-center text-sm sm:text-base text-gray-600">
+              <GoHome className="text-base sm:text-lg mr-1" />
+              <span>Trang chủ</span>
+              <MdNavigateNext className="mx-1" />
+              <span>Trả góp</span>
+              <MdNavigateNext className="mx-1" />
+              <strong>{product?.name}</strong>
+            </p>
+            <h4 className="text-lg sm:text-xl font-bold text-gray-800">
+              Trả góp sản phẩm {product?.name} - Chính hãng
+            </h4>
+          </div>
 
-            updatedCart[existingProductIndex].quantity += 1;
-        } else {
-            const newProduct = { ...product, id: product.id || new Date().getTime(), quantity: 1 };
-            updatedCart.push(newProduct);
-        }
-
-        setCart(updatedCart);
-        localStorage.setItem("cart", JSON.stringify(updatedCart));
-        navigate('/cart')
-    }
-    const hanldeMuaNgay = () => {
-        gioHang(product._id);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    return (
-        <Layout title={"Trả góp 0% lãi suất"}>
-            <div className="container" style={{ width: "100%", maxWidth: "1200px", margin: "0 auto" }}>
-                <div style={{ marginTop: "140px" }}>
-                    <div className="row">
-                        <div className="col-md-12">
-                            <p style={{ fontSize: '14px' }}>
-                                <GoHome />Trang chủ <MdNavigateNext /> Trả góp <MdNavigateNext />
-                                <strong>{product?.name}</strong>
-                            </p>
-                            <h4 style={{ fontWeight: 'bold' }} >Trả góp sản phẩm {product?.name} - Chính hãng</h4>
-                            {/* <h4 className="text-danger text-center">Sản phẩm {product?.name} - Chính hãng </h4> */}
-                            {/* <p className="text-muted text-center">Chỉ cần có CMND/CCCD và hộ khẩu là bạn có thể mua hàng trả góp 0% lãi suất.</p> */}
-                        </div>
-                    </div>
-
-                    {product && (
-                        <div className="row mt-4">
-                            <div className="col-md-4">
-                                <div className="card">
-                                    <img src={product.image} className="card-img-top" alt={product.name} />
-                                    {/* <div className="card-body">
-                                        <h5 className="card-title">{product.name}</h5>
-                                        <p className="card-text">Giá sản phẩm: {product.price.toLocaleString()}đ</p>
-                                        <p className="card-text text-danger">Giá trả góp từ: {(product.price / 12).toLocaleString()}đ/tháng</p>
-                                    </div> */}
-                                </div>
-                            </div>
-                            <div className="col-md-8">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <h5 style={{ fontWeight: 'bold' }} className="card-title">Thông tin sản phẩm</h5>
-                                        <div>
-                                            <p className="card-text  mt-3">Tên sản phẩm: {product.name}</p>
-                                            <p className="card-text">Giá sản phẩm: {product.price.toLocaleString()}đ</p>
-                                            <p className="card-text text-danger" >Giá gốc: {product.priceGoc.toLocaleString()}đ</p>
-                                        </div>
-                                        <div className={styles.WrapChoiceColor}>
-                                            <p style={{ fontWeight: '700', fontSize: '14px' }} className="mt-3">Lựa chọn màu</p>
-                                            <div className={styles.choiceColor}>
-                                                <img src={product.image} />
-                                                <div className={styles.undefinedMau}>
-                                                    <p>Màu undefined</p>
-                                                    <p style={{ fontSize: '13px', color: '#FD475A' }}>{product.price.toLocaleString()}đ</p>
-                                                    <div>
-                                                        <FaCheck />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className={styles.freeShip}>
-                                            <MdOutlineLocalShipping style={{ fontSize: '20px' }} /> Miễn phí giao hàng cho đơn hàng toàn quốc
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h5 style={{ fontWeight: 'bold' }} className="mt-4">1. Thông tin trả góp </h5>
-                                <table className="table">
-                                    <tbody>
-                                        <tr>
-                                            <td >Giá sản phẩm</td>
-                                            <td>{product.price.toLocaleString()}đ</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trả trước</td>
-                                            <td>{(product.price * 0.3).toLocaleString()}đ (30%)</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Khoản còn lại</td>
-                                            <td>{(product.price * 0.7).toLocaleString()}đ (70%)</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Kỳ hạn</td>
-                                            <td>6 - 12 tháng</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lãi suất</td>
-                                            <td>8%/tháng</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ước tính góp/tháng (6 tháng)</td>
-                                            <td>
-                                                {(
-                                                    (product.price * 0.7) / 6 +
-                                                    (product.price * 0.7 * 0.08)
-                                                ).toLocaleString()}đ
-
-                                                { }
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Giấy tờ cần có</td>
-                                            <td>CCCD + Hộ khẩu</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div>
-                    )}
-
-                    {/* <div className="row mt-4">
-                        <div className="col-md-12 text-center">
-                            <img src="/images/tragop.jpg" alt="Trả góp 0%" className="img-fluid" />
-                        </div>
-                    </div> */}
+          {product && (
+            <div className="flex flex-col lg:flex-row gap-6 mt-6">
+              <div className="w-full lg:w-1/3">
+                <div className="bg-white rounded-xl shadow-md overflow-hidden">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-auto object-contain"
+                  />
                 </div>
-                <div>
-                    <h5 style={{ fontWeight: 'bold' }} className="mt-4">2. Hướng dẫn trả góp 0%</h5>
-                    <div className={styles.wrapGuide}>
-                        <p style={{ fontSize: '14px' }} className="mt-3">Bước 1: Chọn sản phẩm bạn muốn mua trả góp</p>
-                        <p style={{ fontSize: '14px' }}>Bước 2: Điền thông tin cá nhân và chọn hình thức thanh toán</p>
-                        <p style={{ fontSize: '14px' }}>Bước 3: Nhân viên sẽ liên hệ với bạn để xác nhận đơn hàng</p>
-                        <p style={{ fontSize: '14px' }}>Bước 4: Nhận hàng và thanh toán theo kỳ hạn đã chọn</p>
+              </div>
+              <div className="w-full lg:w-2/3">
+                <div className="bg-white rounded-xl shadow-md p-6">
+                  <h5 className="text-lg font-bold text-gray-800">Thông tin sản phẩm</h5>
+                  <div className="mt-3 space-y-2 text-sm sm:text-base text-gray-700">
+                    <p>Tên sản phẩm: {product.name}</p>
+                    <p>Giá sản phẩm: {product.price.toLocaleString()}đ</p>
+                    <p className="text-red-500">Giá gốc: {product.priceGoc.toLocaleString()}đ</p>
+                  </div>
+                  <div className="mt-4 cursor-pointer">
+                    <p className="text-sm font-bold text-gray-800">Lựa chọn màu</p>
+                    <div className="flex items-center w-full max-w-[200px] border border-[#2e5986] rounded-lg p-2 mt-2">
+                      <img
+                        src={product.image}
+                        alt="Color"
+                        className="w-12 h-12 object-contain"
+                      />
+                      <div className="flex-grow ml-2">
+                        <p className="text-sm font-bold">Màu undefined</p>
+                        <p className="text-xs text-red-500">{product.price.toLocaleString()}đ</p>
+                        <div className="absolute bottom-2 right-2 bg-[#2e5986] text-white w-5 h-5 flex items-center justify-center rounded-full text-xs">
+                          <FaCheck />
+                        </div>
+                      </div>
                     </div>
+                  </div>
+                  <div className="flex items-center justify-center mt-4 bg-gradient-to-b from-blue-100 to-white border border-[#2e5986] rounded-md p-2 text-sm text-blue-700">
+                    <MdOutlineLocalShipping className="text-lg mr-2" />
+                    Miễn phí giao hàng cho đơn hàng toàn quốc
+                  </div>
                 </div>
-                <div >
-                    <h5 style={{ fontWeight: 'bold' }} className="mt-4">3. Thông tin người mua</h5>
-                    <div className={styles.wrapInfoUser}>
-                        <input type="text" placeholder={auth.user.name} />
-                        <input type="text" placeholder={auth.user.phone} />
-                        <input type="text" placeholder={auth.user.email} />
-                    </div>
-                    <input className={styles.inputAdress} type="text" placeholder={auth.user.address} />
-                    <textarea className={styles.textArea} name="" id="" style={{ width: "100%", height: "100px" }}>
-                        Ghi chú:
-
-                    </textarea>
-                    <div className={styles.wrapBtn}>
-                        <button className={styles.btnQuayLai} onClick={handleBack}><MdArrowBackIosNew /> Quay lại</button>
-                        <button className={styles.btnDatHang} onClick={() => hanldeMuaNgay()}>Tiếp tục</button>
-                    </div>
-                    <div className={styles.wrapNote}>
-                        <p style={{ fontSize: '14px' }} className="mt-3">Lưu ý: Đơn hàng sẽ được giao trong vòng 3-5 ngày làm việc</p>
-                        <p style={{ fontSize: '14px' }}>Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi qua số điện thoại: 1900 1234</p>
-                    </div>
-                </div>
+              </div>
             </div>
-        </Layout>
-    );
+          )}
+
+          <div className="mt-6">
+            <h5 className="text-lg font-bold text-gray-800">1. Thông tin trả góp</h5>
+            <div className="bg-white rounded-xl shadow-md mt-2 overflow-hidden">
+              <table className="w-full text-sm sm:text-base text-gray-700">
+                <tbody>
+                  <tr className="border-b border-gray-200">
+                    <td className="p-3">Giá sản phẩm</td>
+                    <td className="p-3">{product?.price.toLocaleString()}đ</td>
+                  </tr>
+                  <tr className="border-b border-gray-200">
+                    <td className="p-3">Trả trước</td>
+                    <td className="p-3">{(product?.price * 0.3).toLocaleString()}đ (30%)</td>
+                  </tr>
+                  <tr className="border-b border-gray-200">
+                    <td className="p-3">Khoản còn lại</td>
+                    <td className="p-3">{(product?.price * 0.7).toLocaleString()}đ (70%)</td>
+                  </tr>
+                  <tr className="border-b border-gray-200">
+                    <td className="p-3">Kỳ hạn</td>
+                    <td className="p-3">6 - 12 tháng</td>
+                  </tr>
+                  <tr className="border-b border-gray-200">
+                    <td className="p-3">Lãi suất</td>
+                    <td className="p-3">8%/tháng</td>
+                  </tr>
+                  <tr className="border-b border-gray-200">
+                    <td className="p-3">Ước tính góp/tháng (6 tháng)</td>
+                    <td className="p-3">
+                      {((product?.price * 0.7) / 6 + (product?.price * 0.7 * 0.08)).toLocaleString()}đ
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="p-3">Giấy tờ cần có</td>
+                    <td className="p-3">CCCD + Hộ khẩu</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <h5 className="text-lg font-bold text-gray-800">2. Hướng dẫn trả góp 0%</h5>
+            <div className="bg-white rounded-md border border-gray-300 p-3 mt-2 space-y-2 text-sm text-gray-700">
+              <p>Bước 1: Chọn sản phẩm bạn muốn mua trả góp</p>
+              <p>Bước 2: Điền thông tin cá nhân và chọn hình thức thanh toán</p>
+              <p>Bước 3: Nhân viên sẽ liên hệ với bạn để xác nhận đơn hàng</p>
+              <p>Bước 4: Nhận hàng và thanh toán theo kỳ hạn đã chọn</p>
+            </div>
+          </div>
+
+          <div className="mt-6 mb-8">
+            <h5 className="text-lg font-bold text-gray-800">3. Thông tin người mua</h5>
+            <div className="flex flex-col sm:flex-row gap-4 mt-3">
+              <input
+                type="text"
+                placeholder={auth.user.name}
+                className="w-full p-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <input
+                type="text"
+                placeholder={auth.user.phone}
+                className="w-full p-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <input
+                type="text"
+                placeholder={auth.user.email}
+                className="w-full p-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <input
+              type="text"
+              placeholder={auth.user.address}
+              className="w-full p-2 border border-gray-300 rounded-md text-sm mt-4 focus:outline-none focus:ring-2 focus:ring-[#2e5986]"
+            />
+            <textarea
+              name=""
+              id=""
+              defaultValue="Ghi chú:"
+              className="w-full h-24 p-2 border border-gray-300 rounded-md text-sm mt-4 text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#2e5986] resize-none"
+            />
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mt-4">
+              <button
+                onClick={handleBack}
+                className="w-full sm:w-1/3 flex items-center justify-center py-2 bg-[#2e5986] text-white rounded-lg hover:bg-[#2e5986] transition-colors duration-300 text-sm"
+              >
+                <MdArrowBackIosNew className="mr-2" />
+                Quay lại
+              </button>
+              <button
+                onClick={() => hanldeMuaNgay()}
+                className="w-full sm:w-1/3 py-2 bg-red-700 text-white rounded-lg hover:bg-red-800 transition-colors duration-300 text-sm"
+              >
+                Tiếp tục
+              </button>
+            </div>
+            <div className="text-center mt-4 space-y-2 text-sm text-gray-700">
+              <p>Lưu ý: Đơn hàng sẽ được giao trong vòng 3-5 ngày làm việc</p>
+              <p>Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi qua số điện thoại: 1900 1234</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
 };
 
 export default Tragop0;

@@ -19,6 +19,7 @@ const Login = () => {
         e.preventDefault();
         try {
             const res = await axios.post(`${API_URL}/api/v2/login`, { email, password });
+            
             if (res.data.token) {
                 setAuth({
                     ...auth,
@@ -29,7 +30,6 @@ const Login = () => {
                 toast.success(res.data.message)
                 navigate('/');
             } else {
-                // alert(res.data.message);
                 toast.error(res.data.message)
             }
         } catch (error) {

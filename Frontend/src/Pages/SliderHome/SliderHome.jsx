@@ -1,101 +1,131 @@
-import styles from './Slider.module.css'
-import { FaApple } from "react-icons/fa";
-
-import { Swiper, SwiperSlide } from 'swiper/react';
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import toast from "react-hot-toast";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 const SliderHome = () => {
-    const categories = [
-        { name: 'Điện thoại', icon: '📱' },
-        { name: 'Apple', icon: <FaApple /> },
-        { name: 'Laptop', icon: '💻' },
-        { name: 'Tablet', icon: '📟' },
-        { name: 'Màn hình', icon: '🖥' },
-        // { name: 'Điện máy', icon: '🏠' },
-        { name: 'Đồng hồ', icon: '⌚' },
-        { name: 'Âm thanh', icon: '🎧' },
-        { name: 'Smart home', icon: '🏡' },
-        { name: 'Phụ kiện', icon: '🔌' },
-    ];
+  const sliderList = [
+    {
+      image:
+        "https://cdn.hoanghamobile.com/i/home/Uploads/2025/02/07/1200x375.png",
+    },
+    {
+      image:
+        "https://cdn.hoanghamobile.com/i/home/Uploads/2025/01/09/promotion-kv-redmi-note-14-series.png",
+    },
+    {
+      image:
+        "https://cdn.hoanghamobile.com/i/home/Uploads/2025/01/09/s24-web.png",
+    },
+    {
+      image:
+        "https://cdn.hoanghamobile.com/i/home/Uploads/2024/12/28/redmagic-10-pro-desktop-1.png",
+    },
+    {
+      image:
+        "https://cdn.hoanghamobile.com/i/home/Uploads/2025/01/10/honor-x5b-1200x375.jpg",
+    },
+    {
+      image:
+        "https://cdn.hoanghamobile.com/i/home/Uploads/2025/01/07/tuf-hoang-ha-1200x375.jpg",
+    },
+    {
+      image:
+        "https://cdn.hoanghamobile.com/i/home/Uploads/2024/12/26/tecno-30c-w-2490.png",
+    },
+    {
+      image:
+        "https://cdn.hoanghamobile.com/i/home/Uploads/2025/01/06/redmi-buds-6-pro-01.jpg",
+    },
+  ];
 
-    const sliderList = [
-        { image: 'https://cdn.hoanghamobile.com/i/home/Uploads/2025/02/07/1200x375.png', },
-        { image: 'https://cdn.hoanghamobile.com/i/home/Uploads/2025/01/09/promotion-kv-redmi-note-14-series.png' },
-        { image: 'https://cdn.hoanghamobile.com/i/home/Uploads/2025/01/09/s24-web.png' },
-        { image: 'https://cdn.hoanghamobile.com/i/home/Uploads/2024/12/28/redmagic-10-pro-desktop-1.png' },
-        { image: 'https://cdn.hoanghamobile.com/i/home/Uploads/2025/01/10/honor-x5b-1200x375.jpg' },
-        { image: 'https://cdn.hoanghamobile.com/i/home/Uploads/2025/01/07/tuf-hoang-ha-1200x375.jpg' },
-        { image: 'https://cdn.hoanghamobile.com/i/home/Uploads/2024/12/26/tecno-30c-w-2490.png' },
-        { image: 'https://cdn.hoanghamobile.com/i/home/Uploads/2025/01/06/redmi-buds-6-pro-01.jpg' },
-    ]
+  const sliderList2 = [
+    {
+      image:
+        "https://cdn.hoanghamobile.com/i/home/Uploads/2025/01/11/note14.png",
+    },
+    {
+      image:
+        "https://cdn.hoanghamobile.com/i/home/Uploads/2025/02/07/sanphamhot2-a06.png",
+    },
+    {
+      image:
+        "https://cdn.hoanghamobile.com/i/home/Uploads/2025/01/11/honor200.png",
+    },
+    {
+      image:
+        "https://cdn.hoanghamobile.com/i/home/Uploads/2025/02/08/mac-4.png",
+    },
+  ];
 
-    const sliderList2 = [
-        { image: 'https://cdn.hoanghamobile.com/i/home/Uploads/2025/01/11/note14.png' },
-        { image: 'https://cdn.hoanghamobile.com/i/home/Uploads/2025/02/07/sanphamhot2-a06.png' },
-        { image: 'https://cdn.hoanghamobile.com/i/home/Uploads/2025/01/11/honor200.png' },
-        { image: 'https://cdn.hoanghamobile.com/i/home/Uploads/2025/02/08/mac-4.png' }
-    ]
+  return (
+    <div className="mx-auto w-full px-3 sm:px-4 lg:px-6 py-4 sm:py-6 ">
+      {/* Giữ nguyên phần danh mục nhưng đang comment */}
 
-    const handleClick = () => {
-        toast.error('Danh mục đang được phát triển 🚀')
-    }
-    return (
-        <div className={styles.sliderHome}>
-            <div className={styles.DanhMucLeft}>
-                <div className={styles.DanhMucLeftItem}>
-                    <strong>Danh mục</strong>
-                    <ul style={{ listStyle: 'none', margin: '0' }}>
-                        {categories.map((category, index) => (
-                            <li key={index} style={{ textDecoration: 'none' }} onClick={() => handleClick()}>
-                                <span className="icon">{category.icon}</span>
-                                {category.name}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+      <div className="w-full">
+        <div className="space-y-4 sm:space-y-6">
+          {/* WRAPPER có tỉ lệ khung hình responsive để banner luôn chuẩn, không bị nhảy layout */}
+          <div className="relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
+            {/* Trên mobile dùng 16:9, lên desktop chuyển gần với 1200x375 (~3.2:1). Full-bleed (tràn toàn màn) */}
+            <div className="aspect-[16/9] md:aspect-[21/9] lg:aspect-[1200/375] overflow-hidden rounded-none sm:rounded-xl">
+              <Swiper
+                spaceBetween={12}
+                centeredSlides
+                autoplay={{
+                  delay: 4000,
+                  disableOnInteraction: false,
+                }}
+                pagination={{ clickable: true }}
+                navigation
+                // Tối ưu khoảng cách theo breakpoint
+                breakpoints={{
+                  0: { spaceBetween: 8 },
+                  640: { spaceBetween: 12 },
+                  768: { spaceBetween: 16 },
+                  1024: { spaceBetween: 24 },
+                  1280: { spaceBetween: 30 },
+                }}
+                modules={[Autoplay, Pagination, Navigation]}
+                className="mySwiper h-full"
+              >
+                {sliderList.map((item, index) => (
+                  <SwiperSlide key={index} className="h-full">
+                    <img
+                      className="h-full w-full object-cover select-none"
+                      src={item.image}
+                      alt={`Slider ${index + 1}`}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      decoding="async"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1200px"
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
-            <div className={styles.sliderRight}>
-                <div className={styles.sliderRightItem}>
-                    <Swiper
-                        spaceBetween={30}
-                        centeredSlides={true}
-                        autoplay={{
-                            delay: 4000,
-                            disableOnInteraction: false,
-                        }}
-                        pagination={{
-                            clickable: true,
-                        }}
-                        navigation={true}
-                        modules={[Autoplay, Pagination, Navigation]}
-                        className="mySwiper"
-                    >
+          </div>
 
-                        {
-                            sliderList.map((item, index) => (
-                                <SwiperSlide key={index}>
-                                    <img className={styles.imageSliderMain} src={item.image} />
-                                </SwiperSlide>
-                            ))
-                        }
-                    </Swiper>
-
-                    <div className={styles.sliderRightItem2}>
-                        {sliderList2.map((item, index) => (
-                            <div key={index} className={styles.sliderRightItem2Item}>
-                                <img className={styles.imageSliderRightItem2Item} src={item.image} />
-                            </div>
-                        ))}
-                    </div>
+          {/* Lưới 4 ảnh nhỏ bên dưới: giữ tỉ lệ thống nhất, không méo */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+            {sliderList2.map((item, index) => (
+              <div key={index} className="overflow-hidden rounded-xl">
+                <div className="aspect-[16/9] sm:aspect-[5/3]">
+                  <img
+                    className="h-full w-full object-cover"
+                    src={item.image}
+                    alt={`Slider Item ${index + 1}`}
+                    loading="lazy"
+                    decoding="async"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  />
                 </div>
-            </div>
+              </div>
+            ))}
+          </div>
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default SliderHome
+export default SliderHome;

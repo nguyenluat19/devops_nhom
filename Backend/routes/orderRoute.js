@@ -1,12 +1,20 @@
 // Backend/routes/orderRoute.js
-const express = require('express');
-const { createOrder, getOrderById, getAllOrders, deleteOrder } = require('../controllers/orderController');
+const express = require("express");
+const {
+  createOrder,
+  getOrderById,
+  getOrderByUserId,
+  getAllOrders,
+  updateOrderStatus,
+  deleteOrder,
+} = require("../controllers/orderController");
 const router = express.Router();
 
-router.post('/orders', createOrder);
-router.get('/orders/:id', getOrderById);
-// router.get('/user/:userId/orders', getOrdersByUser);
-router.get('/getAllOrder', getAllOrders)
-router.delete('/delete/order/:id', deleteOrder)
+router.post("/orders", createOrder);
+router.get("/orders/:id", getOrderById);
+router.get("/getOrderByUserId/:userId", getOrderByUserId);
+router.get("/getAllOrder", getAllOrders);
+router.put("/orders/:id/status", updateOrderStatus);
+router.delete("/delete/order/:id", deleteOrder);
 
 module.exports = router;

@@ -1,28 +1,83 @@
-# docker-compose.yml
-services:
-  backend:
-    build: ./Backend
-    ports:
-      - "3000:3000"
-    environment:
-      - PORT=3000
-      - MONGO_URL=${MONGO_URL}
-      - JWT_SECRET=${JWT_SECRET}
-      - CHATBOT_API_KEY=${CHATBOT_API_KEY}
-    networks:
-      - app-network
+# # docker-compose.yml
+# services:
+#   backend:
+#     build: ./Backend
+#     ports:
+#       - "3001:3000"
+#     environment:
+#       - PORT=3000
+#       - MONGO_URL=${MONGO_URL}
+#       - JWT_SECRET=${JWT_SECRET}
+#       - CHATBOT_API_KEY=${CHATBOT_API_KEY}
+#     networks:
+#       - app-network
 
-  frontend:
-    build: ./Frontend
+#   frontend:
+#     build: ./Frontend
+#     ports:
+#       - "5173:5173"
+#     environment:
+#       - VITE_API=http://localhost:3000
+#     depends_on:
+#       - backend
+#     networks:
+#       - app-network
+
+# networks:
+#   app-network:
+#     driver: bridge
+
+version: "3.8"
+
+services:
+  # ===== BACKEND SERVICE =====
+  backend:
+    build:
+      context: ./Backend # Thư mục chứa code backend
+      dockerfile: Dockerfile # Dockerfile backend
+    container_name: backend_service
+    restart: always
     ports:
-      - "5173:5173"
-    environment:
-      - VITE_API=http://localhost:3000
+      - "3000:3000" # HOST:CONTAINER
+    env_file:
+      - ./Backend/.env # Load biến môi trường backend
+    depends_on:
+      - mongo
+    networks:
+      - app_network
+
+  # ===== FRONTEND SERVICE =====
+  frontend:
+    build:
+      context: ./Frontend # Thư mục chứa code frontend (Vite)
+      dockerfile: Dockerfile # Dockerfile frontend
+    container_name: frontend_service
+    restart: always
+    ports:
+      - "5173:5173" # Vite dev hoặc port build
+    env_file:
+      - ./Frontend/.env # Nếu Vite cần biến môi trường
     depends_on:
       - backend
     networks:
-      - app-network
+      - app_network
 
+  # ===== MONGODB SERVICE =====
+  mongo:
+    image: mongo:6
+    container_name: mongo_service
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db # Lưu data tránh mất
+    networks:
+      - app_network
+
+# ===== VOLUMES =====
+volumes:
+  mongo_data:
+
+# ===== NETWORKS =====
 networks:
-  app-network:
-    driver: bridge
+  app_network:
