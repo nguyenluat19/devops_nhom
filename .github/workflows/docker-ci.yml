@@ -32,7 +32,9 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ${{ matrix.service }}
-          file: ${{ matrix.service }}/Dockerfile
+          # ĐÃ SỬA: Thêm './' vào context để chắc chắn đây là đường dẫn tương đối
+          context: ./${{ matrix.service }}
+          # ĐÃ SỬA: Thêm './' vào file path
+          file: ./${{ matrix.service }}/Dockerfile
           push: true
           tags: luat123/${{ matrix.service }}:latest
