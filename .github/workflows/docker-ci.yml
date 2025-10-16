@@ -37,4 +37,4 @@ jobs:
           # ĐÃ SỬA: Thêm './' vào file path
           file: ./${{ matrix.service }}/Dockerfile
           push: true
-          tags: luat123/${{ matrix.service }}:latest
+          tags: luat123/${{ lower(matrix.service) }}:latest
