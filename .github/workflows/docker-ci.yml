@@ -6,16 +6,22 @@ on:
       - main
 
 env:
+  # Docker Hub Secrets (Giữ nguyên)
   DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
   DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+  # AWS Secrets (Sẽ được sử dụng cho ECR)
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_REGION: ${{ secrets.AWS_REGION }} # Ví dụ: ap-southeast-1
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        service: [Frontend, Backend]
-    # 12
+        service: [Frontend, Backend] # Tên thư mục (chữ hoa)
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -23,27 +29,54 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+      # BƯỚC SỬA LỖI: Tạo biến chữ thường cho Docker Hub và ECR Tag
+      - name: Export lowercase tag name
+        id: set_tag_name
+        run: |
+          # Sử dụng lệnh 'tr' để chuyển đổi sang chữ thường
+          TAG_NAME_LOWERCASE=$(echo "${{ matrix.service }}" | tr '[:upper:]' '[:lower:]')
+          echo "TAG_NAME_LOWERCASE=$TAG_NAME_LOWERCASE" >> $GITHUB_OUTPUT
+
+      # ----------------------------------------------------------------------
+      # 1. TRIỂN KHAI CHO DOCKER HUB (NHƯ CŨ)
+      # ----------------------------------------------------------------------
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ env.DOCKER_HUB_USERNAME }}
           password: ${{ env.DOCKER_HUB_PASSWORD }}
 
-      # BƯỚC SỬA LỖI CUỐI CÙNG: Sử dụng lệnh shell 'tr' thay vì hàm 'lower()'
-      - name: Export lowercase tag name (Shell Fallback)
-        id: set_tag_name
-        run: |
-          # Dùng 'tr' để chuyển đổi giá trị matrix.service sang chữ thường
-          TAG_NAME_LOWERCASE=$(echo "${{ matrix.service }}" | tr '[:upper:]' '[:lower:]')
-
-          # Xuất biến ra $GITHUB_OUTPUT để bước tiếp theo có thể sử dụng
-          echo "TAG_NAME_LOWERCASE=$TAG_NAME_LOWERCASE" >> $GITHUB_OUTPUT
-
-      - name: Build and push Docker image
+      - name: Build and push to Docker Hub
         uses: docker/build-push-action@v5
         with:
           context: ./${{ matrix.service }}
           file: ./${{ matrix.service }}/Dockerfile
           push: true
-          # SỬ DỤNG: Lấy output từ bước set_tag_name
           tags: luat123/${{ steps.set_tag_name.outputs.TAG_NAME_LOWERCASE }}:latest
+
+      # ----------------------------------------------------------------------
+      # 2. TRIỂN KHAI CHO AWS ECR (BƯỚC MỚI)
+      # ----------------------------------------------------------------------
+
+      # a. Đăng nhập AWS và cấu hình Region
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # b. Đăng nhập vào ECR
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # c. Build và Push Image lên ECR
+      - name: Build and push to Amazon ECR
+        uses: docker/build-push-action@v5
+        with:
+          context: ./${{ matrix.service }}
+          file: ./${{ matrix.service }}/Dockerfile
+          push: true
+          # Tên Repository ECR phải là chữ thường: ecommerce-frontend/ecommerce-backend
+          tags: ${{ steps.login-ecr.outputs.registry }}/ecommerce-${{ steps.set_tag_name.outputs.TAG_NAME_LOWERCASE }}:latest
