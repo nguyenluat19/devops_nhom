@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        service: [frontend, backend]
+        service: [Frontend, Backend]
 
     steps:
       - name: Checkout code
