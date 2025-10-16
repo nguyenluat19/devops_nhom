@@ -9,18 +9,16 @@ env:
   # Docker Hub Secrets (Giữ nguyên)
   DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
   DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
-
-  # AWS Secrets (Sẽ được sử dụng cho ECR)
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  AWS_REGION: ${{ secrets.AWS_REGION }} # Ví dụ: ap-southeast-1
+  AWS_REGION: ${{ secrets.AWS_REGION }}
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        service: [Frontend, Backend] # Tên thư mục (chữ hoa)
+        service: [Frontend, Backend]
 
     steps:
       - name: Checkout code
@@ -54,11 +52,6 @@ jobs:
           push: true
           tags: luat123/${{ steps.set_tag_name.outputs.TAG_NAME_LOWERCASE }}:latest
 
-      # ----------------------------------------------------------------------
-      # 2. TRIỂN KHAI CHO AWS ECR (BƯỚC MỚI)
-      # ----------------------------------------------------------------------
-
-      # a. Đăng nhập AWS và cấu hình Region
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
