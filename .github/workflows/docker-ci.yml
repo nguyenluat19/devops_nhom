@@ -29,10 +29,15 @@ jobs:
           username: ${{ env.DOCKER_HUB_USERNAME }}
           password: ${{ env.DOCKER_HUB_PASSWORD }}
 
-      # BƯỚC MỚI: Định nghĩa biến service_name_lower
-      - name: Set lowercase repository name
-        id: repo_name
-        run: echo "SERVICE_LOWERCASE=${{ lower(matrix.service) }}" >> $GITHUB_OUTPUT
+      # BƯỚC SỬA LỖI CUỐI CÙNG: Sử dụng lệnh shell 'tr' thay vì hàm 'lower()'
+      - name: Export lowercase tag name (Shell Fallback)
+        id: set_tag_name
+        run: |
+          # Dùng 'tr' để chuyển đổi giá trị matrix.service sang chữ thường
+          TAG_NAME_LOWERCASE=$(echo "${{ matrix.service }}" | tr '[:upper:]' '[:lower:]')
+
+          # Xuất biến ra $GITHUB_OUTPUT để bước tiếp theo có thể sử dụng
+          echo "TAG_NAME_LOWERCASE=$TAG_NAME_LOWERCASE" >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -40,5 +45,5 @@ jobs:
           context: ./${{ matrix.service }}
           file: ./${{ matrix.service }}/Dockerfile
           push: true
-          # ĐÃ SỬA: Sử dụng output từ bước trên để có tên repository chữ thường
-          tags: luat123/${{ steps.repo_name.outputs.SERVICE_LOWERCASE }}:latest
+          # SỬ DỤNG: Lấy output từ bước set_tag_name
+          tags: luat123/${{ steps.set_tag_name.outputs.TAG_NAME_LOWERCASE }}:latest
