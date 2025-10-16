@@ -29,12 +29,16 @@ jobs:
           username: ${{ env.DOCKER_HUB_USERNAME }}
           password: ${{ env.DOCKER_HUB_PASSWORD }}
 
+      # BƯỚC MỚI: Định nghĩa biến service_name_lower
+      - name: Set lowercase repository name
+        id: repo_name
+        run: echo "SERVICE_LOWERCASE=${{ lower(matrix.service) }}" >> $GITHUB_OUTPUT
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          # ĐÃ SỬA: Thêm './' vào context để chắc chắn đây là đường dẫn tương đối
           context: ./${{ matrix.service }}
-          # ĐÃ SỬA: Thêm './' vào file path
           file: ./${{ matrix.service }}/Dockerfile
           push: true
-          tags: luat123/${{ lower(matrix.service) }}:latest
+          # ĐÃ SỬA: Sử dụng output từ bước trên để có tên repository chữ thường
+          tags: luat123/${{ steps.repo_name.outputs.SERVICE_LOWERCASE }}:latest
